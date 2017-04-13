@@ -23,4 +23,4 @@ gulp.task('pug', ['clean'], function () {
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('build', ['electron', 'pug']);
+gulp.task('default', ['electron', 'pug']);
