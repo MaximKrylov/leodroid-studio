@@ -1,0 +1,23 @@
+{
+  "name": "leodroid-studio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaximKrylov/leodroid-studio.git"
+  },
+  "author": "Maxim Krylov (maxim.kryloff@mail.ru)",
+  "license": "ISC",
+  "homepage": "https://github.com/MaximKrylov/leodroid-studio#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "del": "^2.2.2",
+    "electron": "^1.6.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-pug": "^3.3.0"
+  }
+}
