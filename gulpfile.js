@@ -3,6 +3,7 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const pug = require('gulp-pug');
+const sass = require('gulp-sass');
 const del = require('del');
 
 gulp.task('clean', function (done) {
@@ -23,4 +24,13 @@ gulp.task('pug', ['clean'], function () {
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('default', ['electron', 'pug']);
+gulp.task('sass', ['clean'], function () {
+    return gulp.src('src/**/*.sass')
+        .pipe(sass({
+            outputStyle: 'compressed',
+            includePaths: ['bower_components/bootstrap-sass/assets/stylesheets']
+        }).on('error', sass.logError))
+        .pipe(gulp.dest('build'));
+});
+
+gulp.task('default', ['electron', 'pug', 'sass']);

@@ -1,0 +1,19 @@
+{
+  "name": "leodroid-studio",
+  "main": "build/electron/main.js",
+  "authors": [
+    "Maxim Krylov (maxim.kryloff@mail.ru)"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/MaximKrylov/leodroid-studio",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7"
+  }
+}
