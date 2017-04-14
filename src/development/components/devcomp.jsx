@@ -41,11 +41,18 @@ const data = {
 class DevelopmentComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: "// Ololo"};
+        this.state = { value: "// Ololo" };
         this.onTreeNodeToggle = this.onTreeNodeToggle.bind(this);
+        this.onEditorChange = this.onEditorChange.bind(this);
+    }
+
+    onEditorChange(value) {
+        this.setState({ value: value });
     }
 
     onTreeNodeToggle(node, toggled) {
+        let value = this.state.value;
+
         if (this.state.cursor) {
             this.state.cursor.active = false;
         }
@@ -53,7 +60,7 @@ class DevelopmentComponent extends React.Component {
         if (node.children) {
             node.toggled = toggled;
         }
-        this.setState({cursor: node});
+        this.setState({ cursor: node });
     }
 
     render() {
@@ -64,7 +71,9 @@ class DevelopmentComponent extends React.Component {
                         <div className="row"></div>
                         <div className="row">
                             <div className="col-xs-12">
-                                <Treebeard data={data} onToggle={this.onTreeNodeToggle} />
+                                <Treebeard data={data}
+                                    onToggle={this.onTreeNodeToggle}
+                                />
                             </div>
                         </div>
                     </div>
@@ -76,6 +85,7 @@ class DevelopmentComponent extends React.Component {
                             width="100%"
                             height="100%"
                             value={this.state.value}
+                            onChange={this.onEditorChange}
                         />
                     </div>
                 </div>
