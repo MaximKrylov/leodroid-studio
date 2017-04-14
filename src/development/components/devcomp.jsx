@@ -1,8 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import { Treebeard } from 'react-treebeard';
+
 import brace from 'brace';
 import AceEditor from 'react-ace';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+import FlatButton from 'material-ui/FlatButton';
+import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import 'brace/mode/javascript';
 import 'brace/theme/twilight';
@@ -41,9 +52,10 @@ const data = {
 class DevelopmentComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { value: "// Ololo" };
+        this.state = { value: "// Write your code here..." };
         this.onTreeNodeToggle = this.onTreeNodeToggle.bind(this);
         this.onEditorChange = this.onEditorChange.bind(this);
+        injectTapEventPlugin();
     }
 
     onEditorChange(value) {
@@ -68,7 +80,13 @@ class DevelopmentComponent extends React.Component {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-xs-3 no-padding">
-                        <div className="row"></div>
+                        <div className="row">
+                            <div className="col-xs-12">
+                                <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+                                    <FlatButton label="OPEN" icon={<FileFolderOpen />} />
+                                </MuiThemeProvider>
+                            </div>
+                        </div>
                         <div className="row">
                             <div className="col-xs-12">
                                 <Treebeard data={data}
