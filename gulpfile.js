@@ -1,10 +1,11 @@
-/* jshint esversion: 6 */
-
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const pug = require('gulp-pug');
 const sass = require('gulp-sass');
 const del = require('del');
+const browserify = require('browserify');
+const babelify = require('babelify');
+const source = require('vinyl-source-stream');
 
 gulp.task('clean', function (done) {
     return del(['build']);
@@ -16,6 +17,14 @@ gulp.task('electron', ['clean'], function () {
             presets: ['es2015']
         }))
         .pipe(gulp.dest('build'));
+});
+
+gulp.task('development', ['clean'], function () {
+    return browserify({ entries: './src/development/components/devcomp.jsx', extensions: ['.jsx'], debug: true })
+        .transform('babelify', { presets: ['es2015', 'react'] })
+        .bundle()
+        .pipe(source('devcomp.js'))
+        .pipe(gulp.dest('build/development/components'));
 });
 
 gulp.task('pug', ['clean'], function () {
@@ -33,4 +42,4 @@ gulp.task('sass', ['clean'], function () {
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('default', ['electron', 'pug', 'sass']);
+gulp.task('default', ['electron', 'development', 'pug', 'sass']);

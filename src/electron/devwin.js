@@ -1,8 +1,6 @@
-/* jshint esversion: 6 */
-
 import { app, BrowserWindow } from 'electron';
 
-class Development {
+class DevelopmentWindow {
     constructor() {
         this.window = null;
     }
@@ -27,13 +25,14 @@ class Development {
         this.window = new BrowserWindow({ width: 1100, height: 800 });
         this.window.loadURL('file://' + __dirname + '/../development/index.html');
         this.window.on('closed', () => { this._onClosed(); });
+        // this.window.webContents.openDevTools();
     }
 
-    openWindow() {
+    open() {
         app.on('ready', () => { this._createWindow(); });
         app.on('window-all-closed', () => { this._onWindowAllClosed(); });
         app.on('activate', () => { this._onActivate(); });
     }
 }
 
-export let development = new Development();
+export let devwin = new DevelopmentWindow();

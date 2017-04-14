@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
+import { devwin } from './devwin';
 
-import { development } from './development';
-
-development.openWindow();
+devwin.open();
