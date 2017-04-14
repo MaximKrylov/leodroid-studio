@@ -53,10 +53,22 @@ class DevelopmentComponent extends React.Component {
 
     render() {
         return (
-            <Treebeard data={data} onToggle={this.onTreeNodeToggle} />
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-xs-4">
+                        <div className="row"></div>
+                        <div className="row">
+                            <div className="col-xs-12">
+                                <Treebeard data={data} onToggle={this.onTreeNodeToggle} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-xs-8"></div>
+                </div>
+            </div>
         );
     }
 }
 
-const content = document.getElementById('tree');
+const content = document.getElementById('devcomp');
 ReactDOM.render(<DevelopmentComponent />, content);
