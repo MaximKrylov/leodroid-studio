@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Treebeard } from 'react-treebeard';
+import brace from 'brace';
+import AceEditor from 'react-ace';
+
+import 'brace/mode/javascript';
+import 'brace/theme/twilight';
 
 const data = {
     name: 'root',
@@ -9,7 +14,7 @@ const data = {
         {
             name: 'parent',
             children: [
-                { name: 'child1' },
+                { name: 'dsakdjas' },
                 { name: 'child2' }
             ]
         },
@@ -36,7 +41,7 @@ const data = {
 class DevelopmentComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {value: "// Ololo"};
         this.onTreeNodeToggle = this.onTreeNodeToggle.bind(this);
     }
 
@@ -48,14 +53,14 @@ class DevelopmentComponent extends React.Component {
         if (node.children) {
             node.toggled = toggled;
         }
-        this.setState({ cursor: node });
+        this.setState({cursor: node});
     }
 
     render() {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-xs-4">
+                    <div className="col-xs-3 no-padding">
                         <div className="row"></div>
                         <div className="row">
                             <div className="col-xs-12">
@@ -63,7 +68,16 @@ class DevelopmentComponent extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="col-xs-8"></div>
+                    <div className="col-xs-9 no-padding">
+                        <AceEditor mode="javascript"
+                            theme="twilight"
+                            fontSize="13"
+                            editorProps={{ $blockScrolling: true }}
+                            width="100%"
+                            height="100%"
+                            value={this.state.value}
+                        />
+                    </div>
                 </div>
             </div>
         );
