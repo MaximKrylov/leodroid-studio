@@ -11,7 +11,12 @@ import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
+import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow';
+
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -83,15 +88,22 @@ class DevelopmentComponent extends React.Component {
                         <div className="row">
                             <div className="col-xs-12">
                                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                                    <FlatButton label="OPEN" icon={<FileFolderOpen />} />
+                                    <Toolbar style={{ backgroundColor: "#212121" }}>
+                                        <ToolbarGroup>
+                                            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+                                                <FlatButton label="OPEN" icon={<FileFolderOpen />} />
+                                            </MuiThemeProvider>
+                                            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+                                                <FlatButton label="RUN" icon={<AvPlayArrow />} />
+                                            </MuiThemeProvider>
+                                        </ToolbarGroup>
+                                    </Toolbar>
                                 </MuiThemeProvider>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-xs-12">
-                                <Treebeard data={data}
-                                    onToggle={this.onTreeNodeToggle}
-                                />
+                                <Treebeard data={data} onToggle={this.onTreeNodeToggle} />
                             </div>
                         </div>
                     </div>
