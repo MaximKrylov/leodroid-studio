@@ -24,6 +24,7 @@ class DevelopmentComponent extends React.Component {
     }
 
     render() {
+        // Tree Component
         let treeComponent = null;
 
         if (this.state.treeData) {
@@ -35,36 +36,29 @@ class DevelopmentComponent extends React.Component {
             treeComponent = <div></div>;
         }
 
+        // Dashboard Component
+        let dashboardComponent = <DashboardComponent
+            onOpenButtonClick={this.dashboardEvents.onOpenButtonClick}
+        />
+
+        // Editor Component
+        let editorComponent = <EditorComponent
+            onChange={this.editorEvents.onChange}
+            value={this.state.editorValue}
+        />
+
         return (
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-xs-3 no-padding">
                         <div className="row">
-                            <div className="col-xs-12">
-                                {/* Dashboard Component */}
-                                <DashboardComponent
-                                    onOpenButtonClick={this.dashboardEvents.onOpenButtonClick}
-                                />
-                                {/* ------------------- */}
-                            </div>
+                            <div className="col-xs-12">{dashboardComponent}</div>
                         </div>
                         <div className="row">
-                            <div className="col-xs-12">
-                                {/* Tree Component */}
-                                {treeComponent}
-                                {/* -------------- */}
-                            </div>
+                            <div className="col-xs-12">{treeComponent}</div>
                         </div>
                     </div>
-                    <div className="col-xs-9 no-padding">
-                        {/* Dashboard Component */}
-                        <EditorComponent
-                            onChange={this.editorEvents.onChange}
-                            value={this.state.editorValue}
-                        />
-                        {/* ------------------- */}
-
-                    </div>
+                    <div className="col-xs-9 no-padding">{editorComponent}</div>
                 </div>
             </div>
         );
