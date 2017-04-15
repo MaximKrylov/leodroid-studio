@@ -9,8 +9,6 @@ import IconButton from 'material-ui/IconButton';
 
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 class DashboardComponent extends React.Component {
@@ -24,12 +22,6 @@ class DashboardComponent extends React.Component {
             <div>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
                     <FlatButton onClick={this.props.onOpenButtonClick} label="OPEN" icon={<FileFolderOpen />} />
-                </MuiThemeProvider>
-                <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                    <Toolbar style={{ backgroundColor: "#212121" }}>
-                        <ToolbarGroup>
-                        </ToolbarGroup>
-                    </Toolbar>
                 </MuiThemeProvider>
             </div>
         );
