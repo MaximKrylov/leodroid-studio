@@ -3,12 +3,10 @@ const { dialog } = electron.remote;
 const fs = window.require("fs");
 
 function getChildren(directory) {
-    let children = [];
-
-    fs.readdirSync(directory).forEach((file) => {
+    return fs.readdirSync(directory).map(file => {
         let child = {
             name: file,
-            path: directory + '/' + file,
+            path: `${directory}/${file}`,
             type: 'File'
         }
 
@@ -19,10 +17,8 @@ function getChildren(directory) {
             child.children = getChildren(child.path);
         }
 
-        children.push(child);
+        return child;
     });
-
-    return children;
 }
 
 class DashboardEvents {
@@ -37,7 +33,8 @@ class DashboardEvents {
             }
 
             let data = {
-                name: "Project",
+                // Get folder name (without full path)
+                name: directories[0].match(/([^\/]*)\/*$/)[1],
                 toggled: true,
                 children: getChildren(directories[0])
             };
