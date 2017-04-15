@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import brace from 'brace';

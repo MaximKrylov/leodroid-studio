@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Treebeard } from 'react-treebeard';
-
 import EditorComponent from './edicomp';
+import TreeComponent from './treecomp';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -99,14 +98,18 @@ class DevelopmentComponent extends React.Component {
                         </div>
                         <div className="row">
                             <div className="col-xs-12">
-                                <Treebeard data={data} onToggle={this.onTreeNodeToggle} />
+                                <TreeComponent
+                                    data={data}
+                                    onToggle={this.onTreeNodeToggle}
+                                />
                             </div>
                         </div>
                     </div>
                     <div className="col-xs-9 no-padding">
                         <EditorComponent
                             onChange={this.onEditorChange}
-                            value={this.state.value} />
+                            value={this.state.value}
+                        />
                     </div>
                 </div>
             </div>
