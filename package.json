@@ -30,5 +30,8 @@
     "react-ace": "^4.2.1",
     "material-ui": "^0.17.3",
     "react-tap-event-plugin": "^2.0.1"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security"
   }
 }

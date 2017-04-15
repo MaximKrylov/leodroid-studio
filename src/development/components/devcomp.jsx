@@ -5,41 +5,9 @@ import EditorComponent from './edicomp';
 import TreeComponent from './treecomp';
 import DashboardComponent from './dboardcomp';
 
-// Electron
 const electron = window.require("electron");
 const { dialog } = electron.remote;
-// --------
-
-const data = {
-    name: 'root',
-    toggled: true,
-    children: [
-        {
-            name: 'parent',
-            children: [
-                { name: 'dsakdjas' },
-                { name: 'child2' }
-            ]
-        },
-        {
-            name: 'loading parent',
-            loading: true,
-            children: []
-        },
-        {
-            name: 'parent',
-            children: [
-                {
-                    name: 'nested parent',
-                    children: [
-                        { name: 'nested child 1' },
-                        { name: 'nested child 2' }
-                    ]
-                }
-            ]
-        }
-    ]
-};
+const fs = window.require("fs");
 
 class TreeEvents {
     constructor(context) {
@@ -76,13 +44,48 @@ class EditorEvents {
     }
 }
 
+function getChildren(directory) {
+    let children = [];
+
+    fs.readdirSync(directory).forEach((file) => {
+        let child = {
+            name: file,
+            path: directory + '/' + file,
+            type: 'File'
+        }
+
+        let stat = fs.statSync(child.path);
+
+        if (stat && stat.isDirectory()) {
+            child.type = 'Directory';
+            child.children = getChildren(child.path);
+        }
+
+        children.push(child);
+    });
+
+    return children;
+}
+
 class DashboardEvents {
     constructor(context) {
         this.onOpenButtonClick = this.onOpenButtonClick.bind(context);
     }
 
     onOpenButtonClick() {
-        dialog.showOpenDialog(() => { });
+        dialog.showOpenDialog({ properties: ['openDirectory'] }, (directories) => {
+            if (directories === undefined) {
+                return;
+            }
+
+            let data = {
+                name: "Project",
+                toggled: true,
+                children: getChildren(directories[0])
+            };
+
+            this.setState({ treeData: data });
+        });
     }
 }
 
@@ -91,7 +94,8 @@ class DevelopmentComponent extends React.Component {
         super(props);
 
         this.state = {
-            editorValue: "// Write your code here..."
+            editorValue: "// Write your code here...",
+            treeData: {}
         };
 
         this.editorEvents = new EditorEvents(this);
@@ -117,7 +121,7 @@ class DevelopmentComponent extends React.Component {
                             <div className="col-xs-12">
                                 {/* Tree Component */}
                                 <TreeComponent
-                                    data={data}
+                                    data={this.state.treeData}
                                     onToggle={this.treeEvents.onToggle}
                                 />
                                 {/* -------------- */}
