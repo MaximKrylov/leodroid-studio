@@ -5,89 +5,9 @@ import EditorComponent from './edicomp';
 import TreeComponent from './treecomp';
 import DashboardComponent from './dboardcomp';
 
-const electron = window.require("electron");
-const { dialog } = electron.remote;
-const fs = window.require("fs");
-
-class TreeEvents {
-    constructor(context) {
-        this.onToggle = this.onToggle.bind(context);
-        this.onToggle = this._toggle.bind(context);
-    }
-
-    _toggle(node, toggled) {
-        if (this.state.cursor) {
-            this.state.cursor.active = false;
-        }
-
-        node.active = true;
-
-        if (node.children) {
-            node.toggled = toggled;
-        }
-
-        this.setState({ cursor: node });
-    }
-
-    onToggle(node, toggled) {
-        this._toggle(node, toggled);
-    }
-}
-
-class EditorEvents {
-    constructor(context) {
-        this.onChange = this.onChange.bind(context);
-    }
-
-    onChange(value) {
-        this.setState({ editorValue: value });
-    }
-}
-
-function getChildren(directory) {
-    let children = [];
-
-    fs.readdirSync(directory).forEach((file) => {
-        let child = {
-            name: file,
-            path: directory + '/' + file,
-            type: 'File'
-        }
-
-        let stat = fs.statSync(child.path);
-
-        if (stat && stat.isDirectory()) {
-            child.type = 'Directory';
-            child.children = getChildren(child.path);
-        }
-
-        children.push(child);
-    });
-
-    return children;
-}
-
-class DashboardEvents {
-    constructor(context) {
-        this.onOpenButtonClick = this.onOpenButtonClick.bind(context);
-    }
-
-    onOpenButtonClick() {
-        dialog.showOpenDialog({ properties: ['openDirectory'] }, (directories) => {
-            if (directories === undefined) {
-                return;
-            }
-
-            let data = {
-                name: "Project",
-                toggled: true,
-                children: getChildren(directories[0])
-            };
-
-            this.setState({ treeData: data });
-        });
-    }
-}
+import EditorEvents from '../events/editorEvents'
+import DashboardEvents from '../events/dashboardEvents'
+import TreeEvents from '../events/treeEvents'
 
 class DevelopmentComponent extends React.Component {
     constructor(props) {
