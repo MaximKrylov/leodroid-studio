@@ -27,9 +27,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-treebeard": "^1.1.4",
-    "react-ace": "^4.2.1"
-  },
-  "dependencies": {
+    "react-ace": "^4.2.1",
     "material-ui": "^0.17.3",
     "react-tap-event-plugin": "^2.0.1"
   }
