@@ -5,6 +5,11 @@ import EditorComponent from './edicomp';
 import TreeComponent from './treecomp';
 import DashboardComponent from './dboardcomp';
 
+// Electron
+const electron = window.require("electron");
+const { dialog } = electron.remote;
+// --------
+
 const data = {
     name: 'root',
     toggled: true,
@@ -36,29 +41,62 @@ const data = {
     ]
 };
 
-class DevelopmentComponent extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { value: "// Write your code here..." };
-        this.onTreeNodeToggle = this.onTreeNodeToggle.bind(this);
-        this.onEditorChange = this.onEditorChange.bind(this);
+class TreeEvents {
+    constructor(context) {
+        this.onToggle = this.onToggle.bind(context);
+        this.onToggle = this._toggle.bind(context);
     }
 
-    onEditorChange(value) {
-        this.setState({ value: value });
-    }
-
-    onTreeNodeToggle(node, toggled) {
-        let value = this.state.value;
-
+    _toggle(node, toggled) {
         if (this.state.cursor) {
             this.state.cursor.active = false;
         }
+
         node.active = true;
+
         if (node.children) {
             node.toggled = toggled;
         }
+
         this.setState({ cursor: node });
+    }
+
+    onToggle(node, toggled) {
+        this._toggle(node, toggled);
+    }
+}
+
+class EditorEvents {
+    constructor(context) {
+        this.onChange = this.onChange.bind(context);
+    }
+
+    onChange(value) {
+        this.setState({ editorValue: value });
+    }
+}
+
+class DashboardEvents {
+    constructor(context) {
+        this.onOpenButtonClick = this.onOpenButtonClick.bind(context);
+    }
+
+    onOpenButtonClick() {
+        dialog.showOpenDialog(() => {});
+    }
+}
+
+class DevelopmentComponent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            editorValue: "// Write your code here..."
+        };
+
+        this.editorEvents = new EditorEvents(this);
+        this.dashboardEvents = new DashboardEvents(this);
+        this.treeEvents = new TreeEvents(this);
     }
 
     render() {
@@ -68,22 +106,24 @@ class DevelopmentComponent extends React.Component {
                     <div className="col-xs-3 no-padding">
                         <div className="row">
                             <div className="col-xs-12">
-                                <DashboardComponent/>
+                                <DashboardComponent
+                                    onOpenButtonClick={this.dashboardEvents.onOpenButtonClick}
+                                />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-xs-12">
                                 <TreeComponent
                                     data={data}
-                                    onToggle={this.onTreeNodeToggle}
+                                    onToggle={this.treeEvents.onToggle}
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="col-xs-9 no-padding">
                         <EditorComponent
-                            onChange={this.onEditorChange}
-                            value={this.state.value}
+                            onChange={this.editorEvents.onChange}
+                            value={this.state.editorValue}
                         />
                     </div>
                 </div>

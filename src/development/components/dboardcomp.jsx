@@ -23,7 +23,7 @@ class DashboardComponent extends React.Component {
         return (
             <div>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                    <FlatButton label="OPEN" icon={<FileFolderOpen />} />
+                    <FlatButton onClick={this.props.onOpenButtonClick} label="OPEN" icon={<FileFolderOpen />} />
                 </MuiThemeProvider>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
                     <Toolbar style={{ backgroundColor: "#212121" }}>
