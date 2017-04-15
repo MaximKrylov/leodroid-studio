@@ -82,7 +82,7 @@ class DashboardEvents {
     }
 
     onOpenButtonClick() {
-        dialog.showOpenDialog(() => {});
+        dialog.showOpenDialog(() => { });
     }
 }
 
@@ -106,25 +106,32 @@ class DevelopmentComponent extends React.Component {
                     <div className="col-xs-3 no-padding">
                         <div className="row">
                             <div className="col-xs-12">
+                                {/* Dashboard Component */}
                                 <DashboardComponent
                                     onOpenButtonClick={this.dashboardEvents.onOpenButtonClick}
                                 />
+                                {/* ------------------- */}
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-xs-12">
+                                {/* Tree Component */}
                                 <TreeComponent
                                     data={data}
                                     onToggle={this.treeEvents.onToggle}
                                 />
+                                {/* -------------- */}
                             </div>
                         </div>
                     </div>
                     <div className="col-xs-9 no-padding">
+                        {/* Dashboard Component */}
                         <EditorComponent
                             onChange={this.editorEvents.onChange}
                             value={this.state.editorValue}
                         />
+                        {/* ------------------- */}
+
                     </div>
                 </div>
             </div>
