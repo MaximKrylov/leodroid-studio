@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Treebeard, decorators } from 'react-treebeard';
 
-const CONFIG = {}
-
 decorators.Header = (props) => {
     const style = props.style;
     const iconType = props.node.children ? 'folder' : 'file-text';

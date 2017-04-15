@@ -15,7 +15,7 @@ class DevelopmentComponent extends React.Component {
 
         this.state = {
             editorValue: "// Write your code here...",
-            treeData: {}
+            treeData: null
         };
 
         this.editorEvents = new EditorEvents(this);
@@ -24,6 +24,17 @@ class DevelopmentComponent extends React.Component {
     }
 
     render() {
+        let treeComponent = null;
+
+        if (this.state.treeData) {
+            treeComponent = <TreeComponent
+                data={this.state.treeData}
+                onToggle={this.treeEvents.onToggle}
+            />;
+        } else {
+            treeComponent = <div></div>;
+        }
+
         return (
             <div className="container-fluid">
                 <div className="row">
@@ -40,10 +51,7 @@ class DevelopmentComponent extends React.Component {
                         <div className="row">
                             <div className="col-xs-12">
                                 {/* Tree Component */}
-                                <TreeComponent
-                                    data={this.state.treeData}
-                                    onToggle={this.treeEvents.onToggle}
-                                />
+                                {treeComponent}
                                 {/* -------------- */}
                             </div>
                         </div>
