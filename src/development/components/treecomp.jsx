@@ -11,11 +11,13 @@ class TreeComponent extends React.Component {
 
     render() {
         return (
-            <Treebeard
-                // Tree properties
-                data={this.props.data}
-                onToggle={this.props.onToggle}
-            />
+            <div>
+                <Treebeard
+                    // Tree properties
+                    data={this.props.data}
+                    onToggle={this.props.onToggle}
+                />
+            </div>
         );
     }
 }
