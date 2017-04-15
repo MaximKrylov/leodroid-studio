@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Treebeard } from 'react-treebeard';
 
-import brace from 'brace';
-import AceEditor from 'react-ace';
+import EditorComponent from './edicomp';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -19,9 +18,6 @@ import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow';
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
-import 'brace/mode/javascript';
-import 'brace/theme/twilight';
 
 const data = {
     name: 'root',
@@ -108,15 +104,9 @@ class DevelopmentComponent extends React.Component {
                         </div>
                     </div>
                     <div className="col-xs-9 no-padding">
-                        <AceEditor mode="javascript"
-                            theme="twilight"
-                            fontSize="13"
-                            editorProps={{ $blockScrolling: true }}
-                            width="100%"
-                            height="100%"
-                            value={this.state.value}
+                        <EditorComponent
                             onChange={this.onEditorChange}
-                        />
+                            value={this.state.value} />
                     </div>
                 </div>
             </div>
