@@ -33,9 +33,10 @@ class DashboardEvents {
             }
 
             let data = {
-                // Get folder name (without full path)
+                // Get opened folder name (without full path)
                 name: directories[0].match(/([^\/]*)\/*$/)[1],
                 toggled: true,
+                // Get all children (recursive)
                 children: getChildren(directories[0])
             };
 
