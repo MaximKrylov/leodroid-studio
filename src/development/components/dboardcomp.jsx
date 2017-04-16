@@ -12,6 +12,7 @@ import Dialog from 'material-ui/Dialog';
 
 import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import AvCallToAction from 'material-ui/svg-icons/av/call-to-action';
+import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -52,9 +53,9 @@ class DashboardComponent extends React.Component {
 
         const openProjectButton =
             <FlatButton
-                onTouchTap={this.props.onOpenButtonClick}
                 label="OPEN"
                 icon={<FileFolderOpen />}
+                onTouchTap={this.props.onOpenButtonClick}
             />;
 
         const newProjectButton =
@@ -74,6 +75,13 @@ class DashboardComponent extends React.Component {
                 onRequestClose={this.handleClose}
             > You are going to create new project. Continue?
             </Dialog>;
+        
+        const runButton =
+            <FlatButton
+                label="RUN"
+                icon={<AvPlayArrow />}
+                disabled={!this.props.isProjectOpened}
+            />;
 
         return (
             <div>
@@ -86,10 +94,12 @@ class DashboardComponent extends React.Component {
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
                     {newProjectDialog}
                 </MuiThemeProvider>
+                <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+                    {runButton}
+                </MuiThemeProvider>
             </div>
         );
     }
 }
 
 export default DashboardComponent;
-
