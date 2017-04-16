@@ -9,7 +9,7 @@ import 'brace/theme/twilight';
 const CONFIG = {
     mode: "javascript", // Language: JavaScript
     theme: "twilight", // Color scheme: Twilight
-    fontSize: "13", // Font size: 13pt
+    fontSize: "12", // Font size: 12pt
     editorProps: {
         /*
             Setting '$blockScrolling' option prevents appearing of the following warning message: 

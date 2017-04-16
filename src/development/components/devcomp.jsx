@@ -14,8 +14,9 @@ class DevelopmentComponent extends React.Component {
         super(props);
 
         this.state = {
-            editorValue: "// Write your code here...",
-            treeData: null
+            editorValue: "",
+            openedFilePath: "",
+            treeData: null,
         };
 
         this.editorEvents = new EditorEvents(this);

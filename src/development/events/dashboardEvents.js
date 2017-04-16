@@ -5,13 +5,8 @@ const fs = window.require("fs");
 function getChildren(directory) {
     return fs.readdirSync(directory).map(file => {
         let child = { name: file, path: `${directory}/${file}` }
-
         let stat = fs.statSync(child.path);
-
-        if (stat && stat.isDirectory()) {
-            child.children = getChildren(child.path);
-        }
-
+        if (stat && stat.isDirectory()) { child.children = getChildren(child.path); }
         return child;
     });
 }
@@ -23,10 +18,7 @@ class DashboardEvents {
 
     onOpenButtonClick() {
         dialog.showOpenDialog({ properties: ['openDirectory'] }, directories => {
-            if (directories === undefined) {
-                return;
-            }
-
+            if (directories === undefined) { return; }
             let data = {
                 // Get opened folder name (without full path)
                 name: directories[0].match(/([^\/]*)\/*$/)[1],
@@ -35,7 +27,6 @@ class DashboardEvents {
                 // Get all child nodes (recursive)
                 children: getChildren(directories[0])
             };
-
             this.setState({ treeData: data });
         });
     }
