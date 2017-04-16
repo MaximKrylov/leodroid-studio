@@ -10,7 +10,7 @@ decorators.Header = (props) => {
     return (
         <div style={style.base}>
             <div style={style.title}>
-                <i className={iconClass} style={iconStyle}/>
+                <i className={iconClass} style={iconStyle} />
                 {props.node.name}
             </div>
         </div>
@@ -23,15 +23,16 @@ class TreeComponent extends React.Component {
     }
 
     render() {
+        const treebeard =
+            <Treebeard
+                decorators={decorators}
+                // Tree properties
+                data={this.props.data}
+                onToggle={this.props.onToggle}
+            />;
+            
         return (
-            <div>
-                <Treebeard
-                    decorators={decorators}
-                    // Tree properties
-                    data={this.props.data}
-                    onToggle={this.props.onToggle}
-                />
-            </div>
+            <div>{treebeard}</div>
         );
     }
 }

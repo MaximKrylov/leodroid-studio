@@ -25,29 +25,29 @@ class DevelopmentComponent extends React.Component {
     }
 
     render() {
-        // Tree Component
         let treeComponent = null;
 
         if (this.state.treeData) {
-            treeComponent = <TreeComponent
-                data={this.state.treeData}
-                onToggle={this.treeEvents.onToggle}
-            />;
+            treeComponent =
+                <TreeComponent
+                    data={this.state.treeData}
+                    onToggle={this.treeEvents.onToggle}
+                />;
         } else {
             treeComponent = <div></div>;
         }
 
-        // Dashboard Component
-        let dashboardComponent = <DashboardComponent
-            onOpenButtonClick={this.dashboardEvents.onOpenButtonClick}
-        />
+        const dashboardComponent =
+            <DashboardComponent
+                onOpenButtonClick={this.dashboardEvents.onOpenButtonClick}
+            />;
 
-        // Editor Component
-        let editorComponent = <EditorComponent
-            onChange={this.editorEvents.onChange}
-            onLoad={this.editorEvents.onLoad}
-            value={this.state.editorValue}
-        />
+        const editorComponent =
+            <EditorComponent
+                onChange={this.editorEvents.onChange}
+                onLoad={this.editorEvents.onLoad}
+                value={this.state.editorValue}
+            />;
 
         return (
             <div className="container-fluid">

@@ -18,52 +18,72 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 class DashboardComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { open: false };
+        this.state = { newProjectDialogOpen: false };
 
-        this.handleOpen = this.handleOpen.bind(this);
-        this.handleClose = this.handleClose.bind(this);
+        this.onNewProjectDialogOpen = this.onNewProjectDialogOpen.bind(this);
+        this.onNewProjectDialogClose = this.onNewProjectDialogClose.bind(this);
 
         injectTapEventPlugin();
     }
 
-    handleOpen() {
-        this.setState({ open: true });
+    onNewProjectDialogOpen() {
+        this.setState({ newProjectDialogOpen: true });
     };
 
-    handleClose() {
-        this.setState({ open: false });
+    onNewProjectDialogClose() {
+        this.setState({ newProjectDialogOpen: false });
     };
 
     render() {
-        const actions = [
+        const newProjectDialogActions = [
             <FlatButton
                 label="Cancel"
                 primary={true}
-                onTouchTap={this.handleClose}
+                onTouchTap={this.onNewProjectDialogClose}
             />,
+
             <FlatButton
                 label="Submit"
                 primary={true}
                 keyboardFocused={true}
-                onTouchTap={this.handleClose}
-            />,
+                onTouchTap={this.onNewProjectDialogClose}
+            />
         ];
+
+        const openProjectButton =
+            <FlatButton
+                onTouchTap={this.props.onOpenButtonClick}
+                label="OPEN"
+                icon={<FileFolderOpen />}
+            />;
+
+        const newProjectButton =
+            <RaisedButton
+                label="NEW"
+                onTouchTap={this.onNewProjectDialogOpen}
+                icon={<AvCallToAction />}
+            />;
+
+        const newProjectDialog =
+            <Dialog
+                title="New project"
+                actions={newProjectDialogActions}
+                modal={false}
+                open={this.state.newProjectDialogOpen}
+                onRequestClose={this.handleClose}
+            > You are going to create new project. Continue?
+            </Dialog>;
+
         return (
             <div>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                    <FlatButton onClick={this.props.onOpenButtonClick} label="OPEN" icon={<FileFolderOpen />} />
+                    {openProjectButton}
                 </MuiThemeProvider>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                    <RaisedButton label="NEW" onTouchTap={this.handleOpen} icon={<AvCallToAction />} />
+                    {newProjectButton}
                 </MuiThemeProvider>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                    <Dialog
-                        title="Initialize project"
-                        actions={actions}
-                        modal={false}
-                        open={this.state.open}
-                        onRequestClose={this.handleClose}
-                    > You are going to initialize project. Continue? </Dialog>
+                    {newProjectDialog}
                 </MuiThemeProvider>
             </div>
         );

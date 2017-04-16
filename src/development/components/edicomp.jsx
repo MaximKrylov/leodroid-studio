@@ -28,23 +28,24 @@ class EditorComponent extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                < AceEditor
-                    // Editor configuration
-                    name="editorComponent"
-                    mode={CONFIG.mode}
-                    theme={CONFIG.theme}
-                    fontSize={CONFIG.fontSize}
-                    editorProps={CONFIG.editorProps}
-                    width={CONFIG.width}
-                    height={CONFIG.height}
+        const aceEditor =
+            < AceEditor
+                // Editor configuration
+                name="editorComponent"
+                mode={CONFIG.mode}
+                theme={CONFIG.theme}
+                fontSize={CONFIG.fontSize}
+                editorProps={CONFIG.editorProps}
+                width={CONFIG.width}
+                height={CONFIG.height}
 
-                    // Editor properties
-                    value={this.props.value}
-                    onChange={this.props.onChange}
-                />
-            </div>
+                // Editor properties
+                value={this.props.value}
+                onChange={this.props.onChange}
+            />;
+
+        return (
+            <div>{aceEditor}</div>
         );
     }
 }
