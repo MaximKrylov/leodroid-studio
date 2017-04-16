@@ -62,6 +62,7 @@ class DashboardComponent extends React.Component {
                 label="NEW"
                 onTouchTap={this.onNewProjectDialogOpen}
                 icon={<AvCallToAction />}
+                disabled={!this.props.isProjectOpened}
             />;
 
         const newProjectDialog =

@@ -27,7 +27,7 @@ class DashboardEvents {
                 // Get all child nodes (recursive)
                 children: getChildren(directories[0])
             };
-            this.setState({ treeData: data });
+            this.setState({ treeData: data, isProjectOpened: true });
         });
     }
 }

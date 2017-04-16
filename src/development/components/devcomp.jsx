@@ -17,6 +17,7 @@ class DevelopmentComponent extends React.Component {
             editorValue: "",
             openedFilePath: "",
             treeData: null,
+            isProjectOpened: false
         };
 
         this.editorEvents = new EditorEvents(this);
@@ -40,6 +41,7 @@ class DevelopmentComponent extends React.Component {
         const dashboardComponent =
             <DashboardComponent
                 onOpenButtonClick={this.dashboardEvents.onOpenButtonClick}
+                isProjectOpened={this.state.isProjectOpened}
             />;
 
         const editorComponent =
