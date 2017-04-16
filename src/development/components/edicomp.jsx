@@ -19,7 +19,7 @@ const CONFIG = {
         $blockScrolling: true
     },
     width: "100%", // Widht: 100%
-    height: "100%", // Height: 100%
+    height: "100%" // Height: 100%
 }
 
 class EditorComponent extends React.Component {

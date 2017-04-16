@@ -50,7 +50,7 @@ class DevelopmentComponent extends React.Component {
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-xs-3 no-padding">
+                    <div className="col-xs-3 no-padding side-bar">
                         <div className="row">
                             <div className="col-xs-12">{dashboardComponent}</div>
                         </div>
