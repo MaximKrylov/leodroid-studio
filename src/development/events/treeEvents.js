@@ -1,4 +1,5 @@
 const fs = window.require("fs");
+const brace = window.require("brace");
 
 function toggle(context, node, toggled) {
     if (context.state.cursor) { context.state.cursor.active = false; }
@@ -36,6 +37,8 @@ class TreeEvents {
         }
         // Open file
         openFile(this, node.path);
+        // Reset undo/redo manager
+        brace.edit("editorComponent").getSession().getUndoManager().reset();
     }
 }
 

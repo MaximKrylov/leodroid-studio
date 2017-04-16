@@ -8,10 +8,6 @@ class EditorEvents {
     onChange(value) {
         this.setState({ editorValue: value });
     }
-
-    onLoad() {
-        brace.edit("editorComponent").getSession().setUndoManager(null);
-    }
 }
 
 export default EditorEvents;
