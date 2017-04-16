@@ -32,6 +32,7 @@ class EditorComponent extends React.Component {
             <div>
                 < AceEditor
                     // Editor configuration
+                    name="editorComponent"
                     mode={CONFIG.mode}
                     theme={CONFIG.theme}
                     fontSize={CONFIG.fontSize}

@@ -1,4 +1,5 @@
 const fs = window.require("fs");
+const brace = require("brace");
 
 function toggle(context, node, toggled) {
     if (context.state.cursor) { context.state.cursor.active = false; }
@@ -16,7 +17,10 @@ function saveFile(context, filePath, fileContent) {
 function openFile(context, filePath) {
     fs.readFile(filePath, 'UTF-8', (err, data) => {
         if (err) { return; }
-        context.setState({ editorValue: data, openedFilePath: filePath });
+        context.setState({ editorValue: data, openedFilePath: filePath }, () => {
+            // Get editorComponent by name and reset undo/redo history
+            brace.edit("editorComponent").getSession().getUndoManager().reset()
+        });
     })
 }
 
@@ -36,7 +40,6 @@ class TreeEvents {
         }
         // Open file
         openFile(this, node.path);
-
     }
 }
 
