@@ -43,6 +43,7 @@ class EditorComponent extends React.Component {
                     // Editor properties
                     value={this.props.value}
                     onChange={this.props.onChange}
+                    onLoad={this.props.onLoad}
                 />
             </div>
         );

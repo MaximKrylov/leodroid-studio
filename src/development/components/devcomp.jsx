@@ -45,6 +45,7 @@ class DevelopmentComponent extends React.Component {
         // Editor Component
         let editorComponent = <EditorComponent
             onChange={this.editorEvents.onChange}
+            onLoad={this.editorEvents.onLoad}
             value={this.state.editorValue}
         />
 
