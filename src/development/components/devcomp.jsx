@@ -52,19 +52,16 @@ class DevelopmentComponent extends React.Component {
             />;
 
         return (
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-xs-3 no-padding side-bar">
-                        <div className="row">
-                            <div className="col-xs-12">{dashboardComponent}</div>
-                        </div>
-                        <div className="row">
-                            <div className="col-xs-12">{treeComponent}</div>
-                        </div>
-                    </div>
-                    <div className="col-xs-9 no-padding">{editorComponent}</div>
-                </div>
-            </div>
+            <section id="layout">
+                <aside id="left-side">
+                    <section id="dashboard">{dashboardComponent}</section>
+                    <section id="tree">{treeComponent}</section>
+                </aside>
+                <section id="right-side">
+                    <section id="editor">{editorComponent}</section>
+                    <section id="airline"></section>
+                </section>
+            </section>
         );
     }
 }

@@ -1,12 +1,39 @@
-@import "bootstrap";
-@import "font-awesome";
+@import "font-awesome"
 
-body
+*
+    padding: 0
+    margin: 0
+
+html, body, section#layout
     background-color: #21252B
-
-.side-bar
-    overflow: auto
+    width: 100%
     height: 100%
 
-.no-padding 
-   padding: 0 !important
+section#layout > aside#left-side,
+section#layout > section#right-side
+    position: relative
+    float: left
+    height: 100%
+
+aside#left-side
+    width: 283px
+
+section#right-side
+    width: calc(100% - 283px)
+
+aside#left-side section#tree
+    overflow: auto
+    height: calc(100% - 38px)
+
+aside#right-side section#editor,
+aside#right-side section#airline
+    position: relative
+    width: 100%
+
+section#right-side section#edior
+    overflow: auto
+    height: calc(100% - 30px)
+
+section#right-side section#airline
+    overflow: hidden
+    height: 30px
