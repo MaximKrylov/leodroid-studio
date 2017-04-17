@@ -9,7 +9,7 @@ import 'brace/theme/twilight';
 const CONFIG = {
     mode: "javascript", // Language: JavaScript
     theme: "twilight", // Color scheme: Twilight
-    fontSize: "12", // Font size: 12pt
+    fontSize: "13", // Font size: 13pt
     editorProps: {
         /*
             Setting '$blockScrolling' option prevents appearing of the following warning message: 
@@ -41,6 +41,7 @@ class EditorComponent extends React.Component {
 
                 // Editor properties
                 value={this.props.value}
+                readOnly={!this.props.isFileOpened}
                 onChange={this.props.onChange}
             />;
 

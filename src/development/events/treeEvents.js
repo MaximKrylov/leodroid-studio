@@ -17,7 +17,7 @@ function saveFile(context, filePath, fileContent) {
 function openFile(context, filePath) {
     fs.readFile(filePath, 'UTF-8', (err, data) => {
         if (err) { return; }
-        context.setState({ editorValue: data, openedFilePath: filePath });
+        context.setState({ editorValue: data, openedFilePath: filePath, isFileOpened: true });
     })
 }
 
@@ -32,7 +32,7 @@ class TreeEvents {
         // If node is a folder, return 
         if (node.children) { return; }
         // If the user has opened file, save this file
-        if (this.state.openedFilePath !== "") {
+        if (this.state.isFileOpened) {
             saveFile(this, this.state.openedFilePath, this.state.editorValue);
         }
         // Open file

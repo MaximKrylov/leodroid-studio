@@ -15,6 +15,7 @@ class DevelopmentComponent extends React.Component {
 
         this.state = {
             editorValue: "",
+            isFileOpened: false,
             openedFilePath: "",
             treeData: null,
             isProjectOpened: false
@@ -46,9 +47,10 @@ class DevelopmentComponent extends React.Component {
 
         const editorComponent =
             <EditorComponent
+                value={this.state.editorValue}
+                isFileOpened={this.state.isFileOpened}
                 onChange={this.editorEvents.onChange}
                 onLoad={this.editorEvents.onLoad}
-                value={this.state.editorValue}
             />;
 
         return (

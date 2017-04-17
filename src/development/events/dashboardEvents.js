@@ -31,6 +31,7 @@ class DashboardEvents {
             this.setState({
                 treeData: data,
                 isProjectOpened: true,
+                isFileOpened: false,
                 openedFilePath: "",
                 editorValue: ""
             });
