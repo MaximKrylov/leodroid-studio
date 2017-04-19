@@ -1,8 +1,5 @@
-const electron = window.require("electron");
-const { dialog } = electron.remote;
-const fs = window.require("fs");
-
-import { getChildren } from '../helpers/treecomphelper'
+import { getChildren } from '../helpers/treecomphelper';
+import { showOpenDirectoryDialog } from '../helpers/electronhelper';
 
 class DashboardEvents {
     constructor(context) {
@@ -10,8 +7,11 @@ class DashboardEvents {
     }
 
     onOpenButtonClick() {
-        dialog.showOpenDialog({ properties: ['openDirectory'] }, directories => {
-            if (directories === undefined) { return; }
+        showOpenDirectoryDialog((directories) => {
+            if (directories === undefined) {
+                console.log(`showOpenDirectoryDialog: Directory wasn't opened.`)
+                return;
+            }
             let data = {
                 // Get opened folder name (without full path)
                 name: directories[0].match(/([^\/]*)\/*$/)[1],
@@ -20,7 +20,6 @@ class DashboardEvents {
                 // Get all child nodes (recursive)
                 children: getChildren(directories[0])
             };
-
             this.setState({
                 treeData: data,
                 isProjectOpened: true,
