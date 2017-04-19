@@ -122,7 +122,7 @@ class DevelopmentComponent extends React.Component {
         const editorComponent =
             <EditorComponent
                 value={this.state.fileContent}
-                isFileOpened={this.state.isFileOpened}
+                readOnly={!this.state.isFileOpened}
                 onChange={this.onEditorComponentChange}
                 onLoad={this.onEditorComponentLoad}
             />;

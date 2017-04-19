@@ -41,7 +41,7 @@ class EditorComponent extends React.Component {
 
                 // Editor properties
                 value={this.props.value}
-                readOnly={!this.props.isFileOpened}
+                readOnly={this.props.readOnly}
                 onChange={this.props.onChange}
                 onLoad={this.props.onLoad}
             />;
