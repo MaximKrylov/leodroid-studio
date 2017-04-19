@@ -1,4 +1,4 @@
-const fs = window.require("fs");
+import { saveFile, openFile } from '../helpers/fsyshelper';
 const brace = window.require("brace");
 
 function toggle(context, node, toggled) {
@@ -6,19 +6,6 @@ function toggle(context, node, toggled) {
     node.active = true;
     if (node.children) { node.toggled = toggled; }
     context.setState({ cursor: node });
-}
-
-function saveFile(context, filePath, fileContent) {
-    fs.writeFile(filePath, fileContent, (err) => {
-        if (err) { return; }
-    });
-}
-
-function openFile(context, filePath) {
-    fs.readFile(filePath, 'UTF-8', (err, data) => {
-        if (err) { return; }
-        context.setState({ editorValue: data, openedFilePath: filePath, isFileOpened: true });
-    })
 }
 
 class TreeEvents {
@@ -33,10 +20,16 @@ class TreeEvents {
         if (node.children) { return; }
         // If the user has opened file, save this file
         if (this.state.isFileOpened) {
-            saveFile(this, this.state.openedFilePath, this.state.editorValue);
+            saveFile(this.state.openedFilePath, this.state.editorValue);
         }
         // Open file
-        openFile(this, node.path);
+        openFile(node.path, (filePath, fileContent) => {
+            this.setState({
+                openedFilePath: filePath,
+                editorValue: fileContent,
+                isFileOpened: true
+            });
+        });
         // Reset undo/redo manager
         brace.edit("editorComponent").getSession().getUndoManager().reset();
     }
