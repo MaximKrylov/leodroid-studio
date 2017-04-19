@@ -16,7 +16,7 @@ const CONFIG = {
             Automatically scrolling cursor into view after selection change this will be disabled 
             in the next version set editor.$blockScrolling = Infinity to disable this message
         */
-        $blockScrolling: true
+        $blockScrolling: Infinity
     },
     width: "100%", // Widht: 100%
     height: "calc(100% - 37px)" // Height: 100%
