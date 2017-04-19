@@ -2,10 +2,6 @@ import { saveFile, openFile } from '../helpers/fsyshelper';
 const brace = window.require("brace");
 
 function toggle(context, node, toggled) {
-    if (context.state.cursor) { context.state.cursor.active = false; }
-    node.active = true;
-    if (node.children) { node.toggled = toggled; }
-    context.setState({ cursor: node });
 }
 
 class TreeEvents {
@@ -15,9 +11,18 @@ class TreeEvents {
 
     onToggle(node, toggled) {
         // Toggle node
-        toggle(this, node, toggled);
+        if (this.state.cursor) {
+            this.state.cursor.active = false;
+        }
+        node.active = true;
+        if (node.children) {
+            node.toggled = toggled;
+        }
+        this.setState({ cursor: node });
         // If node is a folder, return 
-        if (node.children) { return; }
+        if (node.children) { 
+            return;
+        }
         // If the user has opened file, save this file
         if (this.state.isFileOpened) {
             saveFile(this.state.openedFilePath, this.state.editorValue);
