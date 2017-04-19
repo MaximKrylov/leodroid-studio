@@ -8,8 +8,7 @@ import DashboardComponent from './dboardcomp';
 import { saveFile, openFile } from '../helpers/fsyshelper';
 import { getChildren } from '../helpers/treecomphelper';
 import { showOpenDirectoryDialog } from '../helpers/electronhelper';
-
-import brace from 'brace';
+import { addCommand } from '../helpers/edicomphelper';
 
 
 class DevelopmentComponent extends React.Component {
@@ -71,7 +70,7 @@ class DevelopmentComponent extends React.Component {
     }
 
     onEditorComponentLoad() {
-        brace.edit('editorComponent').commands.addCommand({
+        addCommand({
             name: 'save',
             bindKey: { 'win': 'Ctrl-S', 'mac': 'Cmd-S' },
             exec: () => {
