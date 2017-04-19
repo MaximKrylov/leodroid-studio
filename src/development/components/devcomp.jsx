@@ -9,15 +9,17 @@ import { saveFile, openFile } from '../helpers/fsyshelper';
 import { getChildren } from '../helpers/treecomphelper';
 import { showOpenDirectoryDialog } from '../helpers/electronhelper';
 
+import brace from 'brace';
+
 
 class DevelopmentComponent extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            editorValue: "",
+            editorValue: '',
             isFileOpened: false,
-            openedFilePath: "",
+            openedFilePath: '',
             treeData: null,
             isProjectOpened: false
         };
@@ -25,6 +27,7 @@ class DevelopmentComponent extends React.Component {
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
         this.onEditorComponentChange = this.onEditorComponentChange.bind(this);
         this.onDashboardComponentOpenButtonClick = this.onDashboardComponentOpenButtonClick.bind(this);
+        this.onEditorComponentLoad = this.onEditorComponentLoad.bind(this);
     }
 
     onTreeComponentToggle(node, toggled) {
@@ -67,6 +70,16 @@ class DevelopmentComponent extends React.Component {
         this.state.editorValue = value;
     }
 
+    onEditorComponentLoad() {
+        brace.edit('editorComponent').commands.addCommand({
+            name: 'save',
+            bindKey: { 'win': 'Ctrl-S', 'mac': 'Cmd-S' },
+            exec: () => {
+                saveFile(this.state.openedFilePath, this.state.editorValue);
+            }
+        });
+    }
+
     onDashboardComponentOpenButtonClick() {
         showOpenDirectoryDialog((directory) => {
             let data = {
@@ -81,8 +94,8 @@ class DevelopmentComponent extends React.Component {
                 treeData: data,
                 isProjectOpened: true,
                 isFileOpened: false,
-                openedFilePath: "",
-                editorValue: ""
+                openedFilePath: '',
+                editorValue: ''
             });
         });
     }
@@ -111,17 +124,18 @@ class DevelopmentComponent extends React.Component {
                 value={this.state.editorValue}
                 isFileOpened={this.state.isFileOpened}
                 onChange={this.onEditorComponentChange}
+                onLoad={this.onEditorComponentLoad}
             />;
 
         return (
-            <section id="layout">
-                <aside id="left-side">
-                    <section id="dashboard">{dashboardComponent}</section>
-                    <section id="tree">{treeComponent}</section>
+            <section id='layout'>
+                <aside id='left-side'>
+                    <section id='dashboard'>{dashboardComponent}</section>
+                    <section id='tree'>{treeComponent}</section>
                 </aside>
-                <section id="right-side">
-                    <section id="editor">{editorComponent}</section>
-                    <section id="airline"></section>
+                <section id='right-side'>
+                    <section id='editor'>{editorComponent}</section>
+                    <section id='airline'></section>
                 </section>
             </section>
         );
