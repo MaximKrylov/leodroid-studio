@@ -2,14 +2,7 @@ const electron = window.require("electron");
 const { dialog } = electron.remote;
 const fs = window.require("fs");
 
-function getChildren(directory) {
-    return fs.readdirSync(directory).map(file => {
-        let child = { name: file, path: `${directory}/${file}` }
-        let stat = fs.statSync(child.path);
-        if (stat && stat.isDirectory()) { child.children = getChildren(child.path); }
-        return child;
-    });
-}
+import { getChildren } from '../helpers/treecomphelper'
 
 class DashboardEvents {
     constructor(context) {
