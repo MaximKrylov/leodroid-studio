@@ -16,9 +16,9 @@ class DevelopmentComponent extends React.Component {
         super(props);
 
         this.state = {
-            editorValue: '',
+            fileContent: '',
+            filePath: '',
             isFileOpened: false,
-            openedFilePath: '',
             treeData: null,
             isProjectOpened: false
         };
@@ -50,14 +50,14 @@ class DevelopmentComponent extends React.Component {
 
         // If the user has opened file, save this file
         if (this.state.isFileOpened) {
-           fileSystemHelper.saveFile(this.state.openedFilePath, this.state.editorValue);
+           fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent);
         }
 
         // Open file
         fileSystemHelper.openFile(node.path, (filePath, fileContent) => {
             this.setState({
-                openedFilePath: filePath,
-                editorValue: fileContent,
+                filePath: filePath,
+                fileContent: fileContent,
                 isFileOpened: true
             });
         });
@@ -66,7 +66,7 @@ class DevelopmentComponent extends React.Component {
     onEditorComponentChange(value) {
         // It doesn't need to update component after changing its value here,
         // that's why it doen't need to use setState(...)
-        this.state.editorValue = value;
+        this.state.fileContent = value;
     }
 
     onEditorComponentLoad() {
@@ -74,7 +74,7 @@ class DevelopmentComponent extends React.Component {
             name: 'save',
             bindKey: { 'win': 'Ctrl-S', 'mac': 'Cmd-S' },
             exec: () => {
-                fileSystemHelper.saveFile(this.state.openedFilePath, this.state.editorValue);
+                fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent);
             }
         });
     }
@@ -89,13 +89,13 @@ class DevelopmentComponent extends React.Component {
                 // Get all child nodes (recursive)
                 children: treeComponentHelper.getChildren(directory)
             };
-            
+
             this.setState({
                 treeData: data,
                 isProjectOpened: true,
                 isFileOpened: false,
-                openedFilePath: '',
-                editorValue: ''
+                filePath: '',
+                fileContent: ''
             });
         });
     }
@@ -121,7 +121,7 @@ class DevelopmentComponent extends React.Component {
 
         const editorComponent =
             <EditorComponent
-                value={this.state.editorValue}
+                value={this.state.fileContent}
                 isFileOpened={this.state.isFileOpened}
                 onChange={this.onEditorComponentChange}
                 onLoad={this.onEditorComponentLoad}
