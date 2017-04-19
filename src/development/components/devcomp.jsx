@@ -5,9 +5,10 @@ import EditorComponent from './edicomp';
 import TreeComponent from './treecomp';
 import DashboardComponent from './dboardcomp';
 
-import DashboardEvents from '../events/dashboardEvents'
-
 import { saveFile, openFile } from '../helpers/fsyshelper';
+import { getChildren } from '../helpers/treecomphelper';
+import { showOpenDirectoryDialog } from '../helpers/electronhelper';
+
 
 class DevelopmentComponent extends React.Component {
     constructor(props) {
@@ -23,8 +24,7 @@ class DevelopmentComponent extends React.Component {
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
         this.onEditorComponentChange = this.onEditorComponentChange.bind(this);
-
-        this.dashboardEvents = new DashboardEvents(this);
+        this.onDashboardComponentOpenButtonClick = this.onDashboardComponentOpenButtonClick.bind(this);
     }
 
     onTreeComponentToggle(node, toggled) {
@@ -67,6 +67,26 @@ class DevelopmentComponent extends React.Component {
         this.state.editorValue = value;
     }
 
+    onDashboardComponentOpenButtonClick() {
+        showOpenDirectoryDialog((directory) => {
+            let data = {
+                // Get opened folder name (without full path)
+                name: directory.match(/([^\/]*)\/*$/)[1],
+                // Root node is toggled by default
+                toggled: true,
+                // Get all child nodes (recursive)
+                children: getChildren(directory)
+            };
+            this.setState({
+                treeData: data,
+                isProjectOpened: true,
+                isFileOpened: false,
+                openedFilePath: "",
+                editorValue: ""
+            });
+        });
+    }
+
     render() {
         let treeComponent = null;
 
@@ -82,7 +102,7 @@ class DevelopmentComponent extends React.Component {
 
         const dashboardComponent =
             <DashboardComponent
-                onOpenButtonClick={this.dashboardEvents.onOpenButtonClick}
+                onOpenButtonClick={this.onDashboardComponentOpenButtonClick}
                 isProjectOpened={this.state.isProjectOpened}
             />;
 
