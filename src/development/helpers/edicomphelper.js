@@ -1,4 +1,4 @@
-const brace = window.require("brace");
+const brace = window.require('brace');
 
 module.exports = {
     addCommand: function (command) {

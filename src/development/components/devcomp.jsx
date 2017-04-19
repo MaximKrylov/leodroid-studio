@@ -89,6 +89,7 @@ class DevelopmentComponent extends React.Component {
                 // Get all child nodes (recursive)
                 children: treeComponentHelper.getChildren(directory)
             };
+            
             this.setState({
                 treeData: data,
                 isProjectOpened: true,

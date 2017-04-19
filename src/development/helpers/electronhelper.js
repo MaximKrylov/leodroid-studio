@@ -1,6 +1,6 @@
-const electron = window.require("electron");
+const electron = window.require('electron');
 const { dialog } = electron.remote;
-const fs = window.require("fs");
+const fs = window.require('fs');
 
 module.exports = {
     showOpenDirectoryDialog: function (callback) {
@@ -9,6 +9,7 @@ module.exports = {
                 console.log(`showOpenDirectoryDialog: Directory wasn't opened.`)
                 return;
             }
+            
             callback(directories[0]);
         });
     }

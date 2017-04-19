@@ -1,4 +1,4 @@
-const fs = window.require("fs");
+const fs = window.require('fs');
 
 module.exports = {
     openFile: function (filePath, callback) {
@@ -7,11 +7,13 @@ module.exports = {
                 console.log(`openFile: ${error}`);
                 return;
             }
+
             if (callback) {
                 callback(filePath, fileContent);
             }
         })
     },
+    
     saveFile: function (filePath, fileContent) {
         fs.writeFile(filePath, fileContent, (error) => {
             if (error) {

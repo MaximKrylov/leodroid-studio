@@ -7,6 +7,7 @@ decorators.Header = (props) => {
     const iconType = props.node.children ? 'folder' : 'file-text';
     const iconClass = `fa fa-${iconType}`;
     const iconStyle = { marginRight: '5px' };
+    
     return (
         <div style={style.base}>
             <div style={style.title}>

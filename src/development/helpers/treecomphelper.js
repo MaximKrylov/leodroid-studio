@@ -1,4 +1,4 @@
-const fs = window.require("fs");
+const fs = window.require('fs');
 
 module.exports = {
     getChildren: function (directory) {
@@ -7,10 +7,13 @@ module.exports = {
                 name: file,
                 path: `${directory}/${file}`
             }
+
             let stat = fs.statSync(child.path);
+
             if (stat && stat.isDirectory()) {
                 child.children = getChildren(child.path);
             }
+            
             return child;
         });
     }
