@@ -5,10 +5,10 @@ import EditorComponent from './edicomp';
 import TreeComponent from './treecomp';
 import DashboardComponent from './dboardcomp';
 
-import { saveFile, openFile } from '../helpers/fsyshelper';
-import { getChildren } from '../helpers/treecomphelper';
-import { showOpenDirectoryDialog } from '../helpers/electronhelper';
-import { addCommand } from '../helpers/edicomphelper';
+import fileSystemHelper from '../helpers/fsyshelper';
+import electronHelper from '../helpers/electronhelper';
+import editorComponentHelper from '../helpers/edicomphelper';
+import treeComponentHelper from '../helpers/treecomphelper';
 
 
 class DevelopmentComponent extends React.Component {
@@ -50,11 +50,11 @@ class DevelopmentComponent extends React.Component {
 
         // If the user has opened file, save this file
         if (this.state.isFileOpened) {
-            saveFile(this.state.openedFilePath, this.state.editorValue);
+           fileSystemHelper.saveFile(this.state.openedFilePath, this.state.editorValue);
         }
 
         // Open file
-        openFile(node.path, (filePath, fileContent) => {
+        fileSystemHelper.openFile(node.path, (filePath, fileContent) => {
             this.setState({
                 openedFilePath: filePath,
                 editorValue: fileContent,
@@ -70,24 +70,24 @@ class DevelopmentComponent extends React.Component {
     }
 
     onEditorComponentLoad() {
-        addCommand({
+        editorComponentHelper.addCommand({
             name: 'save',
             bindKey: { 'win': 'Ctrl-S', 'mac': 'Cmd-S' },
             exec: () => {
-                saveFile(this.state.openedFilePath, this.state.editorValue);
+                fileSystemHelper.saveFile(this.state.openedFilePath, this.state.editorValue);
             }
         });
     }
 
     onDashboardComponentOpenButtonClick() {
-        showOpenDirectoryDialog((directory) => {
+        electronHelper.showOpenDirectoryDialog((directory) => {
             let data = {
                 // Get opened folder name (without full path)
                 name: directory.match(/([^\/]*)\/*$/)[1],
                 // Root node is toggled by default
                 toggled: true,
                 // Get all child nodes (recursive)
-                children: getChildren(directory)
+                children: treeComponentHelper.getChildren(directory)
             };
             this.setState({
                 treeData: data,
