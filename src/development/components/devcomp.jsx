@@ -5,7 +5,6 @@ import EditorComponent from './edicomp';
 import TreeComponent from './treecomp';
 import DashboardComponent from './dboardcomp';
 
-import EditorEvents from '../events/editorEvents'
 import DashboardEvents from '../events/dashboardEvents'
 
 import { saveFile, openFile } from '../helpers/fsyshelper';
@@ -23,8 +22,8 @@ class DevelopmentComponent extends React.Component {
         };
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
+        this.onEditorComponentChange = this.onEditorComponentChange.bind(this);
 
-        this.editorEvents = new EditorEvents(this);
         this.dashboardEvents = new DashboardEvents(this);
     }
 
@@ -33,19 +32,25 @@ class DevelopmentComponent extends React.Component {
         if (this.state.cursor) {
             this.state.cursor.active = false;
         }
+
         node.active = true;
+
         if (node.children) {
             node.toggled = toggled;
         }
+
         this.setState({ cursor: node });
+
         // If node is a folder, return 
         if (node.children) {
             return;
         }
+
         // If the user has opened file, save this file
         if (this.state.isFileOpened) {
             saveFile(this.state.openedFilePath, this.state.editorValue);
         }
+
         // Open file
         openFile(node.path, (filePath, fileContent) => {
             this.setState({
@@ -54,6 +59,12 @@ class DevelopmentComponent extends React.Component {
                 isFileOpened: true
             });
         });
+    }
+
+    onEditorComponentChange(value) {
+        // It doesn't need to update component after changing its value here,
+        // that's why it doen't need to use setState(...)
+        this.state.editorValue = value;
     }
 
     render() {
@@ -79,8 +90,7 @@ class DevelopmentComponent extends React.Component {
             <EditorComponent
                 value={this.state.editorValue}
                 isFileOpened={this.state.isFileOpened}
-                onChange={this.editorEvents.onChange}
-                onLoad={this.editorEvents.onLoad}
+                onChange={this.onEditorComponentChange}
             />;
 
         return (
