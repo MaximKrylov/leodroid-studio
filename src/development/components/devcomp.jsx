@@ -10,6 +10,7 @@ import electronHelper from '../helpers/electronhelper';
 import editorComponentHelper from '../helpers/edicomphelper';
 import treeComponentHelper from '../helpers/treecomphelper';
 
+import 'brace/ext/searchbox';
 
 class DevelopmentComponent extends React.Component {
     constructor(props) {
@@ -77,11 +78,25 @@ class DevelopmentComponent extends React.Component {
     onEditorComponentLoad() {
         editorComponentHelper.addCommand({
             name: 'save',
-            bindKey: { 'win': 'Ctrl-S', 'mac': 'Cmd-S' },
-            exec: () => {
+            bindKey: {
+                win: 'Ctrl-S',
+                mac: 'Command-S'
+            },
+            exec: (editor) => {
                 fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent, () => {
                     this.setState({ isFileChanged: false });
                 });
+            }
+        });
+
+        editorComponentHelper.addCommand({
+            name: "unfind",
+            bindKey: {
+                win: "Ctrl-F",
+                mac: "Command-F"
+            },
+            exec: (editor, line) => {
+                return false;
             }
         });
     }
