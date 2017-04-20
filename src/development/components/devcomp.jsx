@@ -10,8 +10,6 @@ import electronHelper from '../helpers/electronhelper';
 import editorComponentHelper from '../helpers/edicomphelper';
 import treeComponentHelper from '../helpers/treecomphelper';
 
-import 'brace/ext/searchbox';
-
 class DevelopmentComponent extends React.Component {
     constructor(props) {
         super(props);

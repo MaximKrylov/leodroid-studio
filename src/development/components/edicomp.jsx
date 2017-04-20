@@ -5,6 +5,8 @@ import AceEditor from 'react-ace';
 
 import 'brace/mode/javascript';
 import 'brace/theme/twilight';
+import 'brace/ext/searchbox';
+import 'brace/ext/language_tools';
 
 const CONFIG = {
     mode: "javascript", // Language: JavaScript
@@ -19,7 +21,9 @@ const CONFIG = {
         $blockScrolling: Infinity
     },
     width: "100%", // Widht: 100%
-    height: "calc(100% - 37px)" // Height: 100%
+    height: "calc(100% - 37px)", // Height: 100%
+    enableBasicAutocompletion: true,
+    enableLiveAutocompletion: true
 }
 
 class EditorComponent extends React.Component {
@@ -38,6 +42,8 @@ class EditorComponent extends React.Component {
                 editorProps={CONFIG.editorProps}
                 width={CONFIG.width}
                 height={CONFIG.height}
+                enableBasicAutocompletion={CONFIG.enableBasicAutocompletion}
+                enableLiveAutocompletion={CONFIG.enableLiveAutocompletion}
 
                 // Editor properties
                 value={this.props.value}
