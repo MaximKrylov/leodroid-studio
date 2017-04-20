@@ -19,6 +19,8 @@ class DevelopmentComponent extends React.Component {
             fileContent: '',
             filePath: '',
             isFileOpened: false,
+            isFileChanged: false,
+
             treeData: null,
             isProjectOpened: false
         };
@@ -48,9 +50,11 @@ class DevelopmentComponent extends React.Component {
             return;
         }
 
-        // If the user has opened file, save this file
-        if (this.state.isFileOpened) {
-           fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent);
+        // If the user has opened file and the file is changed, save this file
+        if (this.state.isFileOpened && this.state.isFileChanged) {
+            fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent, () => {
+                this.setState({ isFileChanged: false });
+            });
         }
 
         // Open file
@@ -64,9 +68,10 @@ class DevelopmentComponent extends React.Component {
     }
 
     onEditorComponentChange(value) {
-        // It doesn't need to update component after changing its value here,
-        // that's why it doen't need to use setState(...)
-        this.state.fileContent = value;
+        this.setState({
+            fileContent: value,
+            isFileChanged: true
+        });
     }
 
     onEditorComponentLoad() {
@@ -74,7 +79,9 @@ class DevelopmentComponent extends React.Component {
             name: 'save',
             bindKey: { 'win': 'Ctrl-S', 'mac': 'Cmd-S' },
             exec: () => {
-                fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent);
+                fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent, () => {
+                    this.setState({ isFileChanged: false });
+                });
             }
         });
     }
@@ -91,11 +98,13 @@ class DevelopmentComponent extends React.Component {
             };
 
             this.setState({
-                treeData: data,
-                isProjectOpened: true,
-                isFileOpened: false,
                 filePath: '',
-                fileContent: ''
+                fileContent: '',
+                isFileOpened: false,
+                isFileChanged: false,
+
+                treeData: data,
+                isProjectOpened: true
             });
         });
     }

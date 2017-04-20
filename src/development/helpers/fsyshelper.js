@@ -13,12 +13,16 @@ module.exports = {
             }
         })
     },
-    
-    saveFile: function (filePath, fileContent) {
+
+    saveFile: function (filePath, fileContent, callback) {
         fs.writeFile(filePath, fileContent, (error) => {
             if (error) {
                 console.log(`saveFile: ${error}`);
                 return;
+            }
+
+            if (callback) {
+                callback();
             }
         });
     }
