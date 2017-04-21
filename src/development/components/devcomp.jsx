@@ -28,8 +28,10 @@ class DevelopmentComponent extends React.Component {
         };
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
+
         this.onEditorComponentChange = this.onEditorComponentChange.bind(this);
         this.onEditorComponentLoad = this.onEditorComponentLoad.bind(this);
+
         this.onTopDashboardComponentOpenButtonClick = this.onTopDashboardComponentOpenButtonClick.bind(this);
 
         injectTapEventPlugin();
