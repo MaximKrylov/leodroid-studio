@@ -14,8 +14,6 @@ import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import AvCallToAction from 'material-ui/svg-icons/av/call-to-action';
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
 class DashboardComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -23,8 +21,6 @@ class DashboardComponent extends React.Component {
 
         this.onNewProjectDialogOpen = this.onNewProjectDialogOpen.bind(this);
         this.onNewProjectDialogClose = this.onNewProjectDialogClose.bind(this);
-
-        injectTapEventPlugin();
     }
 
     onNewProjectDialogOpen() {
@@ -64,7 +60,6 @@ class DashboardComponent extends React.Component {
                 onTouchTap={this.onNewProjectDialogOpen}
                 icon={<AvCallToAction />}
                 disabled={!this.props.isProjectOpened}
-                style={{backgroundColor: "#00395A"}}
             />;
 
         const newProjectDialog =

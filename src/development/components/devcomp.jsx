@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 
 import EditorComponent from './edicomp';
 import TreeComponent from './treecomp';
-import DashboardComponent from './dboardcomp';
+import DashboardComponent from './tdboardcomp';
+import BottomDashboardComponent from './bdboardcomp';
 
 import fileSystemHelper from '../helpers/fsyshelper';
 import electronHelper from '../helpers/electronhelper';
 import editorComponentHelper from '../helpers/edicomphelper';
 import treeComponentHelper from '../helpers/treecomphelper';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 class DevelopmentComponent extends React.Component {
     constructor(props) {
@@ -28,6 +31,8 @@ class DevelopmentComponent extends React.Component {
         this.onEditorComponentChange = this.onEditorComponentChange.bind(this);
         this.onDashboardComponentOpenButtonClick = this.onDashboardComponentOpenButtonClick.bind(this);
         this.onEditorComponentLoad = this.onEditorComponentLoad.bind(this);
+
+        injectTapEventPlugin();
     }
 
     onTreeComponentToggle(node, toggled) {
@@ -146,6 +151,11 @@ class DevelopmentComponent extends React.Component {
                 isProjectOpened={this.state.isProjectOpened}
             />;
 
+        const bottomDashboardComponent =
+            <BottomDashboardComponent
+                isProjectOpened={this.state.isProjectOpened}
+            />;
+
         const editorComponent =
             <EditorComponent
                 value={this.state.fileContent}
@@ -159,6 +169,7 @@ class DevelopmentComponent extends React.Component {
                 <aside id='left-side'>
                     <section id='dashboard'>{dashboardComponent}</section>
                     <section id='tree'>{treeComponent}</section>
+                    <section id='bottom-dashboard'>{bottomDashboardComponent}</section>
                 </aside>
                 <section id='right-side'>
                     <section id='editor'>{editorComponent}</section>

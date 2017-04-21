@@ -11,7 +11,7 @@ module.exports = {
             let stat = fs.statSync(child.path);
 
             if (stat && stat.isDirectory()) {
-                child.children = getChildren(child.path);
+                child.children = this.getChildren(child.path);
             }
             
             return child;
