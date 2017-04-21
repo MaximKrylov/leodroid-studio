@@ -63,6 +63,8 @@ class DevelopmentComponent extends React.Component {
                 fileContent: fileContent,
                 isFileOpened: true
             });
+
+            editorComponentHelper.focusOnEditor();
         });
     }
 
@@ -74,7 +76,7 @@ class DevelopmentComponent extends React.Component {
     }
 
     onEditorComponentLoad() {
-        editorComponentHelper.addCommand({
+        editorComponentHelper.addCommandToEditor({
             name: 'save',
             bindKey: {
                 win: 'Ctrl-S',
@@ -90,7 +92,7 @@ class DevelopmentComponent extends React.Component {
             }
         });
 
-        editorComponentHelper.addCommand({
+        editorComponentHelper.addCommandToEditor({
             name: "unfind",
             bindKey: {
                 win: "Ctrl-F",
