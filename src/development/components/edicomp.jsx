@@ -7,8 +7,6 @@ import 'brace/mode/javascript';
 import 'brace/theme/twilight';
 import 'brace/ext/searchbox';
 import 'brace/ext/language_tools';
-import 'brace/keybinding/vim';
-
 
 const CONFIG = {
     name: 'editorComponent', // Name: editorComponent
@@ -26,8 +24,7 @@ const CONFIG = {
     width: "100%", // Widht: 100%
     height: "calc(100% - 30px)", // Height: 100%
     enableBasicAutocompletion: true,
-    enableLiveAutocompletion: true,
-    keyboardHandler: 'vim' // Enable vim mode
+    enableLiveAutocompletion: true
 }
 
 class EditorComponent extends React.Component {
@@ -48,7 +45,6 @@ class EditorComponent extends React.Component {
                 height={CONFIG.height}
                 enableBasicAutocompletion={CONFIG.enableBasicAutocompletion}
                 enableLiveAutocompletion={CONFIG.enableLiveAutocompletion}
-                keyboardHandler={CONFIG.keyboardHandler}
 
                 // Editor properties
                 value={this.props.value}

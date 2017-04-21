@@ -81,9 +81,12 @@ class DevelopmentComponent extends React.Component {
                 mac: 'Command-S'
             },
             exec: (editor) => {
-                fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent, () => {
-                    this.setState({ isFileChanged: false });
-                });
+                // If the user has opened file and the file is changed, save this file
+                if (this.state.isFileOpened && this.state.isFileChanged) {
+                    fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent, () => {
+                        this.setState({ isFileChanged: false });
+                    });
+                }
             }
         });
 
