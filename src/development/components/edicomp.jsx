@@ -7,8 +7,11 @@ import 'brace/mode/javascript';
 import 'brace/theme/twilight';
 import 'brace/ext/searchbox';
 import 'brace/ext/language_tools';
+import 'brace/keybinding/vim';
+
 
 const CONFIG = {
+    name: 'editorComponent', // Name: editorComponent
     mode: "javascript", // Language: JavaScript
     theme: "twilight", // Color scheme: Twilight
     fontSize: "13", // Font size: 13pt
@@ -21,9 +24,10 @@ const CONFIG = {
         $blockScrolling: Infinity
     },
     width: "100%", // Widht: 100%
-    height: "calc(100% - 37px)", // Height: 100%
+    height: "calc(100% - 30px)", // Height: 100%
     enableBasicAutocompletion: true,
-    enableLiveAutocompletion: true
+    enableLiveAutocompletion: true,
+    keyboardHandler: 'vim' // Enable vim mode
 }
 
 class EditorComponent extends React.Component {
@@ -35,7 +39,7 @@ class EditorComponent extends React.Component {
         const aceEditor =
             < AceEditor
                 // Editor configuration
-                name="editorComponent"
+                name={CONFIG.name}
                 mode={CONFIG.mode}
                 theme={CONFIG.theme}
                 fontSize={CONFIG.fontSize}
@@ -44,6 +48,7 @@ class EditorComponent extends React.Component {
                 height={CONFIG.height}
                 enableBasicAutocompletion={CONFIG.enableBasicAutocompletion}
                 enableLiveAutocompletion={CONFIG.enableLiveAutocompletion}
+                keyboardHandler={CONFIG.keyboardHandler}
 
                 // Editor properties
                 value={this.props.value}
