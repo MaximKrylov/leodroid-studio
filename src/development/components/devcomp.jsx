@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import EditorComponent from './edicomp';
 import TreeComponent from './treecomp';
-import DashboardComponent from './tdboardcomp';
+import TopDashboardComponent from './tdboardcomp';
 import BottomDashboardComponent from './bdboardcomp';
 
 import fileSystemHelper from '../helpers/fsyshelper';
@@ -29,8 +29,8 @@ class DevelopmentComponent extends React.Component {
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
         this.onEditorComponentChange = this.onEditorComponentChange.bind(this);
-        this.onDashboardComponentOpenButtonClick = this.onDashboardComponentOpenButtonClick.bind(this);
         this.onEditorComponentLoad = this.onEditorComponentLoad.bind(this);
+        this.onTopDashboardComponentOpenButtonClick = this.onTopDashboardComponentOpenButtonClick.bind(this);
 
         injectTapEventPlugin();
     }
@@ -109,7 +109,7 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
-    onDashboardComponentOpenButtonClick() {
+    onTopDashboardComponentOpenButtonClick() {
         electronHelper.showOpenDirectoryDialog((directory) => {
             let data = {
                 // Get opened folder name (without full path)
@@ -145,9 +145,9 @@ class DevelopmentComponent extends React.Component {
             treeComponent = <div></div>;
         }
 
-        const dashboardComponent =
-            <DashboardComponent
-                onOpenButtonClick={this.onDashboardComponentOpenButtonClick}
+        const topDashboardComponent =
+            <TopDashboardComponent
+                onOpenButtonClick={this.onTopDashboardComponentOpenButtonClick}
                 isProjectOpened={this.state.isProjectOpened}
             />;
 
@@ -167,7 +167,7 @@ class DevelopmentComponent extends React.Component {
         return (
             <section id='layout'>
                 <aside id='left-side'>
-                    <section id='dashboard'>{dashboardComponent}</section>
+                    <section id='top-dashboard'>{topDashboardComponent}</section>
                     <section id='tree'>{treeComponent}</section>
                     <section id='bottom-dashboard'>{bottomDashboardComponent}</section>
                 </aside>

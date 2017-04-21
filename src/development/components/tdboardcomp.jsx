@@ -14,7 +14,7 @@ import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import AvCallToAction from 'material-ui/svg-icons/av/call-to-action';
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow';
 
-class DashboardComponent extends React.Component {
+class TopDashboardComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = { newProjectDialogOpen: false };
@@ -98,4 +98,4 @@ class DashboardComponent extends React.Component {
     }
 }
 
-export default DashboardComponent;
+export default TopDashboardComponent;
