@@ -64,6 +64,7 @@ class DashboardComponent extends React.Component {
                 onTouchTap={this.onNewProjectDialogOpen}
                 icon={<AvCallToAction />}
                 disabled={!this.props.isProjectOpened}
+                style={{backgroundColor: "#00395A"}}
             />;
 
         const newProjectDialog =
