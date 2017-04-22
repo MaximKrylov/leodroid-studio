@@ -6,8 +6,8 @@ import TreeComponent from './TreeComponent';
 import TopDashboardComponent from './TopDashboardComponent';
 import BottomDashboardComponent from './BottomDashboardComponent';
 
-import electronHelper from '../helpers/electronHelper';
-import fileSystemHelper from '../helpers/fileSystemHelper';
+import electronHelper from '../../helpers/electronHelper';
+import fileSystemHelper from '../../helpers/fileSystemHelper';
 import editorComponentHelper from './helpers/editorHelper';
 import treeComponentHelper from './helpers/treeHelper';
 
