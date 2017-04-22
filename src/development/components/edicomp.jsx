@@ -22,7 +22,7 @@ const CONFIG = {
         $blockScrolling: Infinity
     },
     width: "100%", // Widht: 100%
-    height: "calc(100% - 37px)", // Height: 100%
+    height: "100%", // Height: 100%
     enableBasicAutocompletion: true,
     enableLiveAutocompletion: true
 }

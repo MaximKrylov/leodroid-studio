@@ -175,7 +175,6 @@ class DevelopmentComponent extends React.Component {
                 </aside>
                 <section id='right-side'>
                     <section id='editor'>{editorComponent}</section>
-                    <section id='airline'></section>
                 </section>
             </section>
         );
