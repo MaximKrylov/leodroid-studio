@@ -1,3 +1,3 @@
-import { devwin } from './devwin';
+import { developmentWindow } from './developmentWindow';
 
-devwin.open();
+developmentWindow.open();

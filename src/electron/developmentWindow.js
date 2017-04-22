@@ -35,4 +35,4 @@ class DevelopmentWindow {
     }
 }
 
-export let devwin = new DevelopmentWindow();
+export let developmentWindow = new DevelopmentWindow();
