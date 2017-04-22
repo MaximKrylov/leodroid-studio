@@ -6,6 +6,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import RaisedButton from 'material-ui/RaisedButton';
 
+import HardwareDeveloperBoard from 'material-ui/svg-icons/hardware/developer-board';
+
 class BottomDashboardComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -13,17 +15,18 @@ class BottomDashboardComponent extends React.Component {
     }
 
     render() {
-        const deployProjectButton =
+        const compileProjectButton =
             <RaisedButton
-                label="DEPLOY"
+                label="COMPILE"
+                icon={<HardwareDeveloperBoard />}
                 fullWidth={true}
-                disabled={this.props.deployProjectButtonDisabled}
+                disabled={this.props.compileProjectButtonDisabled}
             />;
 
         return (
             <div>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                    {deployProjectButton}
+                    {compileProjectButton}
                 </MuiThemeProvider>
             </div>
         );
