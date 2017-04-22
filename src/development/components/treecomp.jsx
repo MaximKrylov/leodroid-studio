@@ -27,7 +27,7 @@ class TreeComponent extends React.Component {
         const treebeard =
             <Treebeard
                 decorators={decorators}
-                // Tree properties
+                
                 data={this.props.data}
                 onToggle={this.props.onToggle}
             />;

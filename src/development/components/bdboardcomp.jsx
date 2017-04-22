@@ -17,7 +17,7 @@ class BottomDashboardComponent extends React.Component {
             <RaisedButton
                 label="DEPLOY"
                 fullWidth={true}
-                disabled={!this.props.isProjectOpened}
+                disabled={this.props.deployProjectButtonDisabled}
             />;
 
         return (

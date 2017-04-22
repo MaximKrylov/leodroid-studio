@@ -20,11 +20,11 @@ class DevelopmentComponent extends React.Component {
         this.state = {
             fileContent: '',
             filePath: '',
-            isFileOpened: false,
-            isFileChanged: false,
+            fileOpened: false,
+            fileChanged: false,
 
             treeData: null,
-            isProjectOpened: false
+            projectOpened: false
         };
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
@@ -32,7 +32,7 @@ class DevelopmentComponent extends React.Component {
         this.onEditorComponentChange = this.onEditorComponentChange.bind(this);
         this.onEditorComponentLoad = this.onEditorComponentLoad.bind(this);
 
-        this.onTopDashboardComponentOpenButtonClick = this.onTopDashboardComponentOpenButtonClick.bind(this);
+        this.onTopDashboardComponentOpenButtonTouchTap = this.onTopDashboardComponentOpenButtonTouchTap.bind(this);
 
         injectTapEventPlugin();
     }
@@ -57,9 +57,9 @@ class DevelopmentComponent extends React.Component {
         }
 
         // If the user has opened file and the file is changed, save this file
-        if (this.state.isFileOpened && this.state.isFileChanged) {
+        if (this.state.fileOpened && this.state.fileChanged) {
             fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent, () => {
-                this.setState({ isFileChanged: false });
+                this.setState({ fileChanged: false });
             });
         }
 
@@ -68,7 +68,7 @@ class DevelopmentComponent extends React.Component {
             this.setState({
                 filePath: filePath,
                 fileContent: fileContent,
-                isFileOpened: true
+                fileOpened: true
             });
 
             editorComponentHelper.focusOnEditor();
@@ -78,7 +78,7 @@ class DevelopmentComponent extends React.Component {
     onEditorComponentChange(value) {
         this.setState({
             fileContent: value,
-            isFileChanged: true
+            fileChanged: true
         });
     }
 
@@ -91,9 +91,9 @@ class DevelopmentComponent extends React.Component {
             },
             exec: (editor) => {
                 // If the user has opened file and the file is changed, save this file
-                if (this.state.isFileOpened && this.state.isFileChanged) {
+                if (this.state.fileOpened && this.state.fileChanged) {
                     fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent, () => {
-                        this.setState({ isFileChanged: false });
+                        this.setState({ fileChanged: false });
                     });
                 }
             }
@@ -111,9 +111,9 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
-    onTopDashboardComponentOpenButtonClick() {
+    onTopDashboardComponentOpenButtonTouchTap() {
         electronHelper.showOpenDirectoryDialog((directory) => {
-            let data = {
+            let treeData = {
                 // Get opened folder name (without full path)
                 name: directory.match(/([^\/]*)\/*$/)[1],
                 // Root node is toggled by default
@@ -125,11 +125,11 @@ class DevelopmentComponent extends React.Component {
             this.setState({
                 filePath: '',
                 fileContent: '',
-                isFileOpened: false,
-                isFileChanged: false,
+                fileOpened: false,
+                fileChanged: false,
 
-                treeData: data,
-                isProjectOpened: true
+                treeData: treeData,
+                projectOpened: true
             });
         });
     }
@@ -149,19 +149,21 @@ class DevelopmentComponent extends React.Component {
 
         const topDashboardComponent =
             <TopDashboardComponent
-                onOpenButtonClick={this.onTopDashboardComponentOpenButtonClick}
-                isProjectOpened={this.state.isProjectOpened}
+                onOpenButtonTouchTap={this.onTopDashboardComponentOpenButtonTouchTap}
+
+                newProjectButtonDisabled={!this.state.projectOpened}
+                runButtonDisabled={!this.state.projectOpened}
             />;
 
         const bottomDashboardComponent =
             <BottomDashboardComponent
-                isProjectOpened={this.state.isProjectOpened}
+                deployProjectButtonDisabled={!this.state.projectOpened}
             />;
 
         const editorComponent =
             <EditorComponent
                 value={this.state.fileContent}
-                readOnly={!this.state.isFileOpened}
+                readOnly={!this.state.fileOpened}
                 onChange={this.onEditorComponentChange}
                 onLoad={this.onEditorComponentLoad}
             />;

@@ -6,8 +6,9 @@ module.exports = {
     },
     focusOnEditor: function () {
         let editor = brace.edit('editorComponent');
-        editor.focus();
         let lastLine = editor.getSession().getValue().split("\n").length;
+
+        editor.focus();
         editor.gotoLine(lastLine);
     }
 }

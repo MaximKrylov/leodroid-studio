@@ -17,18 +17,18 @@ import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow';
 class TopDashboardComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { newProjectDialogOpen: false };
+        this.state = { newProjectDialogOpened: false };
 
         this.onNewProjectDialogOpen = this.onNewProjectDialogOpen.bind(this);
         this.onNewProjectDialogClose = this.onNewProjectDialogClose.bind(this);
     }
 
     onNewProjectDialogOpen() {
-        this.setState({ newProjectDialogOpen: true });
+        this.setState({ newProjectDialogOpened: true });
     };
 
     onNewProjectDialogClose() {
-        this.setState({ newProjectDialogOpen: false });
+        this.setState({ newProjectDialogOpened: false });
     };
 
     render() {
@@ -51,7 +51,7 @@ class TopDashboardComponent extends React.Component {
             <FlatButton
                 label="OPEN"
                 icon={<FileFolderOpen />}
-                onTouchTap={this.props.onOpenButtonClick}
+                onTouchTap={this.props.onOpenButtonTouchTap}
             />;
 
         const newProjectButton =
@@ -59,7 +59,7 @@ class TopDashboardComponent extends React.Component {
                 label="NEW"
                 onTouchTap={this.onNewProjectDialogOpen}
                 icon={<AvCallToAction />}
-                disabled={!this.props.isProjectOpened}
+                disabled={this.props.newProjectButtonDisabled}
             />;
 
         const newProjectDialog =
@@ -67,16 +67,16 @@ class TopDashboardComponent extends React.Component {
                 title="New project"
                 actions={newProjectDialogActions}
                 modal={false}
-                open={this.state.newProjectDialogOpen}
-                onRequestClose={this.handleClose}
+                open={this.state.newProjectDialogOpened}
+                onRequestClose={this.onNewProjectDialogClose}
             > You are going to create new project. Continue?
             </Dialog>;
-        
+
         const runButton =
             <FlatButton
                 label="RUN"
                 icon={<AvPlayArrow />}
-                disabled={!this.props.isProjectOpened}
+                disabled={this.props.runButtonDisabled}
             />;
 
         return (

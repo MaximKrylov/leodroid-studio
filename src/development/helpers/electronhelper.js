@@ -9,8 +9,10 @@ module.exports = {
                 console.log(`showOpenDirectoryDialog: Directory wasn't opened.`)
                 return;
             }
-            
-            callback(directories[0]);
+
+            if (callback) {
+                callback(directories[0]);
+            }
         });
     }
 }
