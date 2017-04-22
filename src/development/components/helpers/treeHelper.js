@@ -6,7 +6,7 @@ module.exports = {
             let child = {
                 name: file,
                 path: `${directory}/${file}`
-            }
+            };
 
             let stat = fs.statSync(child.path);
 

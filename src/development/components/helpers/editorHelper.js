@@ -12,4 +12,4 @@ module.exports = {
         editor.focus();
         editor.gotoLine(lastLine);
     }
-}
+};

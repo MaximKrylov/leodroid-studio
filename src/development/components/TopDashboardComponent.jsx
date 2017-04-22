@@ -25,11 +25,11 @@ class TopDashboardComponent extends React.Component {
 
     onNewProjectDialogOpen() {
         this.setState({ newProjectDialogOpened: true });
-    };
+    }
 
     onNewProjectDialogClose() {
         this.setState({ newProjectDialogOpened: false });
-    };
+    }
 
     render() {
         let newProjectDialogActions = [

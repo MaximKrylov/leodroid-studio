@@ -19,8 +19,8 @@ class BottomDashboardComponent extends React.Component {
             <RaisedButton
                 label="COMPILE"
                 icon={<HardwareDeveloperBoard />}
-                fullWidth={true}
                 disabled={this.props.compileProjectButtonDisabled}
+                fullWidth={true}
             />;
 
         return (

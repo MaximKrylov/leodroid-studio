@@ -22,9 +22,8 @@ class DevelopmentComponent extends React.Component {
             filePath: '',
             fileOpened: false,
             fileChanged: false,
-
-            treeData: null,
-            projectOpened: false
+            projectOpened: false,
+            treeData: null
         };
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
@@ -127,7 +126,6 @@ class DevelopmentComponent extends React.Component {
                 fileContent: '',
                 fileOpened: false,
                 fileChanged: false,
-
                 treeData: treeData,
                 projectOpened: true
             });

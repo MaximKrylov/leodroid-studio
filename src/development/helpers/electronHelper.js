@@ -5,7 +5,7 @@ module.exports = {
     showOpenDirectoryDialog: function (callback) {
         dialog.showOpenDialog({ properties: ['openDirectory'] }, (directories) => {
             if (directories === undefined) {
-                console.log(`showOpenDirectoryDialog: Directory wasn't opened.`)
+                console.log(`showOpenDirectoryDialog: Directory wasn't opened.`);
                 return;
             }
 

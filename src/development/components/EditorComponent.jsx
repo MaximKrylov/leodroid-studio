@@ -25,7 +25,7 @@ const CONFIG = {
     height: "100%", // Height: 100%
     enableBasicAutocompletion: true,
     enableLiveAutocompletion: true
-}
+};
 
 class EditorComponent extends React.Component {
     constructor(props) {
@@ -35,7 +35,6 @@ class EditorComponent extends React.Component {
     render() {
         let aceEditor =
             < AceEditor
-                // Editor configuration
                 name={CONFIG.name}
                 mode={CONFIG.mode}
                 theme={CONFIG.theme}
@@ -46,7 +45,6 @@ class EditorComponent extends React.Component {
                 enableBasicAutocompletion={CONFIG.enableBasicAutocompletion}
                 enableLiveAutocompletion={CONFIG.enableLiveAutocompletion}
 
-                // Editor properties
                 value={this.props.value}
                 readOnly={this.props.readOnly}
                 onChange={this.props.onChange}
