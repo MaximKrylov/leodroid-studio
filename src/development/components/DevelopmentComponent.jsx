@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import EditorComponent from './edicomp';
-import TreeComponent from './treecomp';
-import TopDashboardComponent from './tdboardcomp';
-import BottomDashboardComponent from './bdboardcomp';
+import EditorComponent from './EditorComponent';
+import TreeComponent from './TreeComponent';
+import TopDashboardComponent from './TopDashboardComponent';
+import BottomDashboardComponent from './BottomDashboardComponent';
 
-import fileSystemHelper from '../helpers/fsyshelper';
-import electronHelper from '../helpers/electronhelper';
-import editorComponentHelper from '../helpers/edicomphelper';
-import treeComponentHelper from '../helpers/treecomphelper';
+import electronHelper from '../helpers/electronHelper';
+import fileSystemHelper from '../helpers/fileSystemHelper';
+import editorComponentHelper from './helpers/editorHelper';
+import treeComponentHelper from './helpers/treeHelper';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -147,7 +147,7 @@ class DevelopmentComponent extends React.Component {
             treeComponent = <div></div>;
         }
 
-        const topDashboardComponent =
+        let topDashboardComponent =
             <TopDashboardComponent
                 onOpenButtonTouchTap={this.onTopDashboardComponentOpenButtonTouchTap}
 
@@ -155,12 +155,12 @@ class DevelopmentComponent extends React.Component {
                 runButtonDisabled={!this.state.projectOpened}
             />;
 
-        const bottomDashboardComponent =
+        let bottomDashboardComponent =
             <BottomDashboardComponent
                 compileProjectButtonDisabled={!this.state.projectOpened}
             />;
 
-        const editorComponent =
+        let editorComponent =
             <EditorComponent
                 value={this.state.fileContent}
                 readOnly={!this.state.fileOpened}

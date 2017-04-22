@@ -33,7 +33,7 @@ class EditorComponent extends React.Component {
     }
 
     render() {
-        const aceEditor =
+        let aceEditor =
             < AceEditor
                 // Editor configuration
                 name={CONFIG.name}

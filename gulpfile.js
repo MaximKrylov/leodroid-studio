@@ -20,7 +20,7 @@ gulp.task('electron', ['clean'], function () {
 });
 
 gulp.task('development', ['clean'], function () {
-    return browserify({ entries: './src/development/components/devcomp.jsx', extensions: ['.jsx'], debug: true })
+    return browserify({ entries: './src/development/components/DevelopmentComponent.jsx', extensions: ['.jsx'], debug: true })
         .transform('babelify', { presets: ['es2015', 'react'] })
         .bundle()
         .pipe(source('devcomp.js'))

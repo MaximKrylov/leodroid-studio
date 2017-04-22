@@ -32,7 +32,7 @@ class TopDashboardComponent extends React.Component {
     };
 
     render() {
-        const newProjectDialogActions = [
+        let newProjectDialogActions = [
             <FlatButton
                 label="Cancel"
                 primary={true}
@@ -47,14 +47,14 @@ class TopDashboardComponent extends React.Component {
             />
         ];
 
-        const openProjectButton =
+        let openProjectButton =
             <FlatButton
                 label="OPEN"
                 icon={<FileFolderOpen />}
                 onTouchTap={this.props.onOpenButtonTouchTap}
             />;
 
-        const newProjectButton =
+        let newProjectButton =
             <RaisedButton
                 label="NEW"
                 onTouchTap={this.onNewProjectDialogOpen}
@@ -62,7 +62,7 @@ class TopDashboardComponent extends React.Component {
                 disabled={this.props.newProjectButtonDisabled}
             />;
 
-        const newProjectDialog =
+        let newProjectDialog =
             <Dialog
                 title="New project"
                 actions={newProjectDialogActions}
@@ -72,7 +72,7 @@ class TopDashboardComponent extends React.Component {
             > You are going to create new project. Continue?
             </Dialog>;
 
-        const runButton =
+        let runButton =
             <FlatButton
                 label="RUN"
                 icon={<AvPlayArrow />}

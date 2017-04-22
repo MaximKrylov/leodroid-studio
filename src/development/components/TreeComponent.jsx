@@ -24,7 +24,7 @@ class TreeComponent extends React.Component {
     }
 
     render() {
-        const treebeard =
+        let treebeard =
             <Treebeard
                 decorators={decorators}
                 

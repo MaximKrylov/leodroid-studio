@@ -15,7 +15,7 @@ class BottomDashboardComponent extends React.Component {
     }
 
     render() {
-        const compileProjectButton =
+        let compileProjectButton =
             <RaisedButton
                 label="COMPILE"
                 icon={<HardwareDeveloperBoard />}
