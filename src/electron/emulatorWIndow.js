@@ -7,14 +7,18 @@ class EmulatorWindow {
     }
 
     get opened() {
-        return this.window;
+        return this.window !== null && this.window !== undefined;
+    }
+
+    get webContents() {
+        return this.window.webContents;
     }
 
     open() {
         this.window = new BrowserWindow({ width: 400, height: 600 });
 
         this.window.on('closed', () => {
-            ipcMain.emit('emulator-window-closed');
+            ipcMain.emit('close-emulator-window');
             this.window = null;
         });
     }

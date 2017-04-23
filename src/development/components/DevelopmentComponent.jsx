@@ -23,6 +23,7 @@ class DevelopmentComponent extends React.Component {
             fileOpened: false,
             fileChanged: false,
             projectOpened: false,
+            emulatorWindowOpened: false,
             treeData: null
         };
 
@@ -35,6 +36,12 @@ class DevelopmentComponent extends React.Component {
         this.onTopDashboardComponentRunButtonTouchTap = this.onTopDashboardComponentRunButtonTouchTap.bind(this);
 
         injectTapEventPlugin();
+
+        electronHelper.ipcRendererOn('emulator-window-closed', (event, args) => {
+            this.setState({
+                emulatorWindowOpened: false
+            });
+        });
     }
 
     onTreeComponentToggle(node, toggled) {
@@ -134,7 +141,11 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        electronHelper.ipcRendererSend('emulator-window-opened');
+        electronHelper.ipcRendererSend('open-emulator-window');
+
+        this.setState({
+            emulatorWindowOpened: true
+        });
     }
 
     render() {
@@ -156,7 +167,7 @@ class DevelopmentComponent extends React.Component {
                 onRunButtonTouchTap={this.onTopDashboardComponentRunButtonTouchTap}
 
                 newProjectButtonDisabled={!this.state.projectOpened}
-                runButtonDisabled={!this.state.projectOpened}
+                runButtonDisabled={!this.state.projectOpened || this.state.emulatorWindowOpened}
             />;
 
         let bottomDashboardComponent =

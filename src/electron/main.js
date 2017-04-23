@@ -4,6 +4,7 @@ import { emulatorWindow } from './emulatorWindow';
 
 app.on('ready', () => {
     developmentWindow.open();
+    // developmentWindow.webContents.openDevTools();
 });
 
 app.on('window-all-closed', () => {
@@ -18,11 +19,12 @@ app.on('activate', () => {
     }
 });
 
-ipcMain.on('emulator-window-opened', (event, arg) => {
+ipcMain.on('open-emulator-window', (event, args) => {
     if (!emulatorWindow.opened) {
         emulatorWindow.open();
     }
 });
 
-ipcMain.on('emulator-window-closed', (event, arg) => {
+ipcMain.on('close-emulator-window', () => {
+    developmentWindow.webContents.send('emulator-window-closed');
 });
