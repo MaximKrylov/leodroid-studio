@@ -1,4 +1,5 @@
 const electron = window.require('electron');
+const { ipcRenderer } = electron;
 const { dialog } = electron.remote;
 
 module.exports = {
@@ -13,5 +14,13 @@ module.exports = {
                 callback(directories[0]);
             }
         });
+    },
+
+    ipcRendererOn: function (channel, listener) {
+        ipcRenderer.on(channel, listener)
+    },
+
+    ipcRendererSend: function (channel, args) {
+        ipcRenderer.send(channel, args);
     }
 }

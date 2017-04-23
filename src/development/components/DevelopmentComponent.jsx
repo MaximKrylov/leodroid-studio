@@ -134,7 +134,7 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        console.log("RUN");
+        electronHelper.ipcRendererSend('emulator-window-opened');
     }
 
     render() {
