@@ -1,4 +1,5 @@
 import { app, ipcMain } from 'electron';
+
 import { developmentWindow } from './developmentWindow';
 import { emulatorWindow } from './emulatorWindow';
 
@@ -23,8 +24,4 @@ ipcMain.on('open-emulator-window', (event, args) => {
     if (!emulatorWindow.opened) {
         emulatorWindow.open();
     }
-});
-
-ipcMain.on('close-emulator-window', () => {
-    developmentWindow.webContents.send('emulator-window-closed');
 });

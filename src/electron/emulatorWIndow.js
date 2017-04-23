@@ -1,5 +1,6 @@
 import { BrowserWindow } from 'electron';
-import { ipcMain } from 'electron';
+
+import { developmentWindow } from './developmentWindow';
 
 class EmulatorWindow {
     constructor() {
@@ -18,8 +19,8 @@ class EmulatorWindow {
         this.window = new BrowserWindow({ width: 400, height: 600 });
 
         this.window.on('closed', () => {
-            ipcMain.emit('close-emulator-window');
             this.window = null;
+            developmentWindow.webContents.send('emulator-window-closed');
         });
     }
 }
