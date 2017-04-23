@@ -32,6 +32,7 @@ class DevelopmentComponent extends React.Component {
         this.onEditorComponentLoad = this.onEditorComponentLoad.bind(this);
 
         this.onTopDashboardComponentOpenButtonTouchTap = this.onTopDashboardComponentOpenButtonTouchTap.bind(this);
+        this.onTopDashboardComponentRunButtonTouchTap = this.onTopDashboardComponentRunButtonTouchTap.bind(this);
 
         injectTapEventPlugin();
     }
@@ -132,6 +133,10 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
+    onTopDashboardComponentRunButtonTouchTap() {
+        console.log("RUN");
+    }
+
     render() {
         let treeComponent = null;
 
@@ -148,6 +153,7 @@ class DevelopmentComponent extends React.Component {
         let topDashboardComponent =
             <TopDashboardComponent
                 onOpenButtonTouchTap={this.onTopDashboardComponentOpenButtonTouchTap}
+                onRunButtonTouchTap={this.onTopDashboardComponentRunButtonTouchTap}
 
                 newProjectButtonDisabled={!this.state.projectOpened}
                 runButtonDisabled={!this.state.projectOpened}

@@ -77,6 +77,7 @@ class TopDashboardComponent extends React.Component {
                 label="RUN"
                 icon={<AvPlayArrow />}
                 disabled={this.props.runButtonDisabled}
+                onTouchTap={this.props.onRunButtonTouchTap}
             />;
 
         return (
