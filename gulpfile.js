@@ -23,7 +23,7 @@ gulp.task('development', ['clean'], function () {
     return browserify({ entries: './src/development/components/DevelopmentComponent.jsx', extensions: ['.jsx'], debug: true })
         .transform('babelify', { presets: ['es2015', 'react'] })
         .bundle()
-        .pipe(source('development.js'))
+        .pipe(source('bundle.js'))
         .pipe(gulp.dest('build/development'));
 });
 
