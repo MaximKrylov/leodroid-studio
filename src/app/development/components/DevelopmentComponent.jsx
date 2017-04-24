@@ -38,7 +38,7 @@ class DevelopmentComponent extends React.Component {
 
         injectTapEventPlugin();
 
-        electronHelper.on('emulator-window-closed', (event, args) => {
+        electronHelper.on('emulator-window-did-closed', (event, args) => {
             this.setState({
                 emulatorWindowOpened: false
             });
@@ -143,19 +143,24 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        // delete dir './tmp'
-        fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`, () => {
-            // make dir './tmp'
-            fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`, () => {
-                // copy from '/path/to/projectdir' dir to './tmp' dir
-                fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`, (err, files) => {
-                    electronHelper.send('open-emulator-window');
+        // // delete dir './tmp'
+        // fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`, () => {
+        //     // make dir './tmp'
+        //     fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`, () => {
+        //         // copy from '/path/to/projectdir' dir to './tmp' dir
+        //         fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`, (err, files) => {
+        //             electronHelper.send('open-emulator-window');
 
-                    this.setState({
-                        emulatorWindowOpened: true
-                    });
-                });
-            });
+        //             this.setState({
+        //                 emulatorWindowOpened: true
+        //             });
+        //         });
+        //     });
+        // });
+        electronHelper.send('emulator-window-will-opened');
+
+        this.setState({
+            emulatorWindowOpened: true
         });
     }
 
