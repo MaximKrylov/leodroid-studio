@@ -1,7 +1,7 @@
 const fs = window.require('fs');
 const path = window.require('path');
 const del = window.require('del');
-const copyfiles = window.require('copyfiles');
+const copy = window.require('copy');
 
 module.exports = {
     openFile: function (filePath, callback) {
@@ -44,7 +44,7 @@ module.exports = {
         });
     },
 
-    copyfiles: function ([paths], out, callback) {
-        copyfiles([paths], out, callback);
+    copy: function (src, dest, callback) {
+        copy(src, dest, callback);
     }
 }

@@ -145,10 +145,12 @@ class DevelopmentComponent extends React.Component {
     onTopDashboardComponentRunButtonTouchTap() {
         fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp/**`, () => {
             fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`, () => {
-                electronHelper.send('open-emulator-window');
+                fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`, (err, files) => {
+                    electronHelper.send('open-emulator-window');
 
-                this.setState({
-                    emulatorWindowOpened: true
+                    this.setState({
+                        emulatorWindowOpened: true
+                    });
                 });
             });
         });
