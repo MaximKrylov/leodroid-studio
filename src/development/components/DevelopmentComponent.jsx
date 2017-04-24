@@ -20,6 +20,7 @@ class DevelopmentComponent extends React.Component {
         this.state = {
             fileContent: '',
             filePath: '',
+            projectPath: '',
             fileOpened: false,
             fileChanged: false,
             projectOpened: false,
@@ -132,6 +133,7 @@ class DevelopmentComponent extends React.Component {
             this.setState({
                 filePath: '',
                 fileContent: '',
+                projectPath: directory,
                 fileOpened: false,
                 fileChanged: false,
                 treeData: treeData,
@@ -141,10 +143,14 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        electronHelper.send('open-emulator-window');
+        fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp/**`, () => {
+            fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`, () => {
+                electronHelper.send('open-emulator-window');
 
-        this.setState({
-            emulatorWindowOpened: true
+                this.setState({
+                    emulatorWindowOpened: true
+                });
+            });
         });
     }
 
