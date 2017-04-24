@@ -68,7 +68,9 @@ class DevelopmentComponent extends React.Component {
         if (this.state.fileOpened && this.state.fileChanged) {
             fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent)
                 .then(() => {
-                    this.setState({ fileChanged: false });
+                    this.setState({
+                        fileChanged: false
+                    });
                 })
                 .catch((error) => {
                     throw new Error(error);
@@ -110,7 +112,9 @@ class DevelopmentComponent extends React.Component {
                 if (this.state.fileOpened && this.state.fileChanged) {
                     fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent)
                         .then(() => {
-                            this.setState({ fileChanged: false });
+                            this.setState({
+                                fileChanged: false
+                            });
                         })
                         .catch((error) => {
                             throw new Error(error);
