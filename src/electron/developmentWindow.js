@@ -14,7 +14,7 @@ class DevelopmentWindow {
     }
 
     open() {
-        this.window = new BrowserWindow({ width: 1135, height: 800 });
+        this.window = new BrowserWindow({ width: 1100, height: 800 });
         this.window.loadURL('file://' + __dirname + '/../app/development/index.html');
 
         this.window.on('closed', () => {

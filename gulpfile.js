@@ -44,7 +44,7 @@ gulp.task('sass', ['clean'], function () {
 
 gulp.task('font-awesome-icons', ['clean'], function () {
     return gulp.src('./bower_components/font-awesome/fonts/**.*')
-        .pipe(gulp.dest('./build/fonts/font-awesome'));
+        .pipe(gulp.dest('./build/app/fonts/font-awesome'));
 });
 
 gulp.task('default', ['electron', 'development', 'pug', 'sass', 'font-awesome-icons']);
