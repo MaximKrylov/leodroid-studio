@@ -6,8 +6,7 @@ module.exports = {
     showOpenDirectoryDialog: function (callback) {
         dialog.showOpenDialog({ properties: ['openDirectory'] }, (directories) => {
             if (directories === undefined) {
-                console.log(`showOpenDirectoryDialog: Directory wasn't opened.`);
-                return;
+                throw new Error(`showOpenDirectoryDialog: Directory wasn't opened.`);
             }
 
             if (callback) {
@@ -16,11 +15,11 @@ module.exports = {
         });
     },
 
-    ipcRendererOn: function (channel, listener) {
+    on: function (channel, listener) {
         ipcRenderer.on(channel, listener)
     },
 
-    ipcRendererSend: function (channel, args) {
+    send: function (channel, args) {
         ipcRenderer.send(channel, args);
     }
 }

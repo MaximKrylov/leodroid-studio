@@ -37,7 +37,7 @@ class DevelopmentComponent extends React.Component {
 
         injectTapEventPlugin();
 
-        electronHelper.ipcRendererOn('emulator-window-closed', (event, args) => {
+        electronHelper.on('emulator-window-closed', (event, args) => {
             this.setState({
                 emulatorWindowOpened: false
             });
@@ -141,7 +141,7 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        electronHelper.ipcRendererSend('open-emulator-window');
+        electronHelper.send('open-emulator-window');
 
         this.setState({
             emulatorWindowOpened: true
