@@ -4,27 +4,27 @@ const del = window.require('del');
 const copy = window.require('copy');
 
 module.exports = {
-    openFile: function (filePath, callback) {
-        fs.readFile(filePath, 'UTF-8', (error, fileContent) => {
-            if (error) {
-                throw new Error(`openFile: ${error}`);
-            }
+    openFile: function (path) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(path, 'UTF-8', (error, content) => {
+                if (error) {
+                    reject(new Error(`openFile: ${error}`));
+                }
 
-            if (callback) {
-                callback(filePath, fileContent);
-            }
-        })
+                resolve(content);
+            });
+        });
     },
 
-    saveFile: function (filePath, fileContent, callback) {
-        fs.writeFile(filePath, fileContent, (error) => {
-            if (error) {
-                throw new Error(`saveFile: ${error}`);
-            }
+    saveFile: function (path, content) {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(path, content, (error) => {
+                if (error) {
+                    reject(new Error(`saveFile: ${error}`));
+                }
 
-            if (callback) {
-                callback();
-            }
+                resolve();
+            });
         });
     },
 

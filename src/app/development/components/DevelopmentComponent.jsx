@@ -66,21 +66,29 @@ class DevelopmentComponent extends React.Component {
 
         // If the user has opened file and the file is changed, save this file
         if (this.state.fileOpened && this.state.fileChanged) {
-            fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent, () => {
-                this.setState({ fileChanged: false });
-            });
+            fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent)
+                .then(() => {
+                    this.setState({ fileChanged: false });
+                })
+                .catch((error) => {
+                    throw new Error(error);
+                });
         }
 
         // Open file
-        fileSystemHelper.openFile(node.path, (filePath, fileContent) => {
-            this.setState({
-                filePath: filePath,
-                fileContent: fileContent,
-                fileOpened: true
-            });
+        fileSystemHelper.openFile(node.path)
+            .then((content) => {
+                this.setState({
+                    filePath: node.path,
+                    fileContent: content,
+                    fileOpened: true
+                });
 
-            editorComponentHelper.focusOnEditor();
-        });
+                editorComponentHelper.focusOnEditor();
+            })
+            .catch((error) => {
+                throw new Error(error);
+            });
     }
 
     onEditorComponentChange(value) {
@@ -100,9 +108,13 @@ class DevelopmentComponent extends React.Component {
             exec: (editor) => {
                 // If the user has opened file and the file is changed, save this file
                 if (this.state.fileOpened && this.state.fileChanged) {
-                    fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent, () => {
-                        this.setState({ fileChanged: false });
-                    });
+                    fileSystemHelper.saveFile(this.state.filePath, this.state.fileContent)
+                        .then(() => {
+                            this.setState({ fileChanged: false });
+                        })
+                        .catch((error) => {
+                            throw new Error(error);
+                        });
                 }
             }
         });
