@@ -159,25 +159,20 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        // // delete dir './tmp'
-        // fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`, () => {
-        //     // make dir './tmp'
-        //     fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`, () => {
-        //         // copy from '/path/to/projectdir' dir to './tmp' dir
-        //         fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`, (err, files) => {
-        //             electronHelper.send('open-emulator-window');
+        fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`)
+            .then(() => {
+                return fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`);
+            })
+            .then(() => {
+                return fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`);
+            })
+            .then(() => {
+                electronHelper.send('emulator-window-will-opened');
 
-        //             this.setState({
-        //                 emulatorWindowOpened: true
-        //             });
-        //         });
-        //     });
-        // });
-        electronHelper.send('emulator-window-will-opened');
-
-        this.setState({
-            emulatorWindowOpened: true
-        });
+                this.setState({
+                    emulatorWindowOpened: true
+                });
+            });
     }
 
     render() {

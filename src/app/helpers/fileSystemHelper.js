@@ -28,23 +28,31 @@ module.exports = {
         });
     },
 
-    getRootPath: function () {
-        return path.resolve('./');
-    },
-
-    mkdir: function (path, callback) {
-        fs.mkdir(path, callback);
-    },
-
-    del: function (pattern, callback) {
-        del(pattern).then((paths) => {
-            if (callback) {
-                callback(paths);
-            }
+    del: function (patterns) {
+        return new Promise((resolve) => {
+            del(patterns).then((paths) => {
+                resolve(paths);
+            })
         });
     },
 
-    copy: function (src, dest, callback) {
-        copy(src, dest, callback);
+    mkdir: function (path) {
+        return new Promise((resolve) => {
+            fs.mkdir(path, () => {
+                resolve();
+            });
+        });
+    },
+
+    copy: function (src, dest) {
+        return new Promise((resolve) => {
+            copy(src, dest, () => {
+                resolve();
+            });
+        });
+    },
+
+    getRootPath: function () {
+        return path.resolve('./');
     }
 }
