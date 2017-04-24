@@ -8,7 +8,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             fs.readFile(path, 'UTF-8', (error, content) => {
                 if (error) {
-                    reject(new Error(`openFile: ${error}`));
+                    reject(new Error(error));
                 }
 
                 resolve(content);
@@ -20,10 +20,34 @@ module.exports = {
         return new Promise((resolve, reject) => {
             fs.writeFile(path, content, (error) => {
                 if (error) {
-                    reject(new Error(`saveFile: ${error}`));
+                    reject(new Error(error));
                 }
 
                 resolve();
+            });
+        });
+    },
+
+    mkdir: function (path) {
+        return new Promise((resolve, reject) => {
+            fs.mkdir(path, (error) => {
+                if (error) {
+                    reject(new Error(error));
+                }
+
+                resolve();
+            });
+        });
+    },
+
+    copy: function (src, dest) {
+        return new Promise((resolve, reject) => {
+            copy(src, dest, (error, files) => {
+                if (error) {
+                    reject(new Error(error));
+                }
+
+                resolve(files);
             });
         });
     },
@@ -33,22 +57,6 @@ module.exports = {
             del(patterns).then((paths) => {
                 resolve(paths);
             })
-        });
-    },
-
-    mkdir: function (path) {
-        return new Promise((resolve) => {
-            fs.mkdir(path, () => {
-                resolve();
-            });
-        });
-    },
-
-    copy: function (src, dest) {
-        return new Promise((resolve) => {
-            copy(src, dest, () => {
-                resolve();
-            });
         });
     },
 

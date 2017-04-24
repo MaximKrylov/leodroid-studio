@@ -172,6 +172,9 @@ class DevelopmentComponent extends React.Component {
                 this.setState({
                     emulatorWindowOpened: true
                 });
+            })
+            .catch((error) => {
+                throw new Error(error);
             });
     }
 
