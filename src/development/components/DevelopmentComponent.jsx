@@ -143,8 +143,11 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp/**`, () => {
+        // delete dir './tmp'
+        fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`, () => {
+            // make dir './tmp'
             fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`, () => {
+                // copy from '/path/to/projectdir' dir to './tmp' dir
                 fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`, (err, files) => {
                     electronHelper.send('open-emulator-window');
 
