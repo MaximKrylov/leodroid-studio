@@ -159,19 +159,21 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        // Delete bundle.js from .build/app/emulator/
         fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/build/app/emulator/bundle.js`)
-            // Delete ./tmp (include its content)
             .then(() => {
                 return fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`);
             })
-            // Mkdir ./tmp
             .then(() => {
                 return fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`);
             })
-            // Copy **/*.js from /path/to/opened/project to ./tmp
             .then(() => {
                 return fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`);
+            })
+            .then(() => {
+                return fileSystemHelper.browserify(`${fileSystemHelper.getRootPath()}/tmp/main.js`);
+            })
+            .then((buffer) => {
+                return fileSystemHelper.saveFile(`${fileSystemHelper.getRootPath()}/build/app/emulator/bundle.js`, buffer);
             })
             .then(() => {
                 electronHelper.send('emulator-window-will-opened');
@@ -179,6 +181,9 @@ class DevelopmentComponent extends React.Component {
                 this.setState({
                     emulatorWindowOpened: true
                 });
+            })
+            .then(() => {
+                return fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`);
             })
             .catch((error) => {
                 throw new Error(error);

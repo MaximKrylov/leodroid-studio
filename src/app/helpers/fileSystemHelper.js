@@ -2,6 +2,7 @@ const fs = window.require('fs');
 const path = window.require('path');
 const del = window.require('del');
 const copy = window.require('copy');
+const browserify = window.require('browserify');
 
 module.exports = {
     openFile: function (path) {
@@ -57,6 +58,19 @@ module.exports = {
             del(patterns).then((paths) => {
                 resolve(paths);
             })
+        });
+    },
+
+    browserify: function (entryPoint) {
+        return new Promise((resolve, reject) => {
+            browserify({ entries: entryPoint })
+                .bundle((error, buffer) => {
+                    if (error) {
+                        reject(new Error(error));
+                    }
+
+                    resolve(buffer);
+                });
         });
     },
 
