@@ -1,8 +1,9 @@
+const bluebird = window.require('bluebird');
+const browserify = window.require('browserify');
+const copy = window.require('copy');
+const del = window.require('del');
 const fs = window.require('fs');
 const path = window.require('path');
-const del = window.require('del');
-const copy = window.require('copy');
-const browserify = window.require('browserify');
 
 module.exports = {
     openFile: function (path) {
