@@ -60,9 +60,5 @@ module.exports = {
                     resolve(buffer);
                 });
         });
-    },
-
-    getRootPath: function () {
-        return path.resolve('./');
     }
 }
