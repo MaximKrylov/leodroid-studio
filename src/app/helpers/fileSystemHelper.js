@@ -29,18 +29,6 @@ module.exports = {
         });
     },
 
-    mkdir: function (path) {
-        return new Promise((resolve, reject) => {
-            fs.mkdir(path, (error) => {
-                if (error) {
-                    reject(new Error(error));
-                }
-
-                resolve();
-            });
-        });
-    },
-
     copy: function (src, dest) {
         return new Promise((resolve, reject) => {
             copy(src, dest, (error, files) => {

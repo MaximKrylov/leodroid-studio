@@ -159,22 +159,10 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/build/app/emulator/bundle.js`)
-            .then(() => {
-                return fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`);
-            })
-            .then(() => {
-                return fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`);
-            })
-            .then(() => {
-                return fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`);
-            })
-            .then(() => {
-                return fileSystemHelper.browserify(`${fileSystemHelper.getRootPath()}/tmp/main.js`);
-            })
-            .then((buffer) => {
-                return fileSystemHelper.saveFile(`${fileSystemHelper.getRootPath()}/build/app/emulator/bundle.js`, buffer);
-            })
+        fileSystemHelper.del([`${fileSystemHelper.getRootPath()}/tmp`])
+            .then(() => fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`))
+            .then(() => fileSystemHelper.browserify(`${fileSystemHelper.getRootPath()}/tmp/main.js`))
+            .then((buffer) => fileSystemHelper.saveFile(`${fileSystemHelper.getRootPath()}/build/app/emulator/bundle.js`, buffer))
             .then(() => {
                 electronHelper.send('emulator-window-will-opened');
 
@@ -182,9 +170,7 @@ class DevelopmentComponent extends React.Component {
                     emulatorWindowOpened: true
                 });
             })
-            .then(() => {
-                return fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`);
-            })
+            .then(() => fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`))
             .catch((error) => {
                 throw new Error(error);
             });
