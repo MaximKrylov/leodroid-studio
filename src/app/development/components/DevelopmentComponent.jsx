@@ -159,10 +159,17 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`)
+        // Delete bundle.js from .build/app/emulator/
+        fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/build/app/emulator/bundle.js`)
+            // Delete ./tmp (include its content)
+            .then(() => {
+                return fileSystemHelper.del(`${fileSystemHelper.getRootPath()}/tmp`);
+            })
+            // Mkdir ./tmp
             .then(() => {
                 return fileSystemHelper.mkdir(`${fileSystemHelper.getRootPath()}/tmp`);
             })
+            // Copy **/*.js from /path/to/opened/project to ./tmp
             .then(() => {
                 return fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, `${fileSystemHelper.getRootPath()}/tmp`);
             })
