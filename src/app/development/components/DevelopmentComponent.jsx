@@ -6,10 +6,10 @@ import TreeComponent from './TreeComponent';
 import TopDashboardComponent from './TopDashboardComponent';
 import BottomDashboardComponent from './BottomDashboardComponent';
 
-import electronHelper from '../../helpers/electronHelper';
-import fileSystemHelper from '../../helpers/fileSystemHelper';
-import editorComponentHelper from './helpers/editorHelper';
-import treeComponentHelper from './helpers/treeHelper';
+import electronHelper from '../../common/electronHelper';
+import fileSystemHelper from '../../common/fileSystemHelper';
+import editorComponentHelper from './common/editorHelper';
+import treeComponentHelper from './common/treeHelper';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
