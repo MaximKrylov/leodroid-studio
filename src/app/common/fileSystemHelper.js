@@ -26,7 +26,7 @@ module.exports = {
 
     browserify: function (entryPoint) {
         return new Promise((resolve, reject) => {
-            browserify({ entries: entryPoint })
+            browserify(entryPoint)
                 .bundle((error, buffer) => {
                     if (error) {
                         reject(new Error(error));
