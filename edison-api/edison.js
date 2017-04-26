@@ -1,7 +1,14 @@
 const say = window.require('say');
 
-console.log = function (str) {
-    document.write(str);
+if (console !== undefined) {
+    if (console.log !== undefined) {
+        const log = console.log;
+
+        console.log = function (message) {
+            log(message);
+            document.write(message);
+        }
+    }
 }
 
 module.exports = {
