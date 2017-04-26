@@ -178,14 +178,17 @@ class DevelopmentComponent extends React.Component {
             .then(() => {
                 electronHelper.send('open-emulator-window');
             })
-            // Delete ./tmp
-            .then(() => fileSystemHelper.delete('./tmp'))
             .catch((error) => {
                 alert(error.message);
 
                 this.setState({
                     emulatorWindowOpened: false
                 });
+            })
+            // Delete ./tmp
+            .then(() => fileSystemHelper.delete('./tmp'))
+            .catch((error) => {
+                alert(error.message);
             })
     }
 
