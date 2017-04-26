@@ -159,6 +159,11 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
+        // Async function
+        this.setState({
+            emulatorWindowOpened: true
+        });
+
         // Delete ./tmp
         fileSystemHelper.delete(['./tmp'])
             // Copy 'project'
@@ -169,13 +174,9 @@ class DevelopmentComponent extends React.Component {
             .then(() => fileSystemHelper.bundle('./tmp/main.js'))
             // Save file as 'bundle.js' and put it to ./build/app/emulator/
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
+            // Send signal to main process, that emulator window has to be opened
             .then(() => {
-                // Send signal to main process, that emulator window has to be opened
                 electronHelper.send('open-emulator-window');
-                
-                this.setState({
-                    emulatorWindowOpened: true
-                });
             })
             // Delete ./tmp
             .then(() => fileSystemHelper.delete('./tmp'))
