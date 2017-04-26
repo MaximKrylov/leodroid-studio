@@ -2,31 +2,18 @@ const bluebird = window.require('bluebird');
 const browserify = window.require('browserify');
 const copy = window.require('copy');
 const del = window.require('del');
+
 const fs = window.require('fs');
+const openFile = bluebird.promisify(fs.readFile);
+const saveFile = bluebird.promisify(fs.writeFile);
 
 module.exports = {
     openFile: function (path) {
-        return new Promise((resolve, reject) => {
-            fs.readFile(path, 'UTF-8', (error, content) => {
-                if (error) {
-                    reject(new Error(error));
-                }
-
-                resolve(content);
-            });
-        });
+        return openFile(path, 'UTF-8');
     },
 
     saveFile: function (path, content) {
-        return new Promise((resolve, reject) => {
-            fs.writeFile(path, content, (error) => {
-                if (error) {
-                    reject(new Error(error));
-                }
-
-                resolve();
-            });
-        });
+        return saveFile(path, content);
     },
 
     copy: function (src, dest) {
