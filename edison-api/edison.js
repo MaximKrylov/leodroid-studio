@@ -1,5 +1,7 @@
+const say = window.require('say');
+
 module.exports = {
     say: function(message) {
-        document.write(message);
+        say.speak(message);
     }
 }
