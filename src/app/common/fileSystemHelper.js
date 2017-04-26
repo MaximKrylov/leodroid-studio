@@ -1,11 +1,11 @@
 const bluebird = window.require('bluebird');
 const browserify = window.require('browserify');
-const del = window.require('del');
 
 const fs = window.require('fs');
 const openFile = bluebird.promisify(fs.readFile);
 const saveFile = bluebird.promisify(fs.writeFile);
 const copy = bluebird.promisify(window.require('copy'));
+const del = window.require('del');
 
 module.exports = {
     openFile: function (path) {
@@ -20,12 +20,8 @@ module.exports = {
         return copy(src, dest);
     },
 
-    del: function (patterns) {
-        return new Promise((resolve) => {
-            del(patterns).then((paths) => {
-                resolve(paths);
-            })
-        });
+    delete: function (patterns) {
+        return del(patterns);
     },
 
     browserify: function (entryPoint) {

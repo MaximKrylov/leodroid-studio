@@ -159,7 +159,7 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        fileSystemHelper.del(['./tmp'])
+        fileSystemHelper.delete(['./tmp'])
             .then(() => fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, './tmp'))
             .then(() => fileSystemHelper.browserify('./tmp/main.js'))
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
@@ -170,7 +170,7 @@ class DevelopmentComponent extends React.Component {
                     emulatorWindowOpened: true
                 });
             })
-            .then(() => fileSystemHelper.del('./tmp'))
+            .then(() => fileSystemHelper.delete('./tmp'))
             .catch((error) => {
                 throw new Error(error);
             });
