@@ -160,9 +160,13 @@ class DevelopmentComponent extends React.Component {
 
     onTopDashboardComponentRunButtonTouchTap() {
         fileSystemHelper.delete(['./tmp'])
+            // Copy 'project'
             .then(() => fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, './tmp'))
+            // Copy ./edison-api/edison.js
             .then(() => fileSystemHelper.copy(`./edison-api/edison.js`, './tmp'))
+            // Bundle ./tmp/**/*.js, using 'main.js' as entry point
             .then(() => fileSystemHelper.bundle('./tmp/main.js'))
+            // Save file as 'bundle.js' and put it to ./build/app/emulator/
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
             .then(() => {
                 electronHelper.send('emulator-window-will-opened');
@@ -171,6 +175,7 @@ class DevelopmentComponent extends React.Component {
                     emulatorWindowOpened: true
                 });
             })
+            // Delete ./tmp
             .then(() => fileSystemHelper.delete('./tmp'))
             .catch((error) => {
                 throw new Error(error);
