@@ -170,8 +170,9 @@ class DevelopmentComponent extends React.Component {
             // Save file as 'bundle.js' and put it to ./build/app/emulator/
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
             .then(() => {
-                electronHelper.send('emulator-window-will-opened');
-
+                // Send signal to main process, that emulator window has to be opened
+                electronHelper.send('open-emulator-window');
+                
                 this.setState({
                     emulatorWindowOpened: true
                 });
@@ -179,8 +180,12 @@ class DevelopmentComponent extends React.Component {
             // Delete ./tmp
             .then(() => fileSystemHelper.delete('./tmp'))
             .catch((error) => {
-                throw new Error(error);
-            });
+                alert(error.message);
+
+                this.setState({
+                    emulatorWindowOpened: false
+                });
+            })
     }
 
     render() {

@@ -20,7 +20,7 @@ app.on('activate', () => {
     }
 });
 
-ipcMain.on('emulator-window-will-opened', (event, args) => {
+ipcMain.on('open-emulator-window', (event, args) => {
     if (!emulatorWindow.opened) {
         emulatorWindow.open();
     }
