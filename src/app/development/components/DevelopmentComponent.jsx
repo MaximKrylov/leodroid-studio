@@ -5,6 +5,7 @@ import EditorComponent from './EditorComponent';
 import TreeComponent from './TreeComponent';
 import TopDashboardComponent from './TopDashboardComponent';
 import BottomDashboardComponent from './BottomDashboardComponent';
+import ErrorComponent from './ErrorComponent';
 
 import electronHelper from '../../common/electronHelper';
 import fileSystemHelper from '../../common/fileSystemHelper';
@@ -20,12 +21,18 @@ class DevelopmentComponent extends React.Component {
         this.state = {
             fileContent: '',
             filePath: '',
-            projectPath: '',
             fileOpened: false,
             fileChanged: false,
+
+            projectPath: '',
             projectOpened: false,
+
             emulatorWindowOpened: false,
-            treeData: null
+
+            treeData: null,
+
+            errorMessage: '',
+            errorDisplayed: false
         };
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
@@ -35,6 +42,8 @@ class DevelopmentComponent extends React.Component {
 
         this.onTopDashboardComponentOpenButtonTouchTap = this.onTopDashboardComponentOpenButtonTouchTap.bind(this);
         this.onTopDashboardComponentRunButtonTouchTap = this.onTopDashboardComponentRunButtonTouchTap.bind(this);
+
+        this.onErrorComponentRequestClose = this.onErrorComponentRequestClose.bind(this);
 
         injectTapEventPlugin();
 
@@ -179,17 +188,30 @@ class DevelopmentComponent extends React.Component {
                 electronHelper.send('open-emulator-window');
             })
             .catch((error) => {
-                alert(error.message);
-
                 this.setState({
+                    errorMessage: error.message,
+                    errorDisplayed: true,
                     emulatorWindowOpened: false
                 });
             })
             // Delete ./tmp
             .then(() => fileSystemHelper.delete('./tmp'))
             .catch((error) => {
-                alert(error.message);
+                this.setState({
+                    errorMessage: error.message,
+                    errorDisplayed: true,
+                });
             })
+    }
+
+    onErrorComponentRequestClose() {
+        // Setting errorMessage as empty depends on ErrorComponent
+        // If ErrorComponent is changed, check this setting for new
+        // component
+        this.setState({
+            errorMessage: '',
+            errorDisplayed: false
+        });
     }
 
     render() {
@@ -227,6 +249,13 @@ class DevelopmentComponent extends React.Component {
                 onLoad={this.onEditorComponentLoad}
             />;
 
+        let errorComponent =
+            <ErrorComponent
+                message={this.state.errorMessage}
+                open={this.state.errorDisplayed}
+                onRequestClose={this.onErrorComponentRequestClose}
+            />;
+
         return (
             <section id='layout'>
                 <aside id='left-side'>
@@ -237,6 +266,7 @@ class DevelopmentComponent extends React.Component {
                 <section id='right-side'>
                     <section id='editor'>{editorComponent}</section>
                 </section>
+                {errorComponent}
             </section>
         );
     }
