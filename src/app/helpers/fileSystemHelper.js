@@ -3,7 +3,6 @@ const browserify = window.require('browserify');
 const copy = window.require('copy');
 const del = window.require('del');
 const fs = window.require('fs');
-const path = window.require('path');
 
 module.exports = {
     openFile: function (path) {
