@@ -159,6 +159,7 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
+        // Delete ./tmp
         fileSystemHelper.delete(['./tmp'])
             // Copy 'project'
             .then(() => fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, './tmp'))
