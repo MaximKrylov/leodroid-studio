@@ -205,9 +205,6 @@ class DevelopmentComponent extends React.Component {
     }
 
     onErrorComponentRequestClose() {
-        // Setting errorMessage as empty depends on ErrorComponent
-        // If ErrorComponent is changed, check this setting for new
-        // component
         this.setState({
             errorMessage: '',
             errorDisplayed: false
