@@ -161,7 +161,8 @@ class DevelopmentComponent extends React.Component {
     onTopDashboardComponentRunButtonTouchTap() {
         fileSystemHelper.delete(['./tmp'])
             .then(() => fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, './tmp'))
-            .then(() => fileSystemHelper.browserify('./tmp/main.js'))
+            .then(() => fileSystemHelper.copy(`./edison-api/edison.js`, './tmp'))
+            .then(() => fileSystemHelper.bundle('./tmp/main.js'))
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
             .then(() => {
                 electronHelper.send('emulator-window-will-opened');

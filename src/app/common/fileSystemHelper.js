@@ -1,7 +1,7 @@
 const bluebird = window.require('bluebird');
 const browserify = window.require('browserify');
-
 const fs = window.require('fs');
+
 const openFile = bluebird.promisify(fs.readFile);
 const saveFile = bluebird.promisify(fs.writeFile);
 const copy = bluebird.promisify(window.require('copy'));
@@ -24,16 +24,8 @@ module.exports = {
         return del(patterns);
     },
 
-    browserify: function (entryPoint) {
-        return new Promise((resolve, reject) => {
-            browserify(entryPoint)
-                .bundle((error, buffer) => {
-                    if (error) {
-                        reject(new Error(error));
-                    }
-
-                    resolve(buffer);
-                });
-        });
+    bundle: function (entryPoint) {
+        const bundler = browserify(entryPoint);
+        return bluebird.promisify(bundler.bundle, { context: bundler })();
     }
 }
