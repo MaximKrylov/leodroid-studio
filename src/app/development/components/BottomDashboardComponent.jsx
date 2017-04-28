@@ -25,10 +25,25 @@ const settingsButtonStyle = {
 class BottomDashboardComponent extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             settingsComponentOpened: false
         };
+
+        this.onSettingsButtonTouchTap = this.onSettingsButtonTouchTap.bind(this);
+        this.onSettingsComponentRequestChange = this.onSettingsComponentRequestChange.bind(this);
+    }
+
+    onSettingsButtonTouchTap() {
+        this.setState({
+            settingsComponentOpened: true
+        });
+    }
+
+    onSettingsComponentRequestChange(inverseSettingsComponentOpeneded) {
+        this.setState({
+            settingsComponentOpened: inverseSettingsComponentOpeneded
+        });
     }
 
     render() {
@@ -45,11 +60,17 @@ class BottomDashboardComponent extends React.Component {
                 label="SETTINGS"
                 icon={<ActionSettings />}
                 disabled={this.props.settingsButtonDisabled}
+                onTouchTap={this.onSettingsButtonTouchTap}
                 style={settingsButtonStyle}
             />;
 
         let settingsDrawer =
-            <Drawer width={300} openSecondary={true} open={this.state.settingsComponentOpened} >
+            <Drawer width={300}
+                docked={false}
+                openSecondary={true}
+                open={this.state.settingsComponentOpened}
+                onRequestChange={this.onSettingsComponentRequestChange}
+            >
                 <AppBar
                     title="Settings"
                     iconElementLeft={<IconButton><ActionSettings /></IconButton>}
