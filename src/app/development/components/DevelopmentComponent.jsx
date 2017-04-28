@@ -236,6 +236,7 @@ class DevelopmentComponent extends React.Component {
         let bottomDashboardComponent =
             <BottomDashboardComponent
                 compileProjectButtonDisabled={!this.state.projectOpened}
+                settingsButtonDisabled={!this.state.projectOpened}
             />;
 
         let editorComponent =
