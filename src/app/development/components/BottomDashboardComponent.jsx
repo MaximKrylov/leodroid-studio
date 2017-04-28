@@ -6,6 +6,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
+
+import Drawer from 'material-ui/Drawer';
+import AppBar from 'material-ui/AppBar';
 
 import HardwareDeveloperBoard from 'material-ui/svg-icons/hardware/developer-board';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
@@ -21,7 +25,10 @@ const settingsButtonStyle = {
 class BottomDashboardComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        
+        this.state = {
+            settingsComponentOpened: false
+        };
     }
 
     render() {
@@ -41,6 +48,14 @@ class BottomDashboardComponent extends React.Component {
                 style={settingsButtonStyle}
             />;
 
+        let settingsDrawer =
+            <Drawer width={300} openSecondary={true} open={this.state.settingsComponentOpened} >
+                <AppBar
+                    title="Settings"
+                    iconElementLeft={<IconButton><ActionSettings /></IconButton>}
+                />
+            </Drawer>;
+
         return (
             <div>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
@@ -48,6 +63,9 @@ class BottomDashboardComponent extends React.Component {
                 </MuiThemeProvider>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
                     {compileProjectButton}
+                </MuiThemeProvider>
+                <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+                    {settingsDrawer}
                 </MuiThemeProvider>
             </div>
         );

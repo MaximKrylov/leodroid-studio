@@ -32,7 +32,7 @@ class DevelopmentComponent extends React.Component {
             treeData: null,
 
             errorMessage: '',
-            errorDisplayed: false
+            errorComponentOpened: false
         };
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
@@ -190,7 +190,7 @@ class DevelopmentComponent extends React.Component {
             .catch((error) => {
                 this.setState({
                     errorMessage: error.message,
-                    errorDisplayed: true,
+                    errorComponentOpened: true,
                     emulatorWindowOpened: false
                 });
             })
@@ -199,7 +199,7 @@ class DevelopmentComponent extends React.Component {
             .catch((error) => {
                 this.setState({
                     errorMessage: error.message,
-                    errorDisplayed: true,
+                    errorComponentOpened: true,
                 });
             })
     }
@@ -207,7 +207,7 @@ class DevelopmentComponent extends React.Component {
     onErrorComponentRequestClose() {
         this.setState({
             errorMessage: '',
-            errorDisplayed: false
+            errorComponentOpened: false
         });
     }
 
@@ -250,7 +250,7 @@ class DevelopmentComponent extends React.Component {
         let errorComponent =
             <ErrorComponent
                 message={this.state.errorMessage}
-                open={this.state.errorDisplayed}
+                open={this.state.errorComponentOpened}
                 onRequestClose={this.onErrorComponentRequestClose}
             />;
 
