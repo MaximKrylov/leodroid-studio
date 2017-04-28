@@ -264,7 +264,7 @@ class DevelopmentComponent extends React.Component {
                 <section id='right-side'>
                     <section id='editor'>{editorComponent}</section>
                 </section>
-                {errorComponent}
+                <div>{errorComponent}</div>
             </section>
         );
     }

@@ -27,22 +27,22 @@ class BottomDashboardComponent extends React.Component {
         super(props);
 
         this.state = {
-            settingsComponentOpened: false
+            settingsDrawerOpened: false
         };
 
         this.onSettingsButtonTouchTap = this.onSettingsButtonTouchTap.bind(this);
-        this.onSettingsComponentRequestChange = this.onSettingsComponentRequestChange.bind(this);
+        this.onSettingsDrawerRequestChange = this.onSettingsDrawerRequestChange.bind(this);
     }
 
     onSettingsButtonTouchTap() {
         this.setState({
-            settingsComponentOpened: true
+            settingsDrawerOpened: true
         });
     }
 
-    onSettingsComponentRequestChange(inverseSettingsComponentOpeneded) {
+    onSettingsDrawerRequestChange(inversesettingsDrawerOpeneded) {
         this.setState({
-            settingsComponentOpened: inverseSettingsComponentOpeneded
+            settingsDrawerOpened: inversesettingsDrawerOpeneded
         });
     }
 
@@ -68,8 +68,8 @@ class BottomDashboardComponent extends React.Component {
             <Drawer width={300}
                 docked={false}
                 openSecondary={true}
-                open={this.state.settingsComponentOpened}
-                onRequestChange={this.onSettingsComponentRequestChange}
+                open={this.state.settingsDrawerOpened}
+                onRequestChange={this.onSettingsDrawerRequestChange}
             >
                 <AppBar
                     title="Settings"
