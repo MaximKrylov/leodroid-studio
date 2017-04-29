@@ -186,17 +186,40 @@ class DevelopmentComponent extends React.Component {
             emulatorWindowOpened: true
         });
 
-        // Delete ./tmp
-        fileSystemHelper.delete(['./tmp'])
-            // Copy 'project'
-            .then(() => fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, './tmp'))
-            // Copy ./edison-api/edison.js
-            .then(() => fileSystemHelper.copy(`./edison-api/edison.js`, './tmp'))
-            // Bundle ./tmp/**/*.js, using 'main.js' as entry point
-            .then(() => fileSystemHelper.bundle('./tmp/main.js'))
-            // Save file as 'bundle.js' and put it to ./build/app/emulator/
+        // // Delete ./tmp
+        // fileSystemHelper.delete(['./tmp'])
+        //     // Copy 'project'
+        //     .then(() => fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, './tmp'))
+        //     // Copy ./edison-api/edison.js
+        //     .then(() => fileSystemHelper.copy(`./edison-api/edison.js`, './tmp'))
+        //     // Bundle ./tmp/**/*.js, using 'main.js' as entry point
+        //     .then(() => fileSystemHelper.bundle('./tmp/main.js'))
+        //     // Save file as 'bundle.js' and put it to ./build/app/emulator/
+        //     .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
+        //     // Send signal to main process, that emulator window has to be opened
+        //     .then(() => {
+        //         electronHelper.send('open-emulator-window', {
+        //             emulatorComponentDevToolsOpened: this.state.emulatorComponentDevToolsOpened
+        //         });
+        //     })
+        //     .catch((error) => {
+        //         this.setState({
+        //             errorMessage: error.message,
+        //             errorComponentOpened: true,
+        //             emulatorWindowOpened: false
+        //         });
+        //     })
+        //     // Delete ./tmp
+        //     .then(() => fileSystemHelper.delete('./tmp'))
+        //     .catch((error) => {
+        //         this.setState({
+        //             errorMessage: error.message,
+        //             errorComponentOpened: true,
+        //         });
+        //     });
+        
+        fileSystemHelper.bundle(`${this.state.projectPath}/main.js`)
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
-            // Send signal to main process, that emulator window has to be opened
             .then(() => {
                 electronHelper.send('open-emulator-window', {
                     emulatorComponentDevToolsOpened: this.state.emulatorComponentDevToolsOpened
@@ -208,15 +231,7 @@ class DevelopmentComponent extends React.Component {
                     errorComponentOpened: true,
                     emulatorWindowOpened: false
                 });
-            })
-            // Delete ./tmp
-            .then(() => fileSystemHelper.delete('./tmp'))
-            .catch((error) => {
-                this.setState({
-                    errorMessage: error.message,
-                    errorComponentOpened: true,
-                });
-            })
+            });
     }
 
     onErrorComponentRequestClose() {
