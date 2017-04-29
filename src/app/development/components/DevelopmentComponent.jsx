@@ -46,18 +46,16 @@ class DevelopmentComponent extends React.Component {
         this.onEditorComponentChange = this.onEditorComponentChange.bind(this);
         this.onEditorComponentLoad = this.onEditorComponentLoad.bind(this);
 
+        this.onErrorComponentRequestClose = this.onErrorComponentRequestClose.bind(this);
+        
         this.onTopDashboardComponentOpenButtonTouchTap = this.onTopDashboardComponentOpenButtonTouchTap.bind(this);
         this.onTopDashboardComponentRunButtonTouchTap = this.onTopDashboardComponentRunButtonTouchTap.bind(this);
-
-        this.onErrorComponentRequestClose = this.onErrorComponentRequestClose.bind(this);
+        this.onTopDashboardComponentNewProjectButtonTouchTap = this.onTopDashboardComponentNewProjectButtonTouchTap.bind(this);
+        this.onTopDashboardComponentNewProjectDialogCancelButtonTouchTapp = this.onTopDashboardComponentNewProjectDialogCancelButtonTouchTapp.bind(this);
+        this.onTopDashboardComponentNewProjectDialogSubmitButtonTouchTap = this.onTopDashboardComponentNewProjectDialogSubmitButtonTouchTap.bind(this);
+        this.onTopDashboardComponentNewProjectDialogRequestClose = this.onTopDashboardComponentNewProjectDialogRequestClose.bind(this);
 
         this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle = this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle.bind(this);
-        
-        this.onTopDashboardNewProjectButtonTouchTap = this.onTopDashboardNewProjectButtonTouchTap.bind(this);
-        this.onTopDashboardNewProjectDialogCancelButtonTouchTap = this.onTopDashboardNewProjectDialogCancelButtonTouchTap.bind(this);
-        this.onTopDashboardNewProjectDialogSubmitButtonTouchTap = this.onTopDashboardNewProjectDialogSubmitButtonTouchTap.bind(this);
-        this.onTopDashboardNewProjectDialogRequestClose = this.onTopDashboardNewProjectDialogRequestClose.bind(this);
-
         this.onBottomDashboardComponentSettingsButtonTouchTap = this.onBottomDashboardComponentSettingsButtonTouchTap.bind(this);
         this.onBottomDashboardComponentSettingsDrawerRequestChange = this.onBottomDashboardComponentSettingsDrawerRequestChange.bind(this);
 
@@ -253,31 +251,25 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
-    onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle(event, isInputChacked) {
-        this.setState({
-           emulatorComponentDevToolsOpened: isInputChacked
-        });
-    }
-
-    onTopDashboardNewProjectDialogCancelButtonTouchTap() {
+    onTopDashboardComponentNewProjectDialogCancelButtonTouchTapp() {
         this.setState({
             topDashboardComponentNewProjectDialogOpened: false
         });
     }
 
-    onTopDashboardNewProjectDialogSubmitButtonTouchTap() {
+    onTopDashboardComponentNewProjectDialogSubmitButtonTouchTap() {
         this.setState({
             topDashboardComponentNewProjectDialogOpened: false
         });
     }
 
-    onTopDashboardNewProjectButtonTouchTap() {
+    onTopDashboardComponentNewProjectButtonTouchTap() {
         this.setState({
             topDashboardComponentNewProjectDialogOpened: true
         });
     }
 
-    onTopDashboardNewProjectDialogRequestClose() {
+    onTopDashboardComponentNewProjectDialogRequestClose() {
         this.setState({
             topDashboardComponentNewProjectDialogOpened: false
         });
@@ -292,6 +284,12 @@ class DevelopmentComponent extends React.Component {
     onBottomDashboardComponentSettingsDrawerRequestChange(isDrawerOpened) {
         this.setState({
             bottomDashboardComponentSettingsDrawerOpened: isDrawerOpened
+        });
+    }
+
+    onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle(event, isInputChacked) {
+        this.setState({
+           emulatorComponentDevToolsOpened: isInputChacked
         });
     }
 
@@ -318,10 +316,10 @@ class DevelopmentComponent extends React.Component {
 
                 newProjectDialogOpened={this.state.topDashboardComponentNewProjectDialogOpened}
 
-                onNewProjectDialogCancelButtonTouchTap={this.onTopDashboardNewProjectDialogCancelButtonTouchTap}
-                onNewProjectDialogSubmitButtonTouchTap={this.onTopDashboardNewProjectDialogSubmitButtonTouchTap}
-                onNewProjectDialogRequestClose={this.onTopDashboardNewProjectDialogRequestClose}
-                onNewProjectButtonTouchTap={this.onTopDashboardNewProjectButtonTouchTap}
+                onNewProjectDialogCancelButtonTouchTap={this.onTopDashboardComponentNewProjectDialogCancelButtonTouchTapp}
+                onNewProjectDialogSubmitButtonTouchTap={this.onTopDashboardComponentNewProjectDialogSubmitButtonTouchTap}
+                onNewProjectDialogRequestClose={this.onTopDashboardComponentNewProjectDialogRequestClose}
+                onNewProjectButtonTouchTap={this.onTopDashboardComponentNewProjectButtonTouchTap}
             />;
 
         let bottomDashboardComponent =
