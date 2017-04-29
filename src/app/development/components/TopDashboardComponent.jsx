@@ -14,8 +14,6 @@ import FileFolderOpen from 'material-ui/svg-icons/file/folder-open';
 import AvCallToAction from 'material-ui/svg-icons/av/call-to-action';
 import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow';
 
-import fileSystemHelper from '../../common/fileSystemHelper';
-
 class TopDashboardComponent extends React.Component {
     constructor(props) {
         super(props);
