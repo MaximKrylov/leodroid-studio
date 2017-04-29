@@ -32,7 +32,9 @@ class DevelopmentComponent extends React.Component {
             treeData: null,
 
             errorMessage: '',
-            errorComponentOpened: false
+            errorComponentOpened: false,
+
+            emulatorComponentDevToolsOpened: false
         };
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
@@ -44,6 +46,8 @@ class DevelopmentComponent extends React.Component {
         this.onTopDashboardComponentRunButtonTouchTap = this.onTopDashboardComponentRunButtonTouchTap.bind(this);
 
         this.onErrorComponentRequestClose = this.onErrorComponentRequestClose.bind(this);
+
+        this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle = this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle.bind(this);
 
         injectTapEventPlugin();
 
@@ -220,6 +224,10 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
+    onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle(event, isInputChacked) {
+        alert(isInputChacked);
+    }
+
     render() {
         let treeComponent = null;
 
@@ -246,6 +254,8 @@ class DevelopmentComponent extends React.Component {
             <BottomDashboardComponent
                 compileProjectButtonDisabled={!this.state.projectOpened}
                 settingsButtonDisabled={!this.state.projectOpened}
+
+                onEmulatorComponentDevToolsToggleButtonToggle={this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle}
             />;
 
         let editorComponent =

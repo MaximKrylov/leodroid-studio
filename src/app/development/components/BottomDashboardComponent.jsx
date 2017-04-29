@@ -74,6 +74,7 @@ class BottomDashboardComponent extends React.Component {
             <Toggle
                 label="Emulator DevTools"
                 style={emulatorComponentDevToolsToggleButtonStyle}
+                onToggle={this.props.onEmulatorComponentDevToolsToggleButtonToggle}
             />
 
         let settingsDrawer =
