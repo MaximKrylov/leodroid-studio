@@ -31,25 +31,6 @@ const emulatorComponentDevToolsToggleButtonStyle = {
 class BottomDashboardComponent extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            settingsDrawerOpened: false
-        };
-
-        this.onSettingsButtonTouchTap = this.onSettingsButtonTouchTap.bind(this);
-        this.onSettingsDrawerRequestChange = this.onSettingsDrawerRequestChange.bind(this);
-    }
-
-    onSettingsButtonTouchTap() {
-        this.setState({
-            settingsDrawerOpened: true
-        });
-    }
-
-    onSettingsDrawerRequestChange(inversesettingsDrawerOpeneded) {
-        this.setState({
-            settingsDrawerOpened: inversesettingsDrawerOpeneded
-        });
     }
 
     render() {
@@ -66,7 +47,7 @@ class BottomDashboardComponent extends React.Component {
                 label="SETTINGS"
                 icon={<ActionSettings />}
                 disabled={this.props.settingsButtonDisabled}
-                onTouchTap={this.onSettingsButtonTouchTap}
+                onTouchTap={this.props.onSettingsButtonTouchTap}
                 style={settingsButtonStyle}
             />;
 
@@ -82,8 +63,8 @@ class BottomDashboardComponent extends React.Component {
             <Drawer width={300}
                 docked={false}
                 openSecondary={true}
-                open={this.state.settingsDrawerOpened}
-                onRequestChange={this.onSettingsDrawerRequestChange}
+                open={this.props.settingsDrawerOpened}
+                onRequestChange={this.props.onSettingsDrawerRequestChange}
             >
                 <AppBar title="Settings"
                     iconElementLeft={<IconButton><ActionSettings /></IconButton>}

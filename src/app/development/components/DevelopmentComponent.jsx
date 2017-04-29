@@ -36,7 +36,9 @@ class DevelopmentComponent extends React.Component {
 
             emulatorComponentDevToolsOpened: false,
 
-            topDashboardComponentNewProjectDialogOpened: false
+            topDashboardComponentNewProjectDialogOpened: false,
+
+            bottomDashboardComponentSettingsDrawerOpened: false
         };
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
@@ -55,6 +57,9 @@ class DevelopmentComponent extends React.Component {
         this.onTopDashboardNewProjectDialogCancelButtonTouchTap = this.onTopDashboardNewProjectDialogCancelButtonTouchTap.bind(this);
         this.onTopDashboardNewProjectDialogSubmitButtonTouchTap = this.onTopDashboardNewProjectDialogSubmitButtonTouchTap.bind(this);
         this.onTopDashboardNewProjectDialogRequestClose = this.onTopDashboardNewProjectDialogRequestClose.bind(this);
+
+        this.onBottomDashboardComponentSettingsButtonTouchTap = this.onBottomDashboardComponentSettingsButtonTouchTap.bind(this);
+        this.onBottomDashboardComponentSettingsDrawerRequestChange = this.onBottomDashboardComponentSettingsDrawerRequestChange.bind(this);
 
         injectTapEventPlugin();
 
@@ -278,6 +283,18 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
+    onBottomDashboardComponentSettingsButtonTouchTap() {
+        this.setState({
+            bottomDashboardComponentSettingsDrawerOpened: true
+        });
+    }
+
+    onBottomDashboardComponentSettingsDrawerRequestChange(isDrawerOpened) {
+        this.setState({
+            bottomDashboardComponentSettingsDrawerOpened: isDrawerOpened
+        });
+    }
+
     render() {
         let treeComponent = null;
 
@@ -314,6 +331,10 @@ class DevelopmentComponent extends React.Component {
                 emulatorComponentDevToolsToggleButtonToggled={this.state.emulatorComponentDevToolsOpened}
 
                 onEmulatorComponentDevToolsToggleButtonToggle={this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle}
+                settingsDrawerOpened={this.state.bottomDashboardComponentSettingsDrawerOpened}
+
+                onSettingsButtonTouchTap={this.onBottomDashboardComponentSettingsButtonTouchTap}
+                onSettingsDrawerRequestChange={this.onBottomDashboardComponentSettingsDrawerRequestChange}
             />;
 
         let editorComponent =
