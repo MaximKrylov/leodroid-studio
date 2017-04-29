@@ -82,7 +82,10 @@ class DevelopmentComponent extends React.Component {
                     });
                 })
                 .catch((error) => {
-                    throw new Error(error);
+                    this.setState({
+                        errorMessage: error.message,
+                        errorComponentOpened: true,
+                    });
                 });
         }
 
@@ -98,7 +101,10 @@ class DevelopmentComponent extends React.Component {
                 editorComponentHelper.focusOnEditor();
             })
             .catch((error) => {
-                throw new Error(error);
+                this.setState({
+                    errorMessage: error.message,
+                    errorComponentOpened: true,
+                });
             });
     }
 
@@ -126,7 +132,10 @@ class DevelopmentComponent extends React.Component {
                             });
                         })
                         .catch((error) => {
-                            throw new Error(error);
+                            this.setState({
+                                errorMessage: error.message,
+                                errorComponentOpened: true,
+                            });
                         });
                 }
             }
