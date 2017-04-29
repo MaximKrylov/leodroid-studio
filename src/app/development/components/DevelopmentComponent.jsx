@@ -225,7 +225,9 @@ class DevelopmentComponent extends React.Component {
     }
 
     onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle(event, isInputChacked) {
-        alert(isInputChacked);
+        this.setState({
+           emulatorComponentDevToolsOpened: isInputChacked
+        });
     }
 
     render() {
@@ -254,6 +256,7 @@ class DevelopmentComponent extends React.Component {
             <BottomDashboardComponent
                 compileProjectButtonDisabled={!this.state.projectOpened}
                 settingsButtonDisabled={!this.state.projectOpened}
+                emulatorComponentDevToolsToggleButtonToggled={this.state.emulatorComponentDevToolsOpened}
 
                 onEmulatorComponentDevToolsToggleButtonToggle={this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle}
             />;
