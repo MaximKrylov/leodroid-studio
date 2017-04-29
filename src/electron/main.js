@@ -23,5 +23,9 @@ app.on('activate', () => {
 ipcMain.on('open-emulator-window', (event, args) => {
     if (!emulatorWindow.opened) {
         emulatorWindow.open();
+
+        if (args.emulatorComponentDevToolsOpened) {
+            emulatorWindow.webContents.openDevTools();
+        }
     }
 });

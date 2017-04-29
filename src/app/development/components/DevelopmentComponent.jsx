@@ -198,7 +198,9 @@ class DevelopmentComponent extends React.Component {
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
             // Send signal to main process, that emulator window has to be opened
             .then(() => {
-                electronHelper.send('open-emulator-window');
+                electronHelper.send('open-emulator-window', {
+                    emulatorComponentDevToolsOpened: this.state.emulatorComponentDevToolsOpened
+                });
             })
             .catch((error) => {
                 this.setState({
