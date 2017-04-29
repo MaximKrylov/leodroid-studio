@@ -267,6 +267,8 @@ class DevelopmentComponent extends React.Component {
 
                 newProjectButtonDisabled={!this.state.projectOpened}
                 runButtonDisabled={!this.state.projectOpened || this.state.emulatorWindowOpened}
+                
+                projectPath={this.state.projectPath}
             />;
 
         let bottomDashboardComponent =
