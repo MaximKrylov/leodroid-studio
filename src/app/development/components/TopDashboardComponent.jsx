@@ -17,36 +17,6 @@ import AvPlayArrow from 'material-ui/svg-icons/av/play-arrow';
 class TopDashboardComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { newProjectDialogOpened: false };
-
-        this.onNewProjectButtonTouchTap = this.onNewProjectButtonTouchTap.bind(this);
-        this.onNewProjectDialogCancelButtonTouchTap = this.onNewProjectDialogCancelButtonTouchTap.bind(this);
-        this.onNewProjectDialogSubmitButtonTouchTap = this.onNewProjectDialogSubmitButtonTouchTap.bind(this);
-        this.onNewProjectDialogRequestClose = this.onNewProjectDialogRequestClose.bind(this);
-    }
-
-    onNewProjectDialogCancelButtonTouchTap() {
-        this.setState({
-            newProjectDialogOpened: false
-        });
-    }
-
-    onNewProjectDialogSubmitButtonTouchTap() {
-        this.setState({
-            newProjectDialogOpened: false
-        });
-    }
-
-    onNewProjectButtonTouchTap() {
-        this.setState({
-            newProjectDialogOpened: true
-        });
-    }
-
-    onNewProjectDialogRequestClose() {
-        this.setState({
-            newProjectDialogOpened: false
-        });
     }
 
     render() {
@@ -54,14 +24,14 @@ class TopDashboardComponent extends React.Component {
             <FlatButton
                 label="Cancel"
                 primary={true}
-                onTouchTap={this.onNewProjectDialogCancelButtonTouchTap}
+                onTouchTap={this.props.onNewProjectDialogCancelButtonTouchTap}
             />,
 
             <FlatButton
                 label="Submit"
                 primary={true}
                 keyboardFocused={true}
-                onTouchTap={this.onNewProjectDialogSubmitButtonTouchTap}
+                onTouchTap={this.props.onNewProjectDialogSubmitButtonTouchTap}
             />
         ];
 
@@ -75,7 +45,7 @@ class TopDashboardComponent extends React.Component {
         let newProjectButton =
             <RaisedButton
                 label="NEW"
-                onTouchTap={this.onNewProjectButtonTouchTap}
+                onTouchTap={this.props.onNewProjectButtonTouchTap}
                 icon={<AvCallToAction />}
                 disabled={this.props.newProjectButtonDisabled}
             />;
@@ -85,8 +55,8 @@ class TopDashboardComponent extends React.Component {
                 title="New project"
                 actions={newProjectDialogActions}
                 modal={false}
-                open={this.state.newProjectDialogOpened}
-                onRequestClose={this.onNewProjectDialogRequestClose}
+                open={this.props.newProjectDialogOpened}
+                onRequestClose={this.props.onNewProjectDialogRequestClose}
             > You are going to create new project. Continue?
             </Dialog>;
 

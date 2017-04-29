@@ -34,7 +34,9 @@ class DevelopmentComponent extends React.Component {
             errorMessage: '',
             errorComponentOpened: false,
 
-            emulatorComponentDevToolsOpened: false
+            emulatorComponentDevToolsOpened: false,
+
+            topDashboardComponentNewProjectDialogOpened: false
         };
 
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
@@ -48,6 +50,11 @@ class DevelopmentComponent extends React.Component {
         this.onErrorComponentRequestClose = this.onErrorComponentRequestClose.bind(this);
 
         this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle = this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle.bind(this);
+        
+        this.onTopDashboardNewProjectButtonTouchTap = this.onTopDashboardNewProjectButtonTouchTap.bind(this);
+        this.onTopDashboardNewProjectDialogCancelButtonTouchTap = this.onTopDashboardNewProjectDialogCancelButtonTouchTap.bind(this);
+        this.onTopDashboardNewProjectDialogSubmitButtonTouchTap = this.onTopDashboardNewProjectDialogSubmitButtonTouchTap.bind(this);
+        this.onTopDashboardNewProjectDialogRequestClose = this.onTopDashboardNewProjectDialogRequestClose.bind(this);
 
         injectTapEventPlugin();
 
@@ -247,6 +254,30 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
+    onTopDashboardNewProjectDialogCancelButtonTouchTap() {
+        this.setState({
+            topDashboardComponentNewProjectDialogOpened: false
+        });
+    }
+
+    onTopDashboardNewProjectDialogSubmitButtonTouchTap() {
+        this.setState({
+            topDashboardComponentNewProjectDialogOpened: false
+        });
+    }
+
+    onTopDashboardNewProjectButtonTouchTap() {
+        this.setState({
+            topDashboardComponentNewProjectDialogOpened: true
+        });
+    }
+
+    onTopDashboardNewProjectDialogRequestClose() {
+        this.setState({
+            topDashboardComponentNewProjectDialogOpened: false
+        });
+    }
+
     render() {
         let treeComponent = null;
 
@@ -267,6 +298,13 @@ class DevelopmentComponent extends React.Component {
 
                 newProjectButtonDisabled={!this.state.projectOpened}
                 runButtonDisabled={!this.state.projectOpened || this.state.emulatorWindowOpened}
+
+                newProjectDialogOpened={this.state.topDashboardComponentNewProjectDialogOpened}
+
+                onNewProjectDialogCancelButtonTouchTap={this.onTopDashboardNewProjectDialogCancelButtonTouchTap}
+                onNewProjectDialogSubmitButtonTouchTap={this.onTopDashboardNewProjectDialogSubmitButtonTouchTap}
+                onNewProjectDialogRequestClose={this.onTopDashboardNewProjectDialogRequestClose}
+                onNewProjectButtonTouchTap={this.onTopDashboardNewProjectButtonTouchTap}
             />;
 
         let bottomDashboardComponent =
