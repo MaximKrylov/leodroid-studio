@@ -7,9 +7,11 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
+import Toggle from 'material-ui/Toggle';
 
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
+import MenuItem from 'material-ui/MenuItem';
 
 import HardwareDeveloperBoard from 'material-ui/svg-icons/hardware/developer-board';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
@@ -20,6 +22,10 @@ const compileProjectButtonStyle = {
 
 const settingsButtonStyle = {
     width: '141.5px'
+}
+
+const emulatorComponentDevToolsToggleButtonStyle = {
+    paddingTop: 10
 }
 
 class BottomDashboardComponent extends React.Component {
@@ -64,6 +70,12 @@ class BottomDashboardComponent extends React.Component {
                 style={settingsButtonStyle}
             />;
 
+        let emulatorComponentDevToolsToggleButton =
+            <Toggle
+                label="Emulator DevTools"
+                style={emulatorComponentDevToolsToggleButtonStyle}
+            />
+
         let settingsDrawer =
             <Drawer width={300}
                 docked={false}
@@ -71,11 +83,14 @@ class BottomDashboardComponent extends React.Component {
                 open={this.state.settingsDrawerOpened}
                 onRequestChange={this.onSettingsDrawerRequestChange}
             >
-                <AppBar
-                    title="Settings"
+                <AppBar title="Settings"
                     iconElementLeft={<IconButton><ActionSettings /></IconButton>}
                 />
+                <MenuItem>
+                    {emulatorComponentDevToolsToggleButton}
+                </MenuItem>
             </Drawer>;
+
 
         return (
             <div>
