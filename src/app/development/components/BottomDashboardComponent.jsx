@@ -25,7 +25,7 @@ const settingsButtonStyle = {
 }
 
 const emulatorComponentDevToolsToggleButtonStyle = {
-    paddingTop: 13
+    paddingTop: 12
 }
 
 class BottomDashboardComponent extends React.Component {
