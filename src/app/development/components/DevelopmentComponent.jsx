@@ -47,7 +47,7 @@ class DevelopmentComponent extends React.Component {
         this.onEditorComponentLoad = this.onEditorComponentLoad.bind(this);
 
         this.onErrorComponentRequestClose = this.onErrorComponentRequestClose.bind(this);
-        
+
         this.onTopDashboardComponentOpenButtonTouchTap = this.onTopDashboardComponentOpenButtonTouchTap.bind(this);
         this.onTopDashboardComponentRunButtonTouchTap = this.onTopDashboardComponentRunButtonTouchTap.bind(this);
         this.onTopDashboardComponentNewProjectButtonTouchTap = this.onTopDashboardComponentNewProjectButtonTouchTap.bind(this);
@@ -80,7 +80,7 @@ class DevelopmentComponent extends React.Component {
             node.toggled = toggled;
         }
 
-        this.setState({ 
+        this.setState({
             cursor: node
         });
 
@@ -198,38 +198,6 @@ class DevelopmentComponent extends React.Component {
             emulatorWindowOpened: true
         });
 
-        // // Delete ./tmp
-        // fileSystemHelper.delete(['./tmp'])
-        //     // Copy 'project'
-        //     .then(() => fileSystemHelper.copy(`${this.state.projectPath}/**/*.js`, './tmp'))
-        //     // Copy ./edison-api/edison.js
-        //     .then(() => fileSystemHelper.copy(`./edison-api/edison.js`, './tmp'))
-        //     // Bundle ./tmp/**/*.js, using 'main.js' as entry point
-        //     .then(() => fileSystemHelper.bundle('./tmp/main.js'))
-        //     // Save file as 'bundle.js' and put it to ./build/app/emulator/
-        //     .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
-        //     // Send signal to main process, that emulator window has to be opened
-        //     .then(() => {
-        //         electronHelper.send('open-emulator-window', {
-        //             emulatorComponentDevToolsOpened: this.state.emulatorComponentDevToolsOpened
-        //         });
-        //     })
-        //     .catch((error) => {
-        //         this.setState({
-        //             errorMessage: error.message,
-        //             errorComponentOpened: true,
-        //             emulatorWindowOpened: false
-        //         });
-        //     })
-        //     // Delete ./tmp
-        //     .then(() => fileSystemHelper.delete('./tmp'))
-        //     .catch((error) => {
-        //         this.setState({
-        //             errorMessage: error.message,
-        //             errorComponentOpened: true,
-        //         });
-        //     });
-        
         fileSystemHelper.bundle(`${this.state.projectPath}/main.js`)
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
             .then(() => {
@@ -263,6 +231,34 @@ class DevelopmentComponent extends React.Component {
         this.setState({
             topDashboardComponentNewProjectDialogOpened: false
         });
+
+        fileSystemHelper.delete([`${this.state.projectPath}/**`, `!${this.state.projectPath}`], { force: true })
+            .then(() => fileSystemHelper.copy('./edison-app/**/*', `${this.state.projectPath}`))
+            .then(() => fileSystemHelper.delete(`${this.state.projectPath}/.DS_Store`, { force: true }))
+            .then(() => {
+                let treeData = {
+                    // Get opened folder name (without full path)
+                    name: this.state.projectPath.match(/([^\/]*)\/*$/)[1],
+                    // Root node is toggled by default
+                    toggled: true,
+                    // Get all child nodes (recursive)
+                    children: treeComponentHelper.getChildren(this.state.projectPath)
+                };
+
+                this.setState({
+                    filePath: '',
+                    fileContent: '',
+                    fileOpened: false,
+                    fileChanged: false,
+                    treeData: treeData
+                });
+            })
+            .catch((error) => {
+                this.setState({
+                    errorMessage: error.message,
+                    errorComponentOpened: true,
+                });
+            });
     }
 
     onTopDashboardComponentNewProjectButtonTouchTap() {
@@ -291,7 +287,7 @@ class DevelopmentComponent extends React.Component {
 
     onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle(event, isInputChacked) {
         this.setState({
-           emulatorComponentDevToolsOpened: isInputChacked
+            emulatorComponentDevToolsOpened: isInputChacked
         });
     }
 

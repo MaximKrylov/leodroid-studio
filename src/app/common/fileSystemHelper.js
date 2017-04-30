@@ -20,8 +20,8 @@ module.exports = {
         return copy(src, dest);
     },
 
-    delete: function (patterns) {
-        return del(patterns);
+    delete: function (patterns, options) {
+        return del(patterns, options);
     },
 
     bundle: function (entryPoint) {
