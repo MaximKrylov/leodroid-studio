@@ -41,6 +41,8 @@ class DevelopmentComponent extends React.Component {
             bottomDashboardComponentSettingsDrawerOpened: false
         };
 
+        this.openProject = this.openProject.bind(this);
+
         this.onTreeComponentToggle = this.onTreeComponentToggle.bind(this);
 
         this.onEditorComponentChange = this.onEditorComponentChange.bind(this);
@@ -65,6 +67,27 @@ class DevelopmentComponent extends React.Component {
             this.setState({
                 emulatorWindowOpened: false
             });
+        });
+    }
+
+    openProject(directory) {
+        let treeData = {
+            // Get opened folder name (without full path)
+            name: directory.match(/([^\/]*)\/*$/)[1],
+            // Root node is toggled by default
+            toggled: true,
+            // Get all child nodes (recursive)
+            children: treeComponentHelper.getChildren(directory)
+        };
+
+        this.setState({
+            filePath: '',
+            fileContent: '',
+            projectPath: directory,
+            fileOpened: false,
+            fileChanged: false,
+            treeData: treeData,
+            projectOpened: true
         });
     }
 
@@ -171,24 +194,7 @@ class DevelopmentComponent extends React.Component {
 
     onTopDashboardComponentOpenButtonTouchTap() {
         electronHelper.showOpenDirectoryDialog((directory) => {
-            let treeData = {
-                // Get opened folder name (without full path)
-                name: directory.match(/([^\/]*)\/*$/)[1],
-                // Root node is toggled by default
-                toggled: true,
-                // Get all child nodes (recursive)
-                children: treeComponentHelper.getChildren(directory)
-            };
-
-            this.setState({
-                filePath: '',
-                fileContent: '',
-                projectPath: directory,
-                fileOpened: false,
-                fileChanged: false,
-                treeData: treeData,
-                projectOpened: true
-            });
+            this.openProject(directory);
         });
     }
 
@@ -236,22 +242,7 @@ class DevelopmentComponent extends React.Component {
             .then(() => fileSystemHelper.copy('./edison-app/**/*', `${this.state.projectPath}`))
             .then(() => fileSystemHelper.delete(`${this.state.projectPath}/.DS_Store`, { force: true }))
             .then(() => {
-                let treeData = {
-                    // Get opened folder name (without full path)
-                    name: this.state.projectPath.match(/([^\/]*)\/*$/)[1],
-                    // Root node is toggled by default
-                    toggled: true,
-                    // Get all child nodes (recursive)
-                    children: treeComponentHelper.getChildren(this.state.projectPath)
-                };
-
-                this.setState({
-                    filePath: '',
-                    fileContent: '',
-                    fileOpened: false,
-                    fileChanged: false,
-                    treeData: treeData
-                });
+                this.openProject(this.state.projectPath);
             })
             .catch((error) => {
                 this.setState({
