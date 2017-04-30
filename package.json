@@ -29,6 +29,7 @@
     "copy": "0.3.0",
     "del": "2.2.2",
     "fs": "0.0.1-security",
+    "jquery": "3.2.1",
     "material-ui": "0.17.3",
     "react": "15.5.4",
     "react-ace": "4.2.1",

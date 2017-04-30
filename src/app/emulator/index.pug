@@ -7,9 +7,10 @@ body
         div.row
             div.col-xs-12
                 div.alert
-                    div.input-group
-                        input.form-control(type=type)#sayTextBox
-                        span.input-group-btn
-                            button.btn.btn-primary(type='button')#sayButton Say! C:
+                    form#sayForm
+                        div.input-group
+                            input.form-control#sayTextBox
+                            span.input-group-btn
+                                button.btn.btn-primary Say! C:
     script(type='text/javascript' src='bundle.js')
     

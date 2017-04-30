@@ -1,4 +1,5 @@
-const say = window.require('say');
+const say = window.require('say')
+const $ = window.require('jquery')
 
 module.exports = {
     say: function (message) {
@@ -6,13 +7,14 @@ module.exports = {
     },
 
     listen: function (callback) {
-        document.getElementById('sayButton').addEventListener('click', () => {
-            const message = document.getElementById('sayTextBox').value;
+        $('#sayForm').submit(function (event) {
+            const message = $('#sayTextBox').val();
 
-            document.getElementById('sayTextBox').value = '';
-            document.getElementById('sayTextBox').focus();
+            $('#sayTextBox').focus();
+            $('#sayTextBox').val('');
 
             callback(message);
+            return event.preventDefault();
         });
     }
 }
