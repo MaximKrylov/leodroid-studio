@@ -37,7 +37,11 @@ gulp.task('sass', ['clean'], function () {
     return gulp.src('src/**/*.sass')
         .pipe(sass({
             outputStyle: 'compressed',
-            includePaths: ['bower_components/bootstrap-sass/assets/stylesheets', 'bower_components/font-awesome-sass/assets/stylesheets']
+            includePaths: [
+                'bower_components/bootstrap-sass/assets/stylesheets',
+                'bower_components/font-awesome-sass/assets/stylesheets',
+                'bower_components/bootstrap-sass/assets/stylesheets'
+            ]
         }).on('error', sass.logError))
         .pipe(gulp.dest('build'));
 });

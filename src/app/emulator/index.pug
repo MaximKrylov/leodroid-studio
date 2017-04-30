@@ -1,6 +1,16 @@
 html
-    meta(charset="UTF-8", name="viewport", content="width=device-width, initial-scale=1")
+    meta(charset='UTF-8', name='viewport', content='width=device-width, initial-scale=1')
     title Emulator v1.0
+    link(rel='stylesheet', href='style.css')
 body
-    h1 Emulator v1.0
-    script(type="text/javascript" src="bundle.js")
+    div.container
+        div.row
+            form
+                div.col-xs-12
+                    div.alert
+                        div.input-group
+                            input.form-control(type=type)#sayTextBox
+                            span.input-group-btn
+                                button.btn.btn-primary(type='reset')#sayButton Say! C:
+    script(type='text/javascript' src='bundle.js')
+    
