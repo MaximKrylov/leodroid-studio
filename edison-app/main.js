@@ -1,3 +1,3 @@
 const edison = require('./edison');
 
-edison.say("Hello World!");
+edison.say('Hello World!');

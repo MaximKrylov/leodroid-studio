@@ -80,7 +80,9 @@ class DevelopmentComponent extends React.Component {
             node.toggled = toggled;
         }
 
-        this.setState({ cursor: node });
+        this.setState({ 
+            cursor: node
+        });
 
         // If node is a folder, return 
         if (node.children) {
