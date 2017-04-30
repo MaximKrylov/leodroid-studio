@@ -25,7 +25,7 @@ ipcMain.on('open-emulator-window', (event, args) => {
         emulatorWindow.open();
 
         if (args.emulatorComponentDevToolsOpened) {
-            emulatorWindow.webContents.openDevTools();
+            emulatorWindow.webContents.openDevTools({detach: true});
         }
     }
 });
