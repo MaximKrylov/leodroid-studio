@@ -1,3 +1,7 @@
 const edison = require('./edison');
 
-edison.say('Hello World!');
+edison.subscribe((message) => {
+   if (message === 'hello') {
+       edison.say('hello, my friend');
+   } 
+});
