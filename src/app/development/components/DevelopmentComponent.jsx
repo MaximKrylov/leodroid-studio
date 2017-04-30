@@ -213,9 +213,7 @@ class DevelopmentComponent extends React.Component {
             `!${emulatorPath}/style.css`,
         ])
             .then(() => fileSystemHelper.copy(`${this.state.projectPath}/node_modules/**/*.*`, `${emulatorPath}/node_modules`))
-            // This is hack. It should be resolved correctly!!!
-            .then(() => fileSystemHelper.copy(`${this.state.projectPath}/*package.json`, `${emulatorPath}`))
-            // ************************************************
+            .then(() => fileSystemHelper.copy(`${this.state.projectPath}/(.)package.json`, `${emulatorPath}`))
             .then(() => fileSystemHelper.bundle(`${this.state.projectPath}/main.js`))
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
             .then(() => {
