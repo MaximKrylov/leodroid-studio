@@ -204,7 +204,17 @@ class DevelopmentComponent extends React.Component {
             emulatorWindowOpened: true
         });
 
-        fileSystemHelper.bundle(`${this.state.projectPath}/main.js`)
+        const emulatorPath = './build/app/emulator';
+
+        fileSystemHelper.delete([
+            `${emulatorPath}/**`,
+            `!${emulatorPath}`,
+            `!${emulatorPath}/index.html`,
+            `!${emulatorPath}/style.css`,
+        ])
+            .then(() => fileSystemHelper.copy(`${this.state.projectPath}/node_modules/**/*.*`, `${emulatorPath}/node_modules`))
+            .then(() => fileSystemHelper.copy(`${this.state.projectPath}/package.json`, `${emulatorPath}`))
+            .then(() => fileSystemHelper.bundle(`${this.state.projectPath}/main.js`))
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
             .then(() => {
                 electronHelper.send('open-emulator-window', {
