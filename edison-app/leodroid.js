@@ -3,6 +3,7 @@ const $ = window.require('jquery')
 
 module.exports = {
     say: function (message) {
+        console.log(`Leodroid says: ${message}`);
         say.speak(message);
     },
 
@@ -13,6 +14,7 @@ module.exports = {
             $('#sayTextBox').focus();
             $('#sayTextBox').val('');
 
+            console.log(`You say: ${message}`);
             callback(message);
             return event.preventDefault();
         });

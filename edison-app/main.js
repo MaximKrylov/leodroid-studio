@@ -1,7 +1,7 @@
-const edison = require('./edison');
+const leodroid = require('./leodroid');
 
-edison.listen((message) => {
+leodroid.listen((message) => {
    if (message === 'hello') {
-       edison.say('hello, my friend');
+       leodroid.say('hello, my friend');
    } 
 });

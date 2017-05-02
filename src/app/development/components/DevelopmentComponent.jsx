@@ -34,7 +34,7 @@ class DevelopmentComponent extends React.Component {
             errorMessage: '',
             errorComponentOpened: false,
 
-            emulatorComponentDevToolsOpened: false,
+            emulatorComponentDevToolsOpened: true,
 
             topDashboardComponentNewProjectDialogOpened: false,
 
