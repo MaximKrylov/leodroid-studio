@@ -53,7 +53,7 @@ class DevelopmentComponent extends React.Component {
         this.onTopDashboardComponentOpenButtonTouchTap = this.onTopDashboardComponentOpenButtonTouchTap.bind(this);
         this.onTopDashboardComponentRunButtonTouchTap = this.onTopDashboardComponentRunButtonTouchTap.bind(this);
         this.onTopDashboardComponentNewProjectButtonTouchTap = this.onTopDashboardComponentNewProjectButtonTouchTap.bind(this);
-        this.onTopDashboardComponentNewProjectDialogCancelButtonTouchTapp = this.onTopDashboardComponentNewProjectDialogCancelButtonTouchTapp.bind(this);
+        this.onTopDashboardComponentNewProjectDialogCancelButtonTouchTap = this.onTopDashboardComponentNewProjectDialogCancelButtonTouchTap.bind(this);
         this.onTopDashboardComponentNewProjectDialogSubmitButtonTouchTap = this.onTopDashboardComponentNewProjectDialogSubmitButtonTouchTap.bind(this);
         this.onTopDashboardComponentNewProjectDialogRequestClose = this.onTopDashboardComponentNewProjectDialogRequestClose.bind(this);
 
@@ -236,7 +236,7 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
-    onTopDashboardComponentNewProjectDialogCancelButtonTouchTapp() {
+    onTopDashboardComponentNewProjectDialogCancelButtonTouchTap() {
         this.setState({
             topDashboardComponentNewProjectDialogOpened: false
         });
@@ -314,7 +314,7 @@ class DevelopmentComponent extends React.Component {
 
                 newProjectDialogOpened={this.state.topDashboardComponentNewProjectDialogOpened}
 
-                onNewProjectDialogCancelButtonTouchTap={this.onTopDashboardComponentNewProjectDialogCancelButtonTouchTapp}
+                onNewProjectDialogCancelButtonTouchTap={this.onTopDashboardComponentNewProjectDialogCancelButtonTouchTap}
                 onNewProjectDialogSubmitButtonTouchTap={this.onTopDashboardComponentNewProjectDialogSubmitButtonTouchTap}
                 onNewProjectDialogRequestClose={this.onTopDashboardComponentNewProjectDialogRequestClose}
                 onNewProjectButtonTouchTap={this.onTopDashboardComponentNewProjectButtonTouchTap}
@@ -322,7 +322,7 @@ class DevelopmentComponent extends React.Component {
 
         let bottomDashboardComponent =
             <BottomDashboardComponent
-                compileProjectButtonDisabled={!this.state.projectOpened}
+                leodifyProjectButtonDisabled={!this.state.projectOpened}
                 settingsButtonDisabled={!this.state.projectOpened}
                 emulatorComponentDevToolsToggleButtonToggled={this.state.emulatorComponentDevToolsOpened}
 

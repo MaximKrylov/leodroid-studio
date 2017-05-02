@@ -16,7 +16,7 @@ import MenuItem from 'material-ui/MenuItem';
 import HardwareDeveloperBoard from 'material-ui/svg-icons/hardware/developer-board';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 
-const compileProjectButtonStyle = {
+const leodifyProjectButtonStyle = {
     width: '141.5px'
 }
 
@@ -34,12 +34,12 @@ class BottomDashboardComponent extends React.Component {
     }
 
     render() {
-        let compileProjectButton =
+        let leodifyProjectButton =
             <FlatButton
-                label="COMPILE"
+                label="LEODIFY C:"
                 icon={<HardwareDeveloperBoard />}
-                disabled={this.props.compileProjectButtonDisabled}
-                style={compileProjectButtonStyle}
+                disabled={this.props.leodifyProjectButtonDisabled}
+                style={leodifyProjectButtonStyle}
             />;
 
         let settingsButton =
@@ -81,7 +81,7 @@ class BottomDashboardComponent extends React.Component {
                     {settingsButton}
                 </MuiThemeProvider>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                    {compileProjectButton}
+                    {leodifyProjectButton}
                 </MuiThemeProvider>
                 <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
                     {settingsDrawer}

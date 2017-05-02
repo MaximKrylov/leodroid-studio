@@ -16,6 +16,7 @@ module.exports = {
 
             console.log(`You say: ${message}`);
             callback(message);
+            
             return event.preventDefault();
         });
     }
