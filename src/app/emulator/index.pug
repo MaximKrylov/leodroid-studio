@@ -4,13 +4,17 @@ html
     link(rel='stylesheet', href='style.css')
 body
     div.container
+        br
         div.row
-            div.col-xs-12
-                div.alert
-                    form#sayForm
-                        div.input-group
-                            input.form-control#sayTextBox
-                            span.input-group-btn
-                                button.btn.btn-primary Say C:
+            div.col-sm-12
+                form#sayForm
+                    div.input-group
+                        input.form-control#sayTextBox
+                        span.input-group-btn
+                            button.btn.btn-primary Say C:
+        div.row
+            div.col-sm-12
+                div.alert.alert-info#leodroid
+    script(type='text/javascript' src='https://rawgithub.com/craftyjs/Crafty/release/dist/crafty-min.js')
     script(type='text/javascript' src='bundle.js')
     

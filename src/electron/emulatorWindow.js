@@ -16,7 +16,7 @@ class EmulatorWindow {
     }
 
     open() {
-        this.window = new BrowserWindow({ width: 400, height: 100, resizable: false, x: 50, y: 50 });
+        this.window = new BrowserWindow({ width: 400, height: 480, resizable: false, x: 50, y: 50 });
         this.window.loadURL('file://' + __dirname + '/../app/emulator/index.html');
 
         this.window.on('closed', () => {
