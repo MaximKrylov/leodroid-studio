@@ -26,6 +26,8 @@ module.exports = {
 
     bundle: function (entryPoint) {
         const bundler = browserify(entryPoint);
-        return bluebird.promisify(bundler.bundle, { context: bundler })();
+        return bluebird.promisify(bundler.bundle, {
+            context: bundler
+        })();
     }
 }

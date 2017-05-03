@@ -12,7 +12,9 @@ gulp.task('clean', function (done) {
 });
 
 gulp.task('electron', ['clean'], function () {
-    return gulp.src('src/electron/*.js', { base: 'src/' })
+    return gulp.src('src/electron/*.js', {
+        base: 'src/'
+    })
         .pipe(babel({
             presets: ['es2015']
         }))
@@ -20,7 +22,11 @@ gulp.task('electron', ['clean'], function () {
 });
 
 gulp.task('development', ['clean'], function () {
-    return browserify({ entries: './src/app/development/components/DevelopmentComponent.jsx', extensions: ['.jsx'], debug: true })
+    return browserify({
+        entries: './src/app/development/components/DevelopmentComponent.jsx',
+        extensions: ['.jsx'],
+        debug: true
+    })
         .transform('babelify', { presets: ['es2015', 'react'] })
         .bundle()
         .pipe(source('devcomp.js'))
@@ -56,4 +62,11 @@ gulp.task('emulator-assets', ['clean'], function () {
         .pipe(gulp.dest('./build/app/emulator/assets'));
 });
 
-gulp.task('default', ['electron', 'development', 'pug', 'sass', 'font-awesome-icons', 'emulator-assets']);
+gulp.task('default', [
+    'electron',
+    'development',
+    'emulator-assets',
+    'pug',
+    'sass',
+    'font-awesome-icons'
+]);
