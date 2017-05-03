@@ -211,9 +211,9 @@ class DevelopmentComponent extends React.Component {
             `!${emulatorPath}`,
             `!${emulatorPath}/index.html`,
             `!${emulatorPath}/style.css`,
+            `!${emulatorPath}/assets/**`
         ])
             .then(() => fileSystemHelper.copy(`${this.state.projectPath}/node_modules/**/*.*`, `${emulatorPath}/node_modules`))
-            .then(() => fileSystemHelper.copy(`./edison-app/assets/*.*`, `${emulatorPath}`))
             .then(() => fileSystemHelper.bundle(`${this.state.projectPath}/main.js`))
             .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
             .then(() => {
@@ -249,7 +249,7 @@ class DevelopmentComponent extends React.Component {
         });
 
         fileSystemHelper.delete([`${this.state.projectPath}/**`, `!${this.state.projectPath}`], { force: true })
-            .then(() => fileSystemHelper.copy('./edison-app/*.*', `${this.state.projectPath}`))
+            .then(() => fileSystemHelper.copy('./leodroid-app/*.*', `${this.state.projectPath}`))
             .then(() => fileSystemHelper.delete(`${this.state.projectPath}/.DS_Store`, { force: true }))
             .then(() => {
                 this.openProject(this.state.projectPath);

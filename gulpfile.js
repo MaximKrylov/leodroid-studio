@@ -51,4 +51,9 @@ gulp.task('font-awesome-icons', ['clean'], function () {
         .pipe(gulp.dest('./build/app/fonts/font-awesome'));
 });
 
-gulp.task('default', ['electron', 'development', 'pug', 'sass', 'font-awesome-icons']);
+gulp.task('emulator-assets', ['clean'], function () {
+    return gulp.src('./src/app/emulator/assets/**.*')
+        .pipe(gulp.dest('./build/app/emulator/assets'));
+});
+
+gulp.task('default', ['electron', 'development', 'pug', 'sass', 'font-awesome-icons', 'emulator-assets']);

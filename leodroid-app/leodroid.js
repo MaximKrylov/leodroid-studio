@@ -3,7 +3,7 @@ const $ = window.require('jquery')
 
 Crafty.init(370, 370, document.getElementById('leodroid'));
 let ent = Crafty.e('2D, DOM, Color, Motion, Image');
-ent.attr({ x: 140, y: 140}).image('East.png')
+ent.attr({ x: 140, y: 140}).image('assets/East.png')
 ent.acceleration().x = 0
 
 const minX = 0, minY = 0, maxX = 310, maxY = 310;
@@ -36,42 +36,42 @@ function move() {
 ent.bind("Move", function (oldPosition) {
     if (this.x > maxX && this.y < minY) {
         direction = south;
-        ent.image('South.png');
+        ent.image('assets/South.png');
         move();
         console.log(this.x + ' ' + this.y);
     } else if (this.x > maxX && this.y > maxY) {
         direction = west;
-        ent.image('West.png');
+        ent.image('assets/West.png');
         move();
         console.log(this.x + ' ' + this.y);
     } else if (this.x < minX && this.y > maxY) {
         direction = north;
-        ent.image('North.png');
+        ent.image('assets/North.png');
         move();
         console.log(this.x + ' ' + this.y);
     } else if (this.x < minX && this.y < minY) {
         direction = east;
-        ent.image('East.png');
+        ent.image('assets/East.png');
         move();
         console.log(this.x + ' ' + this.y);
     } else if (this.x > maxX) {
         direction = south;
-        ent.image('South.png');
+        ent.image('assets/South.png');
         move();
         console.log(this.x + ' ' + this.y);
     } else if (this.y > maxY) {
         direction = west;
-        ent.image('West.png');
+        ent.image('assets/West.png');
         move();
         console.log(this.x + ' ' + this.y);
     } else if (this.x < minX) {
         direction = north;
-        ent.image('North.png');
+        ent.image('assets/North.png');
         move();
         console.log(this.x + ' ' + this.y);
     } else if (this.y < minY) {
         direction = east;
-        ent.image('East.png');
+        ent.image('assets/East.png');
         move();
         console.log(this.x + ' ' + this.y);
     }
@@ -86,22 +86,22 @@ function turnLeft() {
         case north:
             stop();
             direction = west;
-            ent.image('West.png');
+            ent.image('assets/West.png');
             move();
             break;
         case south:
             direction = east;
-            ent.image('East.png');
+            ent.image('assets/East.png');
             move();
             break;
         case east:
             direction = north;
-            ent.image('North.png');
+            ent.image('assets/North.png');
             move();
             break;
         case west:
             direction = south;
-            ent.imge('South.png');
+            ent.imge('assets/South.png');
             move();
             break;
     }
@@ -112,25 +112,25 @@ function turnRight() {
         case north:
             stop();
             direction = east;
-            ent.image('East.png');
+            ent.image('assets/East.png');
             move();
             break;
         case south:
             stop();
             direction = west;
-            ent.image('West.png');
+            ent.image('assets/West.png');
             move();
             break;
         case east:
             stop();
             direction = south;
-            ent.image('South.png');
+            ent.image('assets/South.png');
             move();
             break;
         case west:
             stop();
             direction = north;
-            ent.image('North.png');
+            ent.image('assets/North.png');
             move();
             break;
     }
