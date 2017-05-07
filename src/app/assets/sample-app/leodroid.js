@@ -182,30 +182,43 @@ var _listen = function (callback) {
         const message = $('#txtSay').val();
         console.log(`You say: ${message}`);
 
+        switch (message) {
+            case 'move':
+                if (!moved) {
+                    _say('I\'am moving');
+                    move();
+                }
+                break;
+            case 'turn left':
+                if (moved
+                    && currPosition.x < rightLim
+                    && currPosition.x > leftLim
+                    && currPosition.y < bottomLim
+                    && currPosition.y > topLim) {
+                    _say('I\'m turning left');
+                    turnLeft();
+                }
+                break;
+            case 'turn right':
+                if (moved) {
+                    _say('I\'m turning right');
+                    turnRight();
+                }
+                break;
+            case 'stop':
+                if (moved) {
+                    _say('I\'m stopping');
+                    stop();
+                }
+                break;
+            case 'your name':
+                _say('I\'m Leodroid v1.0!');
+                stop();
+                break;
+        }
+
         $('#txtSay').focus();
         $('#txtSay').val('');
-
-        if (message === 'move') {
-            _say('I\'am moving');
-            move();
-        } else if (message === 'stop') {
-            _say('I\'m stopping');
-            stop();
-        } else if (message === 'turn left') {
-            if (moved
-                && currPosition.x < rightLim
-                && currPosition.x > leftLim
-                && currPosition.y < bottomLim
-                && currPosition.y > topLim) {
-                _say('I\'m turning left');
-                turnLeft();
-            }
-        } else if (message === 'turn right') {
-            if (moved) {
-                _say('I\'m turning right');
-                turnRight();
-            }
-        }
 
         callback(message);
         return event.preventDefault();
