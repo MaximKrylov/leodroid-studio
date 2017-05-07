@@ -1,18 +1,23 @@
 const say = window.require('say');
 const $ = window.require('jquery');
 
+const currPosition = {
+    x: 140,
+    y: 140
+}
+
 // ********** DIRTY HARDCODE ***************************************
 const leodroidContainer = $('#ctrLeodroid')[0];
 Crafty.init(370, 370, leodroidContainer);
 
 const ent = Crafty.e('2D, DOM, Motion, Image');
-ent.attr({ x: 140, y: 140 })
+ent.attr({ x: currPosition.x, y: currPosition.y })
 ent.acceleration().x = 0
 
-const minX = 0,
-    minY = 0,
-    maxX = 335,
-    maxY = 335;
+const leftLim = 0,
+    topLim = 0,
+    rightLim = 335,
+    bottomLim = 335;
 
 const forwardDirectionVelocity = 20,
     backwardDirectionVelocity = -20,
@@ -82,18 +87,30 @@ function turnLeft() {
     if (moved) {
         switch (getDirection()) {
             case "North":
+                if(currPosition.x < leftLim) {
+                    break;
+                }
                 setDirection("West");
                 move();
                 break;
             case "South":
+                if(currPosition.x > rightLim) {
+                    break;
+                }
                 setDirection("East");
                 move();
                 break;
             case "East":
+                if(currPosition.y < topLim) {
+                    break;
+                }
                 setDirection("North");
                 move();
                 break;
             case "West":
+                if(currPosition.y > bottomLim) {
+                    break;
+                }
                 setDirection("South");
                 move();
                 break;
@@ -125,31 +142,34 @@ function turnRight() {
 }
 
 ent.bind("Move", function () {
-    if (this.x > maxX && this.y < minY) {
+    if (this.x > rightLim && this.y < topLim) {
         setDirection("South");
         move();
-    } else if (this.x > maxX && this.y > maxY) {
+    } else if (this.x > rightLim && this.y > bottomLim) {
         setDirection("West");
         move();
-    } else if (this.x < minX && this.y > maxY) {
+    } else if (this.x < leftLim && this.y > bottomLim) {
         setDirection("North");
         move();
-    } else if (this.x < minX && this.y < minY) {
+    } else if (this.x < leftLim && this.y < topLim) {
         setDirection("East");
         move();
-    } else if (this.x > maxX) {
+    } else if (this.x > rightLim) {
         setDirection("South");
         move();
-    } else if (this.y > maxY) {
+    } else if (this.y > bottomLim) {
         setDirection("West");
         move();
-    } else if (this.x < minX) {
+    } else if (this.x < leftLim) {
         setDirection("North");
         move();
-    } else if (this.y < minY) {
+    } else if (this.y < topLim) {
         setDirection("East");
         move();
     }
+
+    currPosition.x = this.x;
+    currPosition.y = this.y;
 });
 
 setDirection("North");
