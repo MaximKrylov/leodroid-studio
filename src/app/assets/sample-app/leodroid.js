@@ -1,5 +1,5 @@
-const say = window.require('say')
-const $ = window.require('jquery')
+const say = window.require('say');
+const $ = window.require('jquery');
 
 const leodroidContainer = $('.leodroid-container')[0];
 Crafty.init(370, 370, leodroidContainer);
@@ -97,7 +97,7 @@ function turnLeft() {
             break;
         case west:
             direction = south;
-            ent.imge('assets/South.png');
+            ent.image('assets/South.png');
             move();
             break;
     }

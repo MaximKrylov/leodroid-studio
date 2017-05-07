@@ -249,7 +249,7 @@ class DevelopmentComponent extends React.Component {
         });
 
         fileSystemHelper.delete([`${this.state.projectPath}/**`, `!${this.state.projectPath}`], { force: true })
-            .then(() => fileSystemHelper.copy('./leodroid-app/*.*', `${this.state.projectPath}`))
+            .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*.*', `${this.state.projectPath}`))
             .then(() => fileSystemHelper.delete(`${this.state.projectPath}/.DS_Store`, { force: true }))
             .then(() => {
                 this.openProject(this.state.projectPath);
