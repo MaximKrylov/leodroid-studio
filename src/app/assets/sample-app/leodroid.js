@@ -66,14 +66,14 @@ function move() {
             ent.velocity().y = noDirectionVelocity;
             break;
     }
-    
+
     moved = true;
     stopped = false;
 }
 
 function stop() {
     ent.resetMotion();
-    
+
     moved = false;
     stopped = true;
 }
