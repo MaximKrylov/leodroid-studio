@@ -25,7 +25,7 @@ const forwardDirectionVelocity = 20,
 // ****************************************************************
 
 let _direction = null;
-let moved = false, stopped = true;
+let moved = false;
 
 function setDirection(direction) {
     switch (direction) {
@@ -73,46 +73,40 @@ function move() {
     }
 
     moved = true;
-    stopped = false;
 }
 
 function stop() {
     ent.resetMotion();
 
     moved = false;
-    stopped = true;
 }
 
 function turnLeft() {
     if (moved) {
         switch (getDirection()) {
             case "North":
-                if(currPosition.x < leftLim) {
-                    _say('I\'m turning right');
+                if (currPosition.x < leftLim) {
                     break;
                 }
                 setDirection("West");
                 move();
                 break;
             case "South":
-                if(currPosition.x > rightLim) {
-                    _say('I\'m turning right');
+                if (currPosition.x > rightLim) {
                     break;
                 }
                 setDirection("East");
                 move();
                 break;
             case "East":
-                if(currPosition.y < topLim) {
-                    _say('I\'m turning right');
+                if (currPosition.y < topLim) {
                     break;
                 }
                 setDirection("North");
                 move();
                 break;
             case "West":
-                if(currPosition.y > bottomLim) {
-                    _say('I\'m turning right');
+                if (currPosition.y > bottomLim) {
                     break;
                 }
                 setDirection("South");
@@ -178,12 +172,12 @@ ent.bind("Move", function () {
 
 setDirection("North");
 
-var _say = function(message) {
+var _say = function (message) {
     console.log(`Leodroid says: ${message}`);
     say.speak(message);
 }
 
-var _listen = function(callback) {
+var _listen = function (callback) {
     $('#formSay').submit(function (event) {
         const message = $('#txtSay').val();
         console.log(`You say: ${message}`);
@@ -198,15 +192,18 @@ var _listen = function(callback) {
             _say('I\'m stopping');
             stop();
         } else if (message === 'turn left') {
-            _say('I\'m turning left');
-            turnLeft();
+            if (moved) {
+                _say('I\'m turning left');
+                turnLeft();
+            }
         } else if (message === 'turn right') {
-            _say('I\'m turning right');
-            turnRight();
+            if (moved) {
+                _say('I\'m turning right');
+                turnRight();
+            }
         }
 
         callback(message);
-
         return event.preventDefault();
     });
 }
