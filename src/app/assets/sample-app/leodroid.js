@@ -1,17 +1,24 @@
 const say = window.require('say');
 const $ = window.require('jquery');
 
-const leodroidContainer = $('.leodroid-container')[0];
+// ********** DIRTY HARDCODE ***************************************
+const leodroidContainer = $('#ctrLeodroid')[0];
 Crafty.init(370, 370, leodroidContainer);
 
 const ent = Crafty.e('2D, DOM, Motion, Image');
 ent.attr({ x: 140, y: 140 })
 ent.acceleration().x = 0
 
-const minX = 0, minY = 0, maxX = 310, maxY = 310;
+const minX = 0, minY = 0, maxX = 335, maxY = 335;
 const north = 'North', south = 'South', east = 'East', west = 'West';
-const northPic = 'assets/North.png', southPic = 'assets/South.png', eastPic = 'assets/East.png', westPic = 'assets/West.png';
-const forwardDirectionVelocity = 20, backwardDirectionVelocity = -20, noDirectionVelocity = 0;
+const northPic = 'assets/North.png',
+    southPic = 'assets/South.png',
+    eastPic = 'assets/East.png',
+    westPic = 'assets/West.png';
+const forwardDirectionVelocity = 20,
+    backwardDirectionVelocity = -20,
+    noDirectionVelocity = 0;
+// ****************************************************************
 
 ent.image(eastPic);
 let direction = east;
@@ -143,11 +150,11 @@ module.exports = {
     },
 
     listen: function (callback) {
-        $('#sayForm').submit(function (event) {
-            const message = $('#sayTextBox').val();
+        $('#formSay').submit(function (event) {
+            const message = $('#txtSay').val();
 
-            $('#sayTextBox').focus();
-            $('#sayTextBox').val('');
+            $('#txtSay').focus();
+            $('#txtSay').val('');
 
             if (message === 'move') {
                 say.speak('i am moving');
