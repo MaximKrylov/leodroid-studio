@@ -36,6 +36,9 @@ class DevelopmentComponent extends React.Component {
 
             emulatorComponentDevToolsOpened: true,
 
+            editorComponentVimModeEnabled: true,
+            editorComponentKeyboardHandler: 'vim',
+
             topDashboardComponentNewProjectDialogOpened: false,
 
             bottomDashboardComponentSettingsDrawerOpened: false
@@ -58,6 +61,7 @@ class DevelopmentComponent extends React.Component {
         this.onTopDashboardComponentNewProjectDialogRequestClose = this.onTopDashboardComponentNewProjectDialogRequestClose.bind(this);
 
         this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle = this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle.bind(this);
+        this.onBottomDashboardComponentEditorComponentVimModeToggleButtonToggle = this.onBottomDashboardComponentEditorComponentVimModeToggleButtonToggle.bind(this);
         this.onBottomDashboardComponentSettingsButtonTouchTap = this.onBottomDashboardComponentSettingsButtonTouchTap.bind(this);
         this.onBottomDashboardComponentSettingsDrawerRequestChange = this.onBottomDashboardComponentSettingsDrawerRequestChange.bind(this);
 
@@ -292,6 +296,20 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
+    onBottomDashboardComponentEditorComponentVimModeToggleButtonToggle(event, isInputChacked) {
+        if (isInputChacked) {
+            this.setState({
+                editorComponentVimModeEnabled: true,
+                editorComponentKeyboardHandler: 'vim'
+            });
+        } else {
+            this.setState({
+                editorComponentVimModeEnabled: false,
+                editorComponentKeyboardHandler: ''
+            });
+        }
+    }
+
     render() {
         let treeComponent = null;
 
@@ -326,8 +344,10 @@ class DevelopmentComponent extends React.Component {
                 leodifyProjectButtonDisabled={!this.state.projectOpened}
                 settingsButtonDisabled={!this.state.projectOpened}
                 emulatorComponentDevToolsToggleButtonToggled={this.state.emulatorComponentDevToolsOpened}
+                editorComponentVimModeToggleButtonToggled={this.state.editorComponentVimModeEnabled}
 
                 onEmulatorComponentDevToolsToggleButtonToggle={this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle}
+                onEditorComponentVimModeToggleButtonToggle={this.onBottomDashboardComponentEditorComponentVimModeToggleButtonToggle}
                 settingsDrawerOpened={this.state.bottomDashboardComponentSettingsDrawerOpened}
 
                 onSettingsButtonTouchTap={this.onBottomDashboardComponentSettingsButtonTouchTap}
@@ -340,6 +360,7 @@ class DevelopmentComponent extends React.Component {
                 readOnly={!this.state.fileOpened}
                 onChange={this.onEditorComponentChange}
                 onLoad={this.onEditorComponentLoad}
+                keyboardHandler={this.state.editorComponentKeyboardHandler}
             />;
 
         let errorComponent =

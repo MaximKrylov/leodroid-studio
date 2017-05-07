@@ -7,6 +7,7 @@ import 'brace/mode/javascript';
 import 'brace/theme/twilight';
 import 'brace/ext/searchbox';
 import 'brace/ext/language_tools';
+import 'brace/keybinding/vim';
 
 const CONFIG = {
     name: 'editorComponent', // Name: editorComponent
@@ -45,6 +46,7 @@ class EditorComponent extends React.Component {
                 enableBasicAutocompletion={CONFIG.enableBasicAutocompletion}
                 enableLiveAutocompletion={CONFIG.enableLiveAutocompletion}
 
+                keyboardHandler={this.props.keyboardHandler}
                 value={this.props.value}
                 readOnly={this.props.readOnly}
                 onChange={this.props.onChange}

@@ -28,6 +28,10 @@ const emulatorComponentDevToolsToggleButtonStyle = {
     paddingTop: 12
 }
 
+const editorComponentVimModeToggleButtonStyle = {
+    paddingTop: 12
+}
+
 class BottomDashboardComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -59,6 +63,14 @@ class BottomDashboardComponent extends React.Component {
                 onToggle={this.props.onEmulatorComponentDevToolsToggleButtonToggle}
             />
 
+        let editorComponentVimModeToggleButton =
+            <Toggle
+                label="Vim Mode"
+                style={editorComponentVimModeToggleButtonStyle}
+                toggled={this.props.editorComponentVimModeToggleButtonToggled}
+                onToggle={this.props.onEditorComponentVimModeToggleButtonToggle}
+            />
+
         let settingsDrawer =
             <Drawer width={300}
                 docked={false}
@@ -71,6 +83,9 @@ class BottomDashboardComponent extends React.Component {
                 />
                 <MenuItem>
                     {emulatorComponentDevToolsToggleButton}
+                </MenuItem>
+                <MenuItem>
+                    {editorComponentVimModeToggleButton}
                 </MenuItem>
             </Drawer>;
 
