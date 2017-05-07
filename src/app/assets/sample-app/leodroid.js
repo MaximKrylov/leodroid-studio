@@ -192,7 +192,11 @@ var _listen = function (callback) {
             _say('I\'m stopping');
             stop();
         } else if (message === 'turn left') {
-            if (moved) {
+            if (moved
+                && currPosition.x < rightLim
+                && currPosition.x > leftLim
+                && currPosition.y < bottomLim
+                && currPosition.y > topLim) {
                 _say('I\'m turning left');
                 turnLeft();
             }
