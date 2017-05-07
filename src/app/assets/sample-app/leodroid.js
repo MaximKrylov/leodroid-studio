@@ -88,6 +88,7 @@ function turnLeft() {
         switch (getDirection()) {
             case "North":
                 if(currPosition.x < leftLim) {
+                    _say('I\'m turning right');
                     break;
                 }
                 setDirection("West");
@@ -95,6 +96,7 @@ function turnLeft() {
                 break;
             case "South":
                 if(currPosition.x > rightLim) {
+                    _say('I\'m turning right');
                     break;
                 }
                 setDirection("East");
@@ -102,6 +104,7 @@ function turnLeft() {
                 break;
             case "East":
                 if(currPosition.y < topLim) {
+                    _say('I\'m turning right');
                     break;
                 }
                 setDirection("North");
@@ -109,6 +112,7 @@ function turnLeft() {
                 break;
             case "West":
                 if(currPosition.y > bottomLim) {
+                    _say('I\'m turning right');
                     break;
                 }
                 setDirection("South");
@@ -174,38 +178,40 @@ ent.bind("Move", function () {
 
 setDirection("North");
 
+var _say = function(message) {
+    console.log(`Leodroid says: ${message}`);
+    say.speak(message);
+}
+
+var _listen = function(callback) {
+    $('#formSay').submit(function (event) {
+        const message = $('#txtSay').val();
+        console.log(`You say: ${message}`);
+
+        $('#txtSay').focus();
+        $('#txtSay').val('');
+
+        if (message === 'move') {
+            _say('I\'am moving');
+            move();
+        } else if (message === 'stop') {
+            _say('I\'m stopping');
+            stop();
+        } else if (message === 'turn left') {
+            _say('I\'m turning left');
+            turnLeft();
+        } else if (message === 'turn right') {
+            _say('I\'m turning right');
+            turnRight();
+        }
+
+        callback(message);
+
+        return event.preventDefault();
+    });
+}
 
 module.exports = {
-    say: function (message) {
-        console.log(`Leodroid says: ${message}`);
-        say.speak(message);
-    },
-
-    listen: function (callback) {
-        $('#formSay').submit(function (event) {
-            const message = $('#txtSay').val();
-
-            $('#txtSay').focus();
-            $('#txtSay').val('');
-
-            if (message === 'move') {
-                say.speak('i am moving');
-                move();
-            } else if (message === 'stop') {
-                say.speak('i am stopping');
-                stop();
-            } else if (message === 'turn left') {
-                say.speak('i am turning left');
-                turnLeft();
-            } else if (message === 'turn right') {
-                say.speak('i am turning right');
-                turnRight();
-            }
-
-            console.log(`You say: ${message}`);
-            callback(message);
-
-            return event.preventDefault();
-        });
-    }
+    say: _say,
+    listen: _listen
 }
