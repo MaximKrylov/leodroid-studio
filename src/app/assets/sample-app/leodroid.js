@@ -213,7 +213,6 @@ var _listen = function (callback) {
                 break;
             case 'your name':
                 _say('I\'m Leodroid v1.0!');
-                stop();
                 break;
         }
 
