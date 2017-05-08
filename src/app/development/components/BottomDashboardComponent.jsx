@@ -43,6 +43,7 @@ class BottomDashboardComponent extends React.Component {
                 label="LEODIFY C:"
                 icon={<HardwareDeveloperBoard />}
                 disabled={this.props.leodifyProjectButtonDisabled}
+                onTouchTap={this.props.onLeodifyButtonTouchTap}
                 style={leodifyProjectButtonStyle}
             />;
 

@@ -62,8 +62,9 @@ class DevelopmentComponent extends React.Component {
 
         this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle = this.onBottomDashboardComponentEmulatorComponentDevToolsToggleButtonToggle.bind(this);
         this.onBottomDashboardComponentEditorComponentVimModeToggleButtonToggle = this.onBottomDashboardComponentEditorComponentVimModeToggleButtonToggle.bind(this);
-        this.onBottomDashboardComponentSettingsButtonTouchTap = this.onBottomDashboardComponentSettingsButtonTouchTap.bind(this);
         this.onBottomDashboardComponentSettingsDrawerRequestChange = this.onBottomDashboardComponentSettingsDrawerRequestChange.bind(this);
+        this.onBottomDashboardComponentSettingsButtonTouchTap = this.onBottomDashboardComponentSettingsButtonTouchTap.bind(this);
+        this.onBottomDashboardComponentLeodifyButtonTouchTap = this.onBottomDashboardComponentLeodifyButtonTouchTap.bind(this);
 
         injectTapEventPlugin();
 
@@ -284,6 +285,10 @@ class DevelopmentComponent extends React.Component {
         });
     }
 
+    onBottomDashboardComponentLeodifyButtonTouchTap() {
+        alert('Leodify');
+    }
+
     onBottomDashboardComponentSettingsDrawerRequestChange(isDrawerOpened) {
         this.setState({
             bottomDashboardComponentSettingsDrawerOpened: isDrawerOpened
@@ -351,6 +356,7 @@ class DevelopmentComponent extends React.Component {
                 settingsDrawerOpened={this.state.bottomDashboardComponentSettingsDrawerOpened}
 
                 onSettingsButtonTouchTap={this.onBottomDashboardComponentSettingsButtonTouchTap}
+                onLeodifyButtonTouchTap={this.onBottomDashboardComponentLeodifyButtonTouchTap}
                 onSettingsDrawerRequestChange={this.onBottomDashboardComponentSettingsDrawerRequestChange}
             />;
 
