@@ -11,6 +11,7 @@ import electronHelper from '../../common/electronHelper';
 import fileSystemHelper from '../../common/fileSystemHelper';
 import editorComponentHelper from './common/editorHelper';
 import treeComponentHelper from './common/treeHelper';
+import dashboardComponentHelper from './common/dashboardHelper';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -286,7 +287,60 @@ class DevelopmentComponent extends React.Component {
     }
 
     onBottomDashboardComponentLeodifyButtonTouchTap() {
-        alert('Leodify');
+        dashboardComponentHelper.readConfig(`${this.state.projectPath}/config.json`)
+            .then((config) => {
+                if (!config.applicationName) {
+                    throw new Error('applicationName is not set');
+                }
+                if (!config.type) {
+                    throw new Error('type is not set');
+                }
+                if (config.type !== 'NodeJS') {
+                    throw new Error('type is not NodeJS');
+                }
+                if (!config.executable) {
+                    throw new Error('executable is not set')
+                }
+                if (config.executable !== 'main.js') {
+                    throw new Error('executable is not main.js')
+                }
+                if (!config.commands) {
+                    throw new Error('commands is not set');
+                }
+                if (!config.commands.rules) {
+                    throw new Error('rules is not set');
+                }
+                if (Object.keys(config.commands.rules).length === 0) {
+                    throw new Error('rules is empty object');
+                }
+
+                let rules = config.commands.rules;
+
+                for (let key in rules) {
+                    if (!rules[key].rule || !rules[key].description) {
+                        throw new Error(`${key} rule is invalid`);
+                    }
+
+                    const regexp = /<\w+>/g;
+                    const paramsInUse = [];
+                    let param;
+
+                    while ((param = regexp.exec(rules[key].rule)) !== null) {
+                        const paramStr = param[0];
+                        const paramKey = paramStr.substring(1, paramStr.length - 1);
+
+                        if (!config.commands.params[paramKey]) {
+                            throw new Error(`Unknown parameter ${param} in rule '${rules[key].rule}'`);
+                        }
+                    }
+                }
+            })
+            .catch((error) => {
+                this.setState({
+                    errorMessage: error.message,
+                    errorComponentOpened: true,
+                });
+            });
     }
 
     onBottomDashboardComponentSettingsDrawerRequestChange(isDrawerOpened) {
