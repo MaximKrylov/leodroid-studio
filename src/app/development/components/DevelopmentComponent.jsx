@@ -11,6 +11,7 @@ import electronHelper from '../../common/electronHelper';
 import fileSystemHelper from '../../common/fileSystemHelper';
 import editorComponentHelper from './common/editorHelper';
 import treeComponentHelper from './common/treeHelper';
+import storageHelper from './common/storageHelper';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -335,9 +336,10 @@ class DevelopmentComponent extends React.Component {
                 }
             })
             .then(() => fileSystemHelper.copy('./src/app/assets/*leodroid.js', `${this.state.projectPath}`))
-            .then(() => fileSystemHelper.readJson(`${this.state.projectPath}/package.json`))
-            .then((json) => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../${json.name}.zip`))
+            .then(() => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../leodroid-app.zip`))
             .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`))
+            .then(() => fileSystemHelper.openFile(`${this.state.projectPath}/../leodroid-app.zip`))
+            .then((zipContent) => storageHelper.createFile('leodroid-app.zip', zipContent))
             .then(() => {
                 this.setState({
                     errorMessage: 'It isn\'t an error! Leodify has successfully completed... CONGRATULATIONS!!! :)',
@@ -350,8 +352,7 @@ class DevelopmentComponent extends React.Component {
                     errorComponentOpened: true,
                 });
                 fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`)
-                    .then(() => fileSystemHelper.readJson(`${this.state.projectPath}/package.json`))
-                    .then((json) => fileSystemHelper.delete(`${this.state.projectPath}/../${json.name}.zip`, { force: true }))
+                    .then(() => fileSystemHelper.delete(`${this.state.projectPath}/../leodroid-app.zip`, { force: true }))
                     .catch((error) => {
                         this.setState({
                             errorMessage: error.message,
