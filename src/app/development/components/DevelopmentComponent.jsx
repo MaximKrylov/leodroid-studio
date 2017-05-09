@@ -335,7 +335,8 @@ class DevelopmentComponent extends React.Component {
                 }
             })
             .then(() => fileSystemHelper.copy('./src/app/assets/*leodroid.js', `${this.state.projectPath}`))
-            .then(() => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../program.zip`))
+            .then(() => fileSystemHelper.readJson(`${this.state.projectPath}/package.json`))
+            .then((json) => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../${json.name}.zip`))
             .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`))
             .catch((error) => {
                 this.setState({
@@ -343,7 +344,8 @@ class DevelopmentComponent extends React.Component {
                     errorComponentOpened: true,
                 });
                 fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`)
-                    .then(() => fileSystemHelper.delete(`${this.state.projectPath}/../program.zip`, { force: true }))
+                    .then(() => fileSystemHelper.readJson(`${this.state.projectPath}/package.json`))
+                    .then((json) => fileSystemHelper.delete(`${this.state.projectPath}/../${json.name}.zip`, { force: true }))
                     .catch((error) => {
                         this.setState({
                             errorMessage: error.message,
