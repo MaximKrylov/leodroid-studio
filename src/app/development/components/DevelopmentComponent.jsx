@@ -11,7 +11,6 @@ import electronHelper from '../../common/electronHelper';
 import fileSystemHelper from '../../common/fileSystemHelper';
 import editorComponentHelper from './common/editorHelper';
 import treeComponentHelper from './common/treeHelper';
-import dashboardComponentHelper from './common/dashboardHelper';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -287,7 +286,7 @@ class DevelopmentComponent extends React.Component {
     }
 
     onBottomDashboardComponentLeodifyButtonTouchTap() {
-        dashboardComponentHelper.readConfig(`${this.state.projectPath}/config.json`)
+        fileSystemHelper.readJson(`${this.state.projectPath}/config.json`)
             .then((config) => {
                 if (!config.applicationName) {
                     throw new Error('config.json: applicationName is not set');
@@ -335,11 +334,23 @@ class DevelopmentComponent extends React.Component {
                     }
                 }
             })
+            .then(() => fileSystemHelper.copy('./src/app/assets/*leodroid.js', `${this.state.projectPath}`))
+            .then(() => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../program.zip`))
+            .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`))
             .catch((error) => {
-                this.setState({
-                    errorMessage: error.message,
-                    errorComponentOpened: true,
-                });
+                fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js')
+                    .then(() => {
+                        this.setState({
+                            errorMessage: error.message,
+                            errorComponentOpened: true,
+                        });
+                    })
+                    .catch((error) => {
+                        this.setState({
+                            errorMessage: error.message,
+                            errorComponentOpened: true,
+                        });
+                    });
             });
     }
 

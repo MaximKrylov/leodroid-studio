@@ -1,11 +1,14 @@
 const bluebird = window.require('bluebird');
 const browserify = window.require('browserify');
 const fs = window.require('fs');
+const jsonfile = window.require('jsonfile');
 
 const openFile = bluebird.promisify(fs.readFile);
 const saveFile = bluebird.promisify(fs.writeFile);
 const copy = bluebird.promisify(window.require('copy'));
 const del = window.require('del');
+const zip = bluebird.promisify(window.require('zip-folder'));
+const readJson = bluebird.promisify(jsonfile.readFile);
 
 module.exports = {
     openFile: function (path) {
@@ -22,6 +25,14 @@ module.exports = {
 
     delete: function (patterns, options) {
         return del(patterns, options);
+    },
+
+    readJson: function (path) {
+        return readJson(path);
+    },
+
+    zip: function (dest, zipPath) {
+        return zip(dest, zipPath);
     },
 
     bundle: function (entryPoint) {
