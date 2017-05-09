@@ -338,6 +338,7 @@ class DevelopmentComponent extends React.Component {
             .then(() => fileSystemHelper.copy('./src/app/assets/*leodroid.js', `${this.state.projectPath}`))
             .then(() => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../leodroid-app.zip`))
             .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`))
+            .then(() => storageHelper.removeFile('leodroid-app.zip'))
             .then(() => fileSystemHelper.openFile(`${this.state.projectPath}/../leodroid-app.zip`))
             .then((zipContent) => storageHelper.createFile('leodroid-app.zip', zipContent))
             .then(() => {
