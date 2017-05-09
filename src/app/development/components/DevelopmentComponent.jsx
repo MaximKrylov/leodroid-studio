@@ -338,13 +338,12 @@ class DevelopmentComponent extends React.Component {
             .then(() => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../program.zip`))
             .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`))
             .catch((error) => {
-                fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js')
-                    .then(() => {
-                        this.setState({
-                            errorMessage: error.message,
-                            errorComponentOpened: true,
-                        });
-                    })
+                this.setState({
+                    errorMessage: error.message,
+                    errorComponentOpened: true,
+                });
+                fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`)
+                    .then(() => fileSystemHelper.delete(`${this.state.projectPath}/../program.zip`, { force: true }))``
                     .catch((error) => {
                         this.setState({
                             errorMessage: error.message,
