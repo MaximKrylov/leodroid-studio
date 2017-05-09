@@ -338,6 +338,12 @@ class DevelopmentComponent extends React.Component {
             .then(() => fileSystemHelper.readJson(`${this.state.projectPath}/package.json`))
             .then((json) => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../${json.name}.zip`))
             .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`))
+            .then(() => {
+                this.setState({
+                    errorMessage: 'It isn\'t an error! Leodify has successfully completed... CONGRATULATIONS!!! :)',
+                    errorComponentOpened: true,
+                });
+            })
             .catch((error) => {
                 this.setState({
                     errorMessage: error.message,
