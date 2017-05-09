@@ -343,7 +343,7 @@ class DevelopmentComponent extends React.Component {
                     errorComponentOpened: true,
                 });
                 fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`)
-                    .then(() => fileSystemHelper.delete(`${this.state.projectPath}/../program.zip`, { force: true }))``
+                    .then(() => fileSystemHelper.delete(`${this.state.projectPath}/../program.zip`, { force: true }))
                     .catch((error) => {
                         this.setState({
                             errorMessage: error.message,
