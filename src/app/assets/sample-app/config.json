@@ -1,30 +1,14 @@
 {
-    "applicationName": "leodroid-app",
+    "applicationName": "greeting",
     "description": "",
     "type": "NodeJS",
     "executable": "main.js",
     "commands": {
         "rules": {
-            "tempInTown": {
-                "rule": "Temperature in <city>",
-                "description": "Says the current temperature in the given town"
-            },
-            "humInTown": {
-                "rule": "Humidity in <city>",
-                "description": "Says the current humidity in the given town"
+            "greeting": {
+                "rule": "hello",
+                "description": "edison will greet you"
             }
-        },
-        "params": {
-            "city": [
-                "Moscow",
-                "Ivanovo",
-                "London",
-                "Berlin",
-                "Tokyo"
-            ]
-        },
-        "dictionary": {
-            "Ivanovo": "IH V AH N AA V OW"
         }
     }
 }
