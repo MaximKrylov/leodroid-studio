@@ -290,35 +290,35 @@ class DevelopmentComponent extends React.Component {
         dashboardComponentHelper.readConfig(`${this.state.projectPath}/config.json`)
             .then((config) => {
                 if (!config.applicationName) {
-                    throw new Error('applicationName is not set');
+                    throw new Error('config.json: applicationName is not set');
                 }
                 if (!config.type) {
-                    throw new Error('type is not set');
+                    throw new Error('config.json: type is not set');
                 }
                 if (config.type !== 'NodeJS') {
-                    throw new Error('type is not NodeJS');
+                    throw new Error('config.json: type is not NodeJS');
                 }
                 if (!config.executable) {
-                    throw new Error('executable is not set')
+                    throw new Error('config.json: executable is not set')
                 }
                 if (config.executable !== 'main.js') {
-                    throw new Error('executable is not main.js')
+                    throw new Error('config.json: executable is not main.js')
                 }
                 if (!config.commands) {
-                    throw new Error('commands is not set');
+                    throw new Error('config.json: commands is not set');
                 }
                 if (!config.commands.rules) {
-                    throw new Error('rules is not set');
+                    throw new Error('config.json: rules is not set');
                 }
                 if (Object.keys(config.commands.rules).length === 0) {
-                    throw new Error('rules is empty object');
+                    throw new Error('config.json: rules is empty object');
                 }
 
                 let rules = config.commands.rules;
 
                 for (let key in rules) {
                     if (!rules[key].rule || !rules[key].description) {
-                        throw new Error(`${key} rule is invalid`);
+                        throw new Error(`config.json: ${key} rule is invalid`);
                     }
 
                     const regexp = /<\w+>/g;
@@ -330,7 +330,7 @@ class DevelopmentComponent extends React.Component {
                         const paramKey = paramStr.substring(1, paramStr.length - 1);
 
                         if (!config.commands.params[paramKey]) {
-                            throw new Error(`Unknown parameter ${param} in rule '${rules[key].rule}'`);
+                            throw new Error(`config.json: Unknown parameter ${param} in rule '${rules[key].rule}'`);
                         }
                     }
                 }
