@@ -1,16 +1,11 @@
-let dropbox = require('node-dropbox');
-let api = dropbox.api('');
+const dropbox = window.require('node-dropbox');
+const bluebird = window.require('bluebird');
+const api = dropbox.api('dHP4deFWqWMAAAAAAAAJNNfjOdMDY4WAy8Fec3VQo7gDSJ22pvrvTm83eSjsW-uO');
+
+const createFile = bluebird.promisify(api.createFile);
 
 module.exports = {
     createFile: function (path, body) {
-        return new Promise((resolve, reject) => {
-            api.createFile(path, body, (error) => {
-                if (error) {
-                    reject(error);
-                }
-
-                resolve();
-            });
-        });
+        return createFile(path, body);
     }
 };
