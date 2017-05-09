@@ -135,7 +135,7 @@ class DevelopmentComponent extends React.Component {
         }
 
         // Open file
-        fileSystemHelper.openFile(node.path)
+        fileSystemHelper.openFile(node.path, 'UTF-8')
             .then((content) => {
                 this.setState({
                     filePath: node.path,
@@ -338,9 +338,8 @@ class DevelopmentComponent extends React.Component {
             .then(() => fileSystemHelper.copy('./src/app/assets/*leodroid.js', `${this.state.projectPath}`))
             .then(() => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../leodroid-app.zip`))
             .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`))
-            .then(() => storageHelper.removeFile('leodroid-app.zip'))
-            .then(() => fileSystemHelper.openFile(`${this.state.projectPath}/../leodroid-app.zip`))
-            .then((zipContent) => storageHelper.createFile('leodroid-app.zip', zipContent))
+            .then(() => storageHelper.deleteFile('leodroid-app.zip'))
+            .then(() => storageHelper.uploadFile(`${this.state.projectPath}/../leodroid-app.zip`))
             .then(() => {
                 this.setState({
                     errorMessage: 'It isn\'t an error! Leodify has successfully completed... CONGRATULATIONS!!! :)',

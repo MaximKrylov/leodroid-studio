@@ -11,8 +11,8 @@ const zip = bluebird.promisify(window.require('zip-folder'));
 const readJson = bluebird.promisify(jsonfile.readFile);
 
 module.exports = {
-    openFile: function (path) {
-        return openFile(path, 'UTF-8');
+    openFile: function (path, options) {
+        return openFile(path, options);
     },
 
     saveFile: function (path, content) {

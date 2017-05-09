@@ -1,16 +1,19 @@
-const dropbox = window.require('node-dropbox');
-const bluebird = window.require('bluebird');
-const api = dropbox.api('dHP4deFWqWMAAAAAAAAJNNfjOdMDY4WAy8Fec3VQo7gDSJ22pvrvTm83eSjsW-uO');
-
-const createFile = bluebird.promisify(api.createFile);
-const removeFile = bluebird.promisify(api.removeFile);
+const dropbox = window.require('dropbox');
+const fileSystemHelper = require('../../../common/fileSystemHelper');
+const api = new dropbox({ accessToken: 'dHP4deFWqWMAAAAAAAAJNTbKXrDq357oOsOv6rGTLHq4lAJsaa3ZqixYJN2CgAPP' });
 
 module.exports = {
-    createFile: function (path, body) {
-        return createFile(path, body);
+    uploadFile: function (path) {
+        fileSystemHelper.openFile(path)
+            .then((contents) => api.filesUpload({ path: '/leodroid-app.zip', contents: contents }));
     },
-    
-    removeFile: function (path) {
-        return removeFile(path);
+
+    deleteFile: function (fileName) {
+        return api.filesSearch({ path: '', query: fileName, mode: 'filename' })
+            .then((result) => {
+                if (result.matches.length > 0) {
+                    return api.filesDelete({ path: `/${fileName}` });
+                }
+            });
     }
 };
