@@ -32,7 +32,7 @@ module.exports = {
     },
 
     zip: function (folder, destPoint) {
-        return zip(dest, destPoint);
+        return zip(folder, destPoint);
     },
 
     bundle: function (entryPoint, destPoint) {

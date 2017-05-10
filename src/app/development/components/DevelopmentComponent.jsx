@@ -286,7 +286,15 @@ class DevelopmentComponent extends React.Component {
     }
 
     onBottomDashboardComponentLeodifyButtonTouchTap() {
-        fileSystemHelper.readJson(`${this.state.projectPath}/config.json`)
+        const emulatorPath = './build/app/emulator';
+        const projectPath = this.state.projectPath;
+        let applicationName = '';
+
+        fileSystemHelper.readJson(`${projectPath}/package.json`)
+            .then((json) => {
+                applicationName = json.name;
+            })
+            .then(() => fileSystemHelper.readJson(`${projectPath}/config.json`))
             .then((config) => {
                 if (!config.applicationName) {
                     throw new Error('config.json: applicationName is not set');
@@ -334,11 +342,12 @@ class DevelopmentComponent extends React.Component {
                     }
                 }
             })
-            .then(() => fileSystemHelper.copy('./src/app/assets/*leodroid.js', `${this.state.projectPath}`))
-            .then(() => fileSystemHelper.zip(`${this.state.projectPath}`, `${this.state.projectPath}/../leodroid-app.zip`))
-            .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`))
-            .then(() => storageHelper.deleteFile('leodroid-app.zip'))
-            .then(() => storageHelper.uploadFile(`${this.state.projectPath}/../leodroid-app.zip`))
+            .then(() => fileSystemHelper.copy('./src/app/assets/*leodroid.js', `${projectPath}`))
+            .then(() => fileSystemHelper.zip(`${projectPath}`, `${projectPath}/../${applicationName}.zip`))
+            .then(() => fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${projectPath}`))
+            .then(() => storageHelper.deleteFile(`${applicationName}.zip`))
+            .then(() => storageHelper.uploadFile(`${projectPath}/../${applicationName}.zip`, `${applicationName}.zip`))
+            .then(() => fileSystemHelper.delete(`${projectPath}/../${applicationName}.zip`, { force: true }))
             .then(() => {
                 this.setState({
                     errorMessage: 'It isn\'t an error! Leodify has successfully completed... CONGRATULATIONS!!! :)',
@@ -350,8 +359,8 @@ class DevelopmentComponent extends React.Component {
                     errorMessage: error.message,
                     errorComponentOpened: true,
                 });
-                fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${this.state.projectPath}`)
-                    .then(() => fileSystemHelper.delete(`${this.state.projectPath}/../leodroid-app.zip`, { force: true }))
+                fileSystemHelper.copy('./src/app/assets/sample-app/*leodroid.js', `${projectPath}`)
+                    .then(() => fileSystemHelper.delete(`${projectPath}/../${applicationName}.zip`, { force: true }))
                     .catch((error) => {
                         this.setState({
                             errorMessage: error.message,

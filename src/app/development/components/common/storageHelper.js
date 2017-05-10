@@ -1,11 +1,11 @@
 const dropbox = window.require('dropbox');
 const fileSystemHelper = require('../../../common/fileSystemHelper');
-const api = new dropbox({ accessToken: 'dHP4deFWqWMAAAAAAAAJNTbKXrDq357oOsOv6rGTLHq4lAJsaa3ZqixYJN2CgAPP' });
+const api = new dropbox({ accessToken: 'dHP4deFWqWMAAAAAAAAJO9RfCZfqyO6VG0i1SdZ0Qc5XgkDQdlsZmTbDOEzAVNbU' });
 
 module.exports = {
-    uploadFile: function (path) {
+    uploadFile: function (path, fileName) {
         fileSystemHelper.openFile(path)
-            .then((contents) => api.filesUpload({ path: '/leodroid-app.zip', contents: contents }));
+            .then((contents) => api.filesUpload({ path: `/${fileName}`, contents: contents }));
     },
 
     deleteFile: function (fileName) {
