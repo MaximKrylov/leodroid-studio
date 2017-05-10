@@ -205,12 +205,12 @@ class DevelopmentComponent extends React.Component {
     }
 
     onTopDashboardComponentRunButtonTouchTap() {
-        // Async function
         this.setState({
             emulatorWindowOpened: true
         });
 
         const emulatorPath = './build/app/emulator';
+        const projectPath = this.state.projectPath;
 
         fileSystemHelper.delete([
             `${emulatorPath}/**`,
@@ -219,9 +219,8 @@ class DevelopmentComponent extends React.Component {
             `!${emulatorPath}/style.css`,
             `!${emulatorPath}/assets/**`
         ])
-            .then(() => fileSystemHelper.copy(`${this.state.projectPath}/node_modules/**/*.*`, `${emulatorPath}/node_modules`))
-            .then(() => fileSystemHelper.bundle(`${this.state.projectPath}/main.js`))
-            .then((buffer) => fileSystemHelper.saveFile('./build/app/emulator/bundle.js', buffer))
+            .then(() => fileSystemHelper.copy(`${projectPath}/node_modules/**/*.*`, `${emulatorPath}/node_modules`))
+            .then(() => fileSystemHelper.bundle(`${projectPath}/main.js`, `${emulatorPath}/bundle.js`))
             .then(() => {
                 electronHelper.send('open-emulator-window', {
                     emulatorComponentDevToolsOpened: this.state.emulatorComponentDevToolsOpened

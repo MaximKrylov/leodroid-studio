@@ -11,12 +11,12 @@ const zip = bluebird.promisify(window.require('zip-folder'));
 const readJson = bluebird.promisify(jsonfile.readFile);
 
 module.exports = {
-    openFile: function (path, options) {
-        return openFile(path, options);
+    openFile: function (srcPoint, options) {
+        return openFile(srcPoint, options);
     },
 
-    saveFile: function (path, content) {
-        return saveFile(path, content);
+    saveFile: function (destPoint, content) {
+        return saveFile(destPoint, content);
     },
 
     copy: function (src, dest) {
@@ -27,18 +27,18 @@ module.exports = {
         return del(patterns, options);
     },
 
-    readJson: function (path) {
-        return readJson(path);
+    readJson: function (srcPoint) {
+        return readJson(srcPoint);
     },
 
-    zip: function (dest, zipPath) {
-        return zip(dest, zipPath);
+    zip: function (folder, destPoint) {
+        return zip(dest, destPoint);
     },
 
-    bundle: function (entryPoint) {
+    bundle: function (entryPoint, destPoint) {
         const bundler = browserify(entryPoint);
         return bluebird.promisify(bundler.bundle, {
             context: bundler
-        })();
+        })().then((buffer) => saveFile(destPoint, buffer));
     }
 }
